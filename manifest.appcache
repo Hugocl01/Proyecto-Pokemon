@@ -1,0 +1,23 @@
+CACHE MANIFEST
+# v1.0 : 10-01-2025
+
+CACHE:
+# Páginas
+index.html
+
+# Estilos y scripts
+css/estilo.css
+js/app.js
+
+# Imágenes locales
+images/logo.png
+
+# Imágenes externas
+https://example.com/images/imagen1.png
+https://example.com/images/imagen2.jpg
+
+NETWORK:
+*
+
+FALLBACK:
+/ /offline.html

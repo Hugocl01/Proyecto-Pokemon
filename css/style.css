@@ -323,3 +323,18 @@ footer .footer-content {
     background-color: #3e9afdc4;
     transform: translateY(-10px);
 }
+
+/* SPINNER */
+.spinner {
+    border: 10px solid #0000001a;
+    border-left-color: #000;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

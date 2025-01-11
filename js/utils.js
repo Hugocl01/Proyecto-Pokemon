@@ -9,8 +9,27 @@ export function obtenerDatosDeLocalStorage(clave) {
     return datos ? JSON.parse(datos) : null;
 }
 
+export function mostrarSpinner() {
+    const contenedorFichas = document.querySelector('.contenedor-fichas');
+    const spinner = document.createElement('div');
+    spinner.classList.add('spinner');
+    contenedorFichas.appendChild(spinner);
+}
+
+export function ocultarSpinner() {
+    const spinner = document.querySelector('.spinner');
+    if (spinner) {
+        spinner.remove();
+    }
+}
+
+export function capitalizarPrimeraLetra(cadena) {
+    return cadena.charAt(0).toUpperCase() + cadena.slice(1);
+}
+
 export function mostrarFichaPokemon(pokemons) {
     const contenedorFichas = document.querySelector('.contenedor-fichas');
+    contenedorFichas.innerHTML = '';
 
     for (const pokemon of pokemons) {
         const divFicha = document.createElement('div');

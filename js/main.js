@@ -1,6 +1,6 @@
 'use strict';
 
-import { almacenarDatosEnLocalStorage, mostrarFichaPokemon, guardarDatosPokemon, obtenerTodosLosPokemon, obtenerPokemonPorGeneracion } from "./utils.js";
+import { mostrarFichaPokemon, obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, capitalizarPrimeraLetra } from "./utils.js";
 import Pokemon from "./Pokemon.js";
 
 export const app = (function () {
@@ -50,7 +50,7 @@ export const app = (function () {
 
                 return new Pokemon(
                     datosPokemon.id,
-                    datosPokemon.name,
+                    capitalizarPrimeraLetra(datosPokemon.name),
                     datosPokemon.types,
                     datosPokemon.stats,
                     datosPokemon.sprites,

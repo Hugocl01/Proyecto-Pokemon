@@ -40,7 +40,6 @@ export function mostrarFichaPokemon(pokemons) {
         const contenedorTipos = document.createElement('div');
         contenedorTipos.classList.add('tipos');
         pokemon.types.forEach(tipo => {
-            console.log(tipo);
             const imgTipo = document.createElement('img');
 
             // Extrae el número al final de la URL

@@ -92,9 +92,9 @@ header nav ul li a:hover {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 2rem;
     padding: 50px 20px;
     background-color: #e0f7fa;
-    /* Fondo suave para la bienvenida */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

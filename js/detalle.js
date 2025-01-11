@@ -22,11 +22,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Mostrar tipos
     const tiposContenedor = document.getElementById('contenedor-tipos');
+    tiposContenedor.classList.add('tipos');
     pokemon.types.forEach(tipo => {
-        const spanTipo = document.createElement('span');
-        spanTipo.textContent = tipo.type.name.toUpperCase();
-        spanTipo.classList.add('tipo', `tipo-${tipo.type.name}`);
-        tiposContenedor.appendChild(spanTipo);
+        const imgTipo = document.createElement('img');
+
+        // Extrae el número al final de la URL
+        const partes = tipo.type.url.split('/');  // Dividir la URL por las barras
+        const id = partes[partes.length - 2]; // Obtener el penúltimo elemento, el id
+        imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
+
+        tiposContenedor.appendChild(imgTipo);
     });
 
     // Mostrar estadísticas

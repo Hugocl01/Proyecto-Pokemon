@@ -1,6 +1,6 @@
 'use strict';
 
-import { almacenarDatosEnLocalStorage } from "./utils.js";
+import { almacenarDatosEnLocalStorage, mostrarFichaPokemon } from "./utils.js";
 import Pokemon from "./Pokemon.js";
 
 const app = (function () {

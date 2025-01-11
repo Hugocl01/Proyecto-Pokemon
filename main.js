@@ -1,40 +1,77 @@
-async function fetchPokemonSpecies(url) {
-  const response = await fetch(url);
-  return response.json();
-}
+'use strict';
 
-async function fetchAllPokemonSpecies() {
-  const url = 'https://pokeapi.co/api/v2/pokemon-species?limit=1025&offset=0';
-  const response = await fetchPokemonSpecies(url);
-  const speciesUrls = response.results.map(species => species.url);
+import { almacenarDatosEnLocalStorage } from "./utils.js";
 
-  const speciesData = await Promise.all(speciesUrls.map(url => fetchPokemonSpecies(url)));
-  return speciesData;
-}
+const app = (function () {
 
-async function fetchPokemonData(url) {
-  const response = await fetch(url);
-  return response.json();
-}
+  const urlAPI = 'https://pokeapi.co/api/v2';
 
-async function fetchAllPokemonData() {
-  const speciesData = await fetchAllPokemonSpecies();
-  const generations = {};
-
-  for (const species of speciesData) {
-    const generationName = species.generation.name;
-    if (!generations[generationName]) {
-      generations[generationName] = [];
-    }
-
-    const pokemonData = await fetchPokemonData(species.varieties[0].pokemon.url);
-    pokemonData.generation = generationName;
-    generations[generationName].push(pokemonData);
+  async function obtenerDatos(url) {
+    return fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error();
+        }
+        return response.json();
+      })
+      .then((datos) => {
+        //console.log(`Datos recibidos para ${url}:`, datos);
+        return datos;
+      })
+      .catch((error) => { throw error });
   }
 
-  return generations;
-}
+  async function obtenerDatosEspecies(desde, hasta) {
+    try {
+      const datosRespuesta = await obtenerDatos(`${urlAPI}/pokemon-species?limit=${hasta}&offset=${desde}`);
+      const especiesURLs = datosRespuesta.results.map(specie => specie.url);
+      //console.log(especiesURLs);
 
-fetchAllPokemonData().then(generations => {
-  console.log(generations);
-});
+      const datosEspecies = await Promise.all(especiesURLs.map(async (url) => {
+        const datosEspecie = await obtenerDatos(url);
+
+        return {
+          generation: datosEspecie.generation.name,
+          pokemonUrl: datosEspecie.varieties[0].pokemon.url
+        };
+      }));
+
+      //console.log(datosEspecies);
+
+      return datosEspecies;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function obtenerDatosPokemon() {
+    try {
+      const datosEspecies = await obtenerDatosEspecies(0, 1025);
+
+      const datosPokemons = await Promise.all(datosEspecies.map(async (especie) => {
+        const datosPokemon = await obtenerDatos(especie.pokemonUrl);
+
+        return {
+          ...datosPokemon,
+          generation: especie.generation
+        };
+      }));
+
+      const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);
+      console.log(generaciones);
+      //console.log(generaciones['generation-i']);
+
+      return generaciones;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return {
+    obtenerDatosPokemon
+  }
+
+})();
+
+// Pruebas
+app.obtenerDatosPokemon();

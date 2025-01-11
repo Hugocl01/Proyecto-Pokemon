@@ -309,6 +309,14 @@ footer .footer-content {
     justify-content: center;
     align-items: center;
     margin: 24px 0;
+    /* Otra forma de presentar las fichas
+     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    */
 }
 
 .ficha {

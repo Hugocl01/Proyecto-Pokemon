@@ -35,6 +35,11 @@ header {
     /* Agregado sombra para resaltar el header */
 }
 
+header .logo {
+    display: flex;
+    gap: 12px;
+}
+
 header .logo img {
     height: 50px;
     /* Ajusta el tamaño del logo según sea necesario */
@@ -241,4 +246,54 @@ footer {
 
 footer .footer-content {
     margin-bottom: 20px;
+}
+
+
+/* Estilo del carrusel */
+.carrusel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.carrusel-imagenes {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carrusel-imagenes img {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.carrusel-controles {
+    position: absolute;
+    top: 50%; /* Posición vertical al centro */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%); /* Ajusta para centrar perfectamente */
+    pointer-events: none; /* Permite que los botones no interfieran con las imágenes */
+}
+
+.carrusel-controles button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    pointer-events: all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.carrusel-controles button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }

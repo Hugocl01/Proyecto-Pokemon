@@ -1,6 +1,6 @@
 'use strict';
 
-import { almacenarDatosEnLocalStorage } from "./utils.js";
+import { almacenarDatosEnLocalStorage, mostrarFichaPokemon } from "./utils.js";
 
 const app = (function () {
 
@@ -59,6 +59,8 @@ const app = (function () {
 
       const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);
       console.log(generaciones);
+      console.log(datosPokemons);
+      mostrarFichaPokemon(datosPokemons);
       //console.log(generaciones['generation-i']);
 
       return generaciones;

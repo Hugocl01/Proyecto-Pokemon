@@ -297,3 +297,29 @@ footer .footer-content {
 .carrusel-controles button:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
+
+/* POKEDEX */
+.contenedor-fichas {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 20px 20px;
+}
+
+.ficha {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+    padding: 15px 15px;
+    flex-basis: 200px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.ficha:hover {
+    cursor: pointer;
+    background-color: #3e9afdc4;
+    transform: translateY(-10px);
+}

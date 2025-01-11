@@ -1,9 +1,9 @@
 'use strict';
 
-import { almacenarDatosEnLocalStorage, mostrarFichaPokemon } from "./utils.js";
+import { almacenarDatosEnLocalStorage, mostrarFichaPokemon, guardarDatosPokemon, obtenerTodosLosPokemon, obtenerPokemonPorGeneracion } from "./utils.js";
 import Pokemon from "./Pokemon.js";
 
-const app = (function () {
+export const app = (function () {
 
     const urlAPI = 'https://pokeapi.co/api/v2';
 
@@ -48,15 +48,21 @@ const app = (function () {
             const datosPokemons = await Promise.all(datosEspecies.map(async (especie) => {
                 const datosPokemon = await obtenerDatos(especie.pokemonUrl);
 
-                return {
-                    ...datosPokemon,
-                    generation: especie.generation
-                };
+                return new Pokemon(
+                    datosPokemon.id,
+                    datosPokemon.name,
+                    datosPokemon.types,
+                    datosPokemon.stats,
+                    datosPokemon.sprites,
+                    especie.generation,
+                    datosPokemon.height,
+                    datosPokemon.weight
+                );
             }));
 
-            const generaciones = groupBy(datosPokemons, pokemon => pokemon.generation);
-
-            console.log("Datos de las generaciones agrupadas:", generaciones);
+            const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);
+            //console.log("Datos de las generaciones agrupadas:", generaciones);
+            //console.log(datosPokemons);
 
             return generaciones;
         } catch (error) {
@@ -64,58 +70,21 @@ const app = (function () {
         }
     }
 
-    /**
-     * Agrupa los elementos de un array según una función de clave.
-     * @param {Array} array - Array a agrupar.
-     * @param {Function} keyFn - Función para obtener la clave de agrupación.
-     * @returns {Object} - Objeto con las agrupaciones.
-     */
-    function groupBy(array, keyFn) {
-        return array.reduce((result, item) => {
-            const key = keyFn(item);
-            if (!result[key]) {
-                result[key] = [];
-            }
-            result[key].push(item);
-            return result;
-        }, {});
-    }
+    async function obtenerDatosDesdeIndexedDB(filtroGeneracion = null) {
+        let pokemons;
 
-    function generarListaPokemon(generaciones) {
-        const listaPorGeneraciones = {};
-
-        for (let generationName in generaciones) {
-            // Asegurar que cada generación tenga su propio array
-            listaPorGeneraciones[generationName] = generaciones[generationName].map((pokemonData) => {
-                // Crear una instancia de la clase Pokemon para cada Pokémon
-                return new Pokemon(
-                    pokemonData.id,
-                    pokemonData.name,
-                    pokemonData.types,
-                    pokemonData.stats,
-                    pokemonData.sprites,
-                    generationName, // Asignar la generación correspondiente
-                    pokemonData.height,
-                    pokemonData.weight,
-                );
-            });
+        if (!filtroGeneracion) {
+            pokemons = await obtenerTodosLosPokemon();
+        } else {
+            pokemons = await obtenerPokemonPorGeneracion(filtroGeneracion);
         }
 
-        console.log("Lista de Pokémon organizada por generaciones:", listaPorGeneraciones);
-        return listaPorGeneraciones;
+        mostrarFichaPokemon(pokemons);
     }
-
 
     return {
         obtenerDatosPokemon,
-        generarListaPokemon
+        obtenerDatosDesdeIndexedDB
     };
 
 })();
-
-// Ejecución
-app.obtenerDatosPokemon().then((generaciones) => {
-    if (generaciones) {
-        const listaPokemon = app.generarListaPokemon(generaciones);
-    }
-});

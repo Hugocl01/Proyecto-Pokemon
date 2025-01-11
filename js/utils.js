@@ -1,5 +1,7 @@
 'use strict';
 
+import { capitalizarPrimeraLetra } from './auxiliares.js';
+
 export function almacenarDatosEnLocalStorage(clave, datos) {
     localStorage.setItem(clave, JSON.stringify(datos));
 }
@@ -17,13 +19,11 @@ export function mostrarFichaPokemon(pokemons) {
         divFicha.classList.add('ficha');
         divFicha.dataset.id = pokemon.id;
 
-        const enlaceImg = document.createElement('a');
         const img = document.createElement('img');
         img.src = pokemon.sprites.other['official-artwork'].front_default;
-        img.title = pokemon.name;
+        img.title = capitalizarPrimeraLetra(pokemon.name);
         img.width = 205;
-        enlaceImg.appendChild(img);
-        divFicha.appendChild(enlaceImg);
+        divFicha.appendChild(img);
 
         const divDatos = document.createElement('div');
         const pID = document.createElement('p');
@@ -31,13 +31,24 @@ export function mostrarFichaPokemon(pokemons) {
         divDatos.appendChild(pID);
 
         const tituloNombre = document.createElement('h3');
-        tituloNombre.textContent = pokemon.name;
+        tituloNombre.textContent = capitalizarPrimeraLetra(pokemon.name);
         divDatos.appendChild(tituloNombre);
 
         divFicha.appendChild(divDatos);
 
         contenedorFichas.appendChild(divFicha);
     }
+
+    contenedorFichas.addEventListener('click', function (event) {
+        const ficha = event.target.closest('.ficha');
+        if (ficha) {
+            const ficha = event.target.closest('.ficha');
+            if (ficha) {
+                const id = ficha.dataset.id;
+                window.location.href = `detalle.html?id=${id}`;
+            }
+        }
+    });
 }
 
 // Funciones de IndexedDB

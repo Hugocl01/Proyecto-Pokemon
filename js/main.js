@@ -15,18 +15,16 @@ const app = (function () {
                 }
                 return response.json();
             })
-            .then((datos) => {
-                //console.log(`Datos recibidos para ${url}:`, datos);
-                return datos;
-            })
-            .catch((error) => { throw error });
+            .catch((error) => {
+                console.error(`Error obteniendo datos de ${url}:`, error);
+                throw error;
+            });
     }
 
     async function obtenerDatosEspecies(desde, hasta) {
         try {
             const datosRespuesta = await obtenerDatos(`${urlAPI}/pokemon-species?limit=${hasta}&offset=${desde}`);
             const especiesURLs = datosRespuesta.results.map(specie => specie.url);
-            //console.log(especiesURLs);
 
             const datosEspecies = await Promise.all(especiesURLs.map(async (url) => {
                 const datosEspecie = await obtenerDatos(url);
@@ -37,11 +35,9 @@ const app = (function () {
                 };
             }));
 
-            //console.log(datosEspecies);
-
             return datosEspecies;
         } catch (error) {
-            console.error(error);
+            console.error("Error obteniendo datos de especies:", error);
         }
     }
 
@@ -58,39 +54,54 @@ const app = (function () {
                 };
             }));
 
-            const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);
-            console.log(generaciones);
-            //console.log(datosPokemons);
-            mostrarFichaPokemon(datosPokemons);
-            //console.log(generaciones['generation-i']);
+            const generaciones = groupBy(datosPokemons, pokemon => pokemon.generation);
+
+            console.log("Datos de las generaciones agrupadas:", generaciones);
 
             return generaciones;
         } catch (error) {
-            console.error(error);
+            console.error("Error obteniendo datos de Pokémon:", error);
         }
     }
 
-    function generarListaPokemon(generaciones) {
-        const listaPorGeneraciones = [];
+    /**
+     * Agrupa los elementos de un array según una función de clave.
+     * @param {Array} array - Array a agrupar.
+     * @param {Function} keyFn - Función para obtener la clave de agrupación.
+     * @returns {Object} - Objeto con las agrupaciones.
+     */
+    function groupBy(array, keyFn) {
+        return array.reduce((result, item) => {
+            const key = keyFn(item);
+            if (!result[key]) {
+                result[key] = [];
+            }
+            result[key].push(item);
+            return result;
+        }, {});
+    }
 
-        // Iteramos sobre las generaciones
+    function generarListaPokemon(generaciones) {
+        const listaPorGeneraciones = {};
+
         for (let generationName in generaciones) {
-            generaciones[generationName].forEach((pokemonData) => {
-                // Crear una instancia de la clase Pokemon para cada Pokémon de la generación
-                const pokemonObject = new Pokemon(
+            // Asegurar que cada generación tenga su propio array
+            listaPorGeneraciones[generationName] = generaciones[generationName].map((pokemonData) => {
+                // Crear una instancia de la clase Pokemon para cada Pokémon
+                return new Pokemon(
                     pokemonData.id,
                     pokemonData.name,
                     pokemonData.types,
                     pokemonData.stats,
                     pokemonData.sprites,
-                    generationName // Asignar la generación correspondiente
+                    generationName, // Asignar la generación correspondiente
+                    pokemonData.height,
+                    pokemonData.weight,
                 );
-
-                // Agregar el objeto Pokemon a la lista
-                listaPorGeneraciones.push(pokemonObject);
             });
         }
 
+        console.log("Lista de Pokémon organizada por generaciones:", listaPorGeneraciones);
         return listaPorGeneraciones;
     }
 
@@ -98,12 +109,13 @@ const app = (function () {
     return {
         obtenerDatosPokemon,
         generarListaPokemon
-    }
+    };
 
 })();
 
-// Pruebas
-app.obtenerDatosPokemon().then(() => {
-    // Suponiendo que 'generaciones' es el resultado de obtenerDatosPokemon
-    app.generarListaPokemon();
+// Ejecución
+app.obtenerDatosPokemon().then((generaciones) => {
+    if (generaciones) {
+        const listaPokemon = app.generarListaPokemon(generaciones);
+    }
 });

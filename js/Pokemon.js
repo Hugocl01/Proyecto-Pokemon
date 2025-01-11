@@ -1,11 +1,13 @@
 class Pokemon {
-    constructor(id, name, types, stats, sprites, generation) {
+    constructor(id, name, types, stats, sprites, generation, height, weight) {
         this.id = id; // ID del Pokémon
         this.name = name; // Nombre del Pokémon
         this.types = types; // Tipos (array de strings)
         this.stats = stats; // Estadísticas base
         this.sprites = sprites; // Imagenes o sprites
         this.generation = generation; // Generación del Pokémon
+        this.height = height;
+        this.weight = weight;
     }
 
     // Método para mostrar los tipos del Pokémon como texto

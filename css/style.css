@@ -270,20 +270,28 @@ footer .footer-content {
 
 .carrusel-controles {
     position: absolute;
-    top: 50%;
+    top: 50%; /* Posición vertical al centro */
     width: 100%;
     display: flex;
     justify-content: space-between;
-    transform: translateY(-50%);
+    transform: translateY(-50%); /* Ajusta para centrar perfectamente */
+    pointer-events: none; /* Permite que los botones no interfieran con las imágenes */
 }
 
 .carrusel-controles button {
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding: 0.5rem;
     cursor: pointer;
+    pointer-events: all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
 }
 
 .carrusel-controles button:hover {

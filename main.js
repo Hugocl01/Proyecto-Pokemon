@@ -1,6 +1,7 @@
 'use strict';
 
 import { almacenarDatosEnLocalStorage } from "./utils.js";
+import Pokemon from "./Pokemon.js";
 
 const app = (function () {
 
@@ -65,6 +66,29 @@ const app = (function () {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  function generarListaPokemon(generaciones) {
+    const listaPorGeneraciones = [];
+
+    Object.entries(generaciones).forEach(([generation, pokemons]) => {
+      // Crear una lista de Pokémon para esta generación
+      const listaGeneracion = pokemons.map(pokemonData => {
+        return new Pokemon(
+          pokemonData.id,
+          pokemonData.name,
+          pokemonData.types,
+          pokemonData.stats,
+          pokemonData.sprites,
+          generation // Asignar la generación desde la clave actual
+        );
+      });
+
+      // Agregar la lista de esta generación al array principal
+      listaPorGeneraciones.push(listaGeneracion);
+    });
+
+    return listaPorGeneraciones;
   }
 
   return {

@@ -60,6 +60,8 @@ const app = (function () {
 
       const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);
       console.log(generaciones);
+      console.log(datosPokemons);
+      mostrarFichaPokemon(datosPokemons);
       //console.log(generaciones['generation-i']);
 
       return generaciones;

@@ -166,3 +166,33 @@ export async function existeDatosEnGeneraciones() {
         };
     });
 }
+
+export async function buscarPokemon(id) {
+    // Obtener todas las generaciones de Pokémon desde IndexedDB
+    const db = await abrirBaseDeDatos();
+    const transaccion = db.transaction('generaciones', 'readonly');
+    const almacen = transaccion.objectStore('generaciones');
+
+    return new Promise((resolve, reject) => {
+        // Obtener todas las generaciones de Pokémon
+        const solicitud = almacen.getAll();
+
+        solicitud.onsuccess = (event) => {
+            const generaciones = event.target.result;
+            let pokemonEncontrado = null;
+
+            // Iterar sobre cada generación para buscar el Pokémon con el id dado
+            for (const generacion of generaciones) {
+                pokemonEncontrado = generacion.pokemons.find(pokemon => pokemon.id === id);
+                if (pokemonEncontrado) break; // Salir del bucle si se encuentra el Pokémon
+            }
+
+            // Devolver el Pokémon encontrado o null si no se encuentra
+            resolve(pokemonEncontrado);
+        };
+
+        solicitud.onerror = (event) => {
+            reject(event.target.error);
+        };
+    });
+}

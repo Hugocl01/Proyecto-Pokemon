@@ -20,6 +20,7 @@ body {
 main {
     flex: 1;
     padding: 20px;
+    margin: 0 auto;
 }
 
 /* Header */
@@ -353,4 +354,23 @@ footer .footer-content {
 .ficha .tipos img {
     width: 45%;
     border-radius: 4px;
+}
+
+.detalles-pokemon {
+    text-align: center;
+}
+
+.info-basica img {
+    max-width: 200px;
+    border: 3px solid #ddd;
+    border-radius: 10px;
+}
+
+.tipos span {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
 }

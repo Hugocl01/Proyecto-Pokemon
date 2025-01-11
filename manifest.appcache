@@ -6,11 +6,13 @@ CACHE:
 index.html
 
 # Estilos y scripts
-css/estilo.css
-js/app.js
+css/style.css
+js/main.js
+js/utils.js
 
 # Imágenes locales
-images/logo.png
+img/logoPokeball.ico
+img/logoPokeball.png
 
 # Imágenes externas Pokemon
 https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png

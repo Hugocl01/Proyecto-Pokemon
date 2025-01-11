@@ -33,8 +33,24 @@ export function mostrarFichaPokemon(pokemons) {
         const tituloNombre = document.createElement('h3');
         tituloNombre.textContent = capitalizarPrimeraLetra(pokemon.name);
         divDatos.appendChild(tituloNombre);
-
+        divDatos.classList.add('datos');
         divFicha.appendChild(divDatos);
+
+        console.log(pokemon.types);
+        const contenedorTipos = document.createElement('div');
+        contenedorTipos.classList.add('tipos');
+        pokemon.types.forEach(tipo => {
+            console.log(tipo);
+            const imgTipo = document.createElement('img');
+
+            // Extrae el número al final de la URL
+            const partes = tipo.type.url.split('/');  // Dividir la URL por las barras
+            const id = partes[partes.length - 2]; // Obtener el penúltimo elemento, el id
+            imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
+
+            contenedorTipos.appendChild(imgTipo);
+        });
+        divDatos.appendChild(contenedorTipos);
 
         contenedorFichas.appendChild(divFicha);
     }

@@ -270,12 +270,15 @@ footer .footer-content {
 
 .carrusel-controles {
     position: absolute;
-    top: 50%; /* Posición vertical al centro */
+    top: 50%;
+    /* Posición vertical al centro */
     width: 100%;
     display: flex;
     justify-content: space-between;
-    transform: translateY(-50%); /* Ajusta para centrar perfectamente */
-    pointer-events: none; /* Permite que los botones no interfieran con las imágenes */
+    transform: translateY(-50%);
+    /* Ajusta para centrar perfectamente */
+    pointer-events: none;
+    /* Permite que los botones no interfieran con las imágenes */
 }
 
 .carrusel-controles button {
@@ -322,4 +325,21 @@ footer .footer-content {
     cursor: pointer;
     background-color: #3e9afdc4;
     transform: translateY(-10px);
+}
+
+.ficha .datos {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ficha .tipos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5%;
+}
+
+.ficha .tipos img {
+    width: 45%;
 }

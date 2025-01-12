@@ -129,6 +129,9 @@ export async function obtenerTodosLosPokemon() {
             const todosLosPokemon = resultado.reduce((acc, item) => {
                 return acc.concat(item.pokemons);
             }, []);
+
+            todosLosPokemon.sort((a, b) => a.id - b.id);
+
             resolve(todosLosPokemon);
         };
 

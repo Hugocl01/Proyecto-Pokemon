@@ -48,16 +48,7 @@ export const app = (function () {
             const datosPokemons = await Promise.all(datosEspecies.map(async (especie) => {
                 const datosPokemon = await obtenerDatos(especie.pokemonUrl);
 
-                return new Pokemon(
-                    datosPokemon.id,
-                    capitalizarPrimeraLetra(datosPokemon.name),
-                    datosPokemon.types,
-                    datosPokemon.stats,
-                    datosPokemon.sprites,
-                    especie.generation,
-                    datosPokemon.height,
-                    datosPokemon.weight
-                );
+                return new Pokemon(datosPokemon);
             }));
 
             const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);

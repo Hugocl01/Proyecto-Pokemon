@@ -1,7 +1,5 @@
 'use strict';
 
-import { capitalizarPrimeraLetra } from './auxiliares.js';
-
 export function almacenarDatosEnLocalStorage(clave, datos) {
     localStorage.setItem(clave, JSON.stringify(datos));
 }

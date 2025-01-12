@@ -52,4 +52,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         listaHabilidades.appendChild(li);
     });
 
+    const btnComparar = document.querySelector('#comparar');
+    btnComparar.addEventListener('click', function () {
+        window.location.href = `comparar.html?=pokemon1=${pokemon.id}`;
+    });
 });

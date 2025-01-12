@@ -55,7 +55,6 @@ export function mostrarFichaPokemon(pokemons) {
         divDatos.classList.add('datos');
         divFicha.appendChild(divDatos);
 
-        console.log(pokemon.types);
         const contenedorTipos = document.createElement('div');
         contenedorTipos.classList.add('tipos');
         pokemon.types.forEach(tipo => {

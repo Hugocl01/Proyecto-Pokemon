@@ -325,17 +325,27 @@ footer .footer-content {
     flex-direction: column;
     border: 2px solid #dee2e6;
     border-radius: 5px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 5px #0000001a;
     background-color: #f8f9fa;
     padding: 15px 15px;
     flex-basis: 200px;
     transition: transform 0.2s ease-in-out;
 }
 
+.datos p {
+    color: gray;
+    font-size: 0.8rem;
+}
+
 .ficha:hover {
     cursor: pointer;
-    background-color: #3e9afdc4;
+    background-color: #2f5d85c7;
     transform: translateY(-10px);
+    color: white;
+
+    .datos p {
+        color: white;
+    }
 }
 
 .ficha .datos {
@@ -381,4 +391,40 @@ footer .footer-content {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* FILTROS POKEDEX */
+
+.contenedor-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.contenedor-filtro-generacion select, .contenedor-busqueda-nombre input[type="text"] {
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+}
+
+.contenedor-filtro-generacion select:hover {
+    cursor: pointer;
+}
+
+.contenedor-filtro-generacion select:focus, .contenedor-busqueda-nombre input:focus {
+    outline: 2px solid #2f5d85;
+}
+
+.contenedor-busqueda-nombre input[type="button"] {
+    background-color: #2f5d85;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+}
+
+.contenedor-busqueda-nombre input[type="button"]:hover {
+    background-color: #f9d71c;
+    cursor: pointer;
+    color: black;
 }

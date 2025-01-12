@@ -1,4 +1,5 @@
-import { buscarPokemon } from './utils.js';
+import Pokemon from './Pokemon.js';
+import { buscarPokemon, capitalizarPrimeraLetra } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Obtener el ID del Pokémon desde la URL
@@ -6,9 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const id = parseInt(params.get('id'), 10);
 
     // Buscar el Pokémon
-    const pokemon = await buscarPokemon(id);
-
-    console.log(pokemon);
+    const pokemon = new Pokemon(await buscarPokemon(id));
 
     if (!pokemon) {
         alert('Pokémon no encontrado');
@@ -44,9 +43,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Mostrar habilidades
     const listaHabilidades = document.getElementById('lista-habilidades');
-    pokemon.abilities.forEach(habilidad => {
+    // Obtener las habilidades del Pokémon
+    const habilidadesTexto = await pokemon.getAbilities();
+    habilidadesTexto.forEach(habilidad => {
         const li = document.createElement('li');
-        li.textContent = habilidad.ability.name.toUpperCase();
+        li.textContent = `${capitalizarPrimeraLetra(habilidad.name)}: ${capitalizarPrimeraLetra(habilidad.description)}`;
         listaHabilidades.appendChild(li);
     });
+
 });

@@ -27,35 +27,43 @@
         </nav>
     </header>
 
-
     <main>
-        <div class="contenedor-filtros">
-            <div class="contenedor-filtro-generacion">
-                <label for="generationFilter">Filtrar por generación:</label>
-                <select id="generationFilter">
-                    <option value="all">Todas</option>
-                    <option value="generation-i">Generación I</option>
-                    <option value="generation-ii">Generación II</option>
-                    <option value="generation-iii">Generación III</option>
-                    <option value="generation-iv">Generación IV</option>
-                    <option value="generation-v">Generación V</option>
-                    <option value="generation-vi">Generación VI</option>
-                    <option value="generation-vii">Generación VII</option>
-                    <option value="generation-viii">Generación VIII</option>
-                    <option value="generation-ix">Generación IX</option>
-                </select>
+        <div class="layout-comparador">
+            <div class="comparador">
+
             </div>
 
-            <div class="contenedor-busqueda-nombre">
-                <label for="buscarNombre">Buscar Pokémon: </label>
-                <input type="text" name="buscarNombre" id="buscarNombre" placeholder="Pikachu" title="Nombre del Pokémon">
-                <input type="button" value="Buscar" title="Buscar Pokémon" data-accion="buscar">
-                <input type="button" value="Limpiar" title="Limpiar filtros" data-accion="limpiar">
+            <div class="contenedor-principal">
+                <div class="contenedor-filtros">
+                    <div class="contenedor-filtro-generacion">
+                        <label for="generationFilter">Filtrar por generación:</label>
+                        <select id="generationFilter">
+                            <option value="all">Todas</option>
+                            <option value="generation-i">Generación I</option>
+                            <option value="generation-ii">Generación II</option>
+                            <option value="generation-iii">Generación III</option>
+                            <option value="generation-iv">Generación IV</option>
+                            <option value="generation-v">Generación V</option>
+                            <option value="generation-vi">Generación VI</option>
+                            <option value="generation-vii">Generación VII</option>
+                            <option value="generation-viii">Generación VIII</option>
+                            <option value="generation-ix">Generación IX</option>
+                        </select>
+                    </div>
+
+                    <div class="contenedor-busqueda-nombre">
+                        <label for="buscarNombre">Buscar Pokémon: </label>
+                        <input type="text" name="buscarNombre" id="buscarNombre" placeholder="Pikachu"
+                            title="Nombre del Pokémon">
+                        <input type="button" value="Buscar" title="Buscar Pokémon" data-accion="buscar">
+                        <input type="button" value="Limpiar" title="Limpiar filtros" data-accion="limpiar">
+                    </div>
+                </div>
+
+                <div class="contenedor-fichas">
+
+                </div>
             </div>
-        </div>
-
-        <div class="contenedor-fichas">
-
         </div>
     </main>
 

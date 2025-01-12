@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Pokémon</title>
-    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/detalle.js"></script>
     <link rel="shortcut icon" href="../img/logoPokeball.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -25,6 +25,37 @@
             </ul>
         </nav>
     </header>
+
+    <main>
+        <section class="detalles-pokemon">
+            <div class="info-basica">
+                <h2 id="nombre-pokemon">Nombre del Pokémon</h2>
+                <p id="id-pokemon">N.º ID</p>
+                <img id="imagen-pokemon" src="" alt="Imagen del Pokémon">
+            </div>
+
+            <div class="tipos">
+                <h3>Tipos</h3>
+                <div id="contenedor-tipos">
+                    <!-- Aquí se agregarán dinámicamente los tipos -->
+                </div>
+            </div>
+
+            <div class="estadisticas">
+                <h3>Estadísticas</h3>
+                <ul id="lista-estadisticas">
+                    <!-- Aquí se agregarán dinámicamente las estadísticas -->
+                </ul>
+            </div>
+
+            <div class="habilidades">
+                <h3>Habilidades</h3>
+                <ul id="lista-habilidades">
+                    <!-- Aquí se agregarán dinámicamente las habilidades -->
+                </ul>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-content">

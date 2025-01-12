@@ -1,5 +1,7 @@
 'use strict';
 
+import { capitalizarPrimeraLetra } from './auxiliares.js';
+
 export function almacenarDatosEnLocalStorage(clave, datos) {
     localStorage.setItem(clave, JSON.stringify(datos));
 }
@@ -36,13 +38,11 @@ export function mostrarFichaPokemon(pokemons) {
         divFicha.classList.add('ficha');
         divFicha.dataset.id = pokemon.id;
 
-        const enlaceImg = document.createElement('a');
         const img = document.createElement('img');
         img.src = pokemon.sprites.other['official-artwork'].front_default;
-        img.title = pokemon.name;
+        img.title = capitalizarPrimeraLetra(pokemon.name);
         img.width = 205;
-        enlaceImg.appendChild(img);
-        divFicha.appendChild(enlaceImg);
+        divFicha.appendChild(img);
 
         const divDatos = document.createElement('div');
         const pID = document.createElement('p');
@@ -50,13 +50,39 @@ export function mostrarFichaPokemon(pokemons) {
         divDatos.appendChild(pID);
 
         const tituloNombre = document.createElement('h3');
-        tituloNombre.textContent = pokemon.name;
+        tituloNombre.textContent = capitalizarPrimeraLetra(pokemon.name);
         divDatos.appendChild(tituloNombre);
-
+        divDatos.classList.add('datos');
         divFicha.appendChild(divDatos);
+
+        console.log(pokemon.types);
+        const contenedorTipos = document.createElement('div');
+        contenedorTipos.classList.add('tipos');
+        pokemon.types.forEach(tipo => {
+            const imgTipo = document.createElement('img');
+
+            // Extrae el número al final de la URL
+            const partes = tipo.type.url.split('/');  // Dividir la URL por las barras
+            const id = partes[partes.length - 2]; // Obtener el penúltimo elemento, el id
+            imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
+
+            contenedorTipos.appendChild(imgTipo);
+        });
+        divDatos.appendChild(contenedorTipos);
 
         contenedorFichas.appendChild(divFicha);
     }
+
+    contenedorFichas.addEventListener('click', function (event) {
+        const ficha = event.target.closest('.ficha');
+        if (ficha) {
+            const ficha = event.target.closest('.ficha');
+            if (ficha) {
+                const id = ficha.dataset.id;
+                window.location.href = `detalle.html?id=${id}`;
+            }
+        }
+    });
 }
 
 // Funciones de IndexedDB
@@ -151,6 +177,36 @@ export async function existeDatosEnGeneraciones() {
 
         solicitud.onsuccess = (event) => {
             resolve(event.target.result > 0);
+        };
+
+        solicitud.onerror = (event) => {
+            reject(event.target.error);
+        };
+    });
+}
+
+export async function buscarPokemon(id) {
+    // Obtener todas las generaciones de Pokémon desde IndexedDB
+    const db = await abrirBaseDeDatos();
+    const transaccion = db.transaction('generaciones', 'readonly');
+    const almacen = transaccion.objectStore('generaciones');
+
+    return new Promise((resolve, reject) => {
+        // Obtener todas las generaciones de Pokémon
+        const solicitud = almacen.getAll();
+
+        solicitud.onsuccess = (event) => {
+            const generaciones = event.target.result;
+            let pokemonEncontrado = null;
+
+            // Iterar sobre cada generación para buscar el Pokémon con el id dado
+            for (const generacion of generaciones) {
+                pokemonEncontrado = generacion.pokemons.find(pokemon => pokemon.id === id);
+                if (pokemonEncontrado) break; // Salir del bucle si se encuentra el Pokémon
+            }
+
+            // Devolver el Pokémon encontrado o null si no se encuentra
+            resolve(pokemonEncontrado);
         };
 
         solicitud.onerror = (event) => {

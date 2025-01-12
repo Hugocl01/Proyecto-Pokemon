@@ -1,6 +1,6 @@
 'use strict';
 
-import { mostrarFichaPokemon, obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, capitalizarPrimeraLetra, buscarPokemonPorNombre } from "./utils.js";
+import { obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, obtenerPokemon } from "./utils.js";
 import Pokemon from "./Pokemon.js";
 
 export const app = (function () {
@@ -52,8 +52,8 @@ export const app = (function () {
             }));
 
             const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);
-            console.log("Datos de las generaciones agrupadas:", generaciones);
-            console.log(datosPokemons);
+            //console.log("Datos de las generaciones agrupadas:", generaciones);
+            //console.log(datosPokemons);
 
             return generaciones;
         } catch (error) {
@@ -61,31 +61,30 @@ export const app = (function () {
         }
     }
 
-    async function obtenerDatosDesdeIndexedDB(filtroGeneracion = null) {
+    async function obtenerDatosDesdeIndexedDB(filtrarPor, valor = null) {
         let pokemons;
 
-        if (!filtroGeneracion) {
-            pokemons = await obtenerTodosLosPokemon();
-        } else {
-            pokemons = await obtenerPokemonPorGeneracion(filtroGeneracion);
+        switch (filtrarPor) {
+            case 'todos':
+                pokemons = await obtenerTodosLosPokemon();
+                break;
+            case 'generacion':
+                pokemons = await obtenerPokemonPorGeneracion(valor);
+                break;
+            case 'name':
+                pokemons = await obtenerPokemon(filtrarPor, valor);
+                break;
+            case 'id':
+                pokemons = await obtenerPokemon(filtrarPor, valor);
+                break;
         }
 
-        mostrarFichaPokemon(pokemons);
-    }
-
-    async function buscarYMostrarPokemonPorNombre(nombre) {
-        const pokemon = await buscarPokemonPorNombre(nombre);
-        if (pokemon) {
-            mostrarFichaPokemon(pokemon);
-        } else {
-            alert('Pokémon no encontrado');
-        }
+        return pokemons;
     }
 
     return {
         obtenerDatosPokemon,
-        obtenerDatosDesdeIndexedDB,
-        buscarYMostrarPokemonPorNombre
+        obtenerDatosDesdeIndexedDB
     };
 
 })();

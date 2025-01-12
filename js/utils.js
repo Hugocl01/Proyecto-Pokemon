@@ -187,7 +187,7 @@ export async function existeDatosEnGeneraciones() {
     });
 }
 
-export async function buscarPokemon(id) {
+export async function obtenerPokemon(campo, valor) {
     // Obtener todas las generaciones de Pokémon desde IndexedDB
     const db = await abrirBaseDeDatos();
     const transaccion = db.transaction('generaciones', 'readonly');
@@ -201,39 +201,15 @@ export async function buscarPokemon(id) {
             const generaciones = event.target.result;
             let pokemonEncontrado = null;
 
-            // Iterar sobre cada generación para buscar el Pokémon con el id dado
+            // Iterar sobre cada generación para buscar el Pokémon con el campo dado
             for (const generacion of generaciones) {
-                pokemonEncontrado = generacion.pokemons.find(pokemon => pokemon.id === id);
-                if (pokemonEncontrado) break; // Salir del bucle si se encuentra el Pokémon
-            }
+                if (typeof valor === "number") {
+                    pokemonEncontrado = generacion.pokemons.find(pokemon => pokemon[campo] === valor);
+                } else {
+                    valor = valor.toLowerCase();
+                    pokemonEncontrado = generacion.pokemons.find(pokemon => pokemon[campo].toLowerCase() === valor);
+                }
 
-            // Devolver el Pokémon encontrado o null si no se encuentra
-            resolve(pokemonEncontrado);
-        };
-
-        solicitud.onerror = (event) => {
-            reject(event.target.error);
-        };
-    });
-}
-
-export async function buscarPokemonPorNombre(nombre) {
-    // Obtener todas las generaciones de Pokémon desde IndexedDB
-    const db = await abrirBaseDeDatos();
-    const transaccion = db.transaction('generaciones', 'readonly');
-    const almacen = transaccion.objectStore('generaciones');
-
-    return new Promise((resolve, reject) => {
-        // Obtener todas las generaciones de Pokémon
-        const solicitud = almacen.getAll();
-
-        solicitud.onsuccess = (event) => {
-            const generaciones = event.target.result;
-            let pokemonEncontrado = null;
-
-            // Iterar sobre cada generación para buscar el Pokémon con el nombre dado
-            for (const generacion of generaciones) {
-                pokemonEncontrado = generacion.pokemons.find(pokemon => pokemon.name.toLowerCase() === nombre.toLowerCase());
                 if (pokemonEncontrado) break; // Salir del bucle si se encuentra el Pokémon
             }
 

@@ -1,12 +1,12 @@
 class Pokemon {
-    constructor(data) {
+    constructor(data, generation = undefined) {
         this.id = data.id; // ID del Pokémon
         this.name = data.name; // Nombre del Pokémon
         this.types = data.types; // Tipos (array de strings)
         this.abilities = data.abilities; // Habilidades
         this.stats = data.stats; // Estadísticas base
         this.sprites = data.sprites; // Imagenes o sprites
-        this.generation = data.generation; // Generación del Pokémon
+        this.generation = generation; // Generación del Pokémon
         this.height = data.height;
         this.weight = data.weight;
     }

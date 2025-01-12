@@ -48,12 +48,12 @@ export const app = (function () {
             const datosPokemons = await Promise.all(datosEspecies.map(async (especie) => {
                 const datosPokemon = await obtenerDatos(especie.pokemonUrl);
 
-                return new Pokemon(datosPokemon);
+                return new Pokemon(datosPokemon, especie.generation);
             }));
 
             const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);
-            //console.log("Datos de las generaciones agrupadas:", generaciones);
-            //console.log(datosPokemons);
+            console.log("Datos de las generaciones agrupadas:", generaciones);
+            console.log(datosPokemons);
 
             return generaciones;
         } catch (error) {

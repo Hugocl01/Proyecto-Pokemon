@@ -31,4 +31,33 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         ocultarSpinner();
     });
+
+    const nombre = document.getElementById('buscarNombre');
+    const inputBuscar = document.getElementById('btnBuscarPokemon');
+    inputBuscar.addEventListener('click', async () => {
+        mostrarSpinner();
+
+        await app.buscarYMostrarPokemonPorNombre(nombre.value);
+
+        ocultarSpinner();
+    });
+
+    const inputLimpiar = document.getElementById('btnLimpiar');
+    inputLimpiar.addEventListener('click', async () => {
+        mostrarSpinner();
+        nombre.value = '';
+        selectGeneracion.value = 'all';
+        const datosExisten = await existeDatosEnGeneraciones();
+
+        if (!datosExisten) {
+            const generaciones = await app.obtenerDatosPokemon();
+
+            if (generaciones) {
+                await guardarDatosPokemon(generaciones);
+            }
+        }
+
+        await app.obtenerDatosDesdeIndexedDB();
+        ocultarSpinner();
+    });
 });

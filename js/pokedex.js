@@ -1,9 +1,9 @@
 'use strict';
 
-import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon } from "./utils.js";
+import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon } from "./utils.js";
 import { app } from "./main.js";
 
-document.addEventListener('DOMContentLoaded', async () => {
+async function cargaInicial() {
     mostrarSpinner();
     const datosExisten = await existeDatosEnGeneraciones();
 
@@ -15,49 +15,71 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('todos'));
-    ocultarSpinner();
+    const pokemons = await app.obtenerDatosDesdeIndexedDB('todos');
 
+    if (pokemons) {
+        mostrarFichaPokemon(pokemons);
+    }
+
+    ocultarSpinner();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Recoger elementos del HTML
+    const inputNombrePokemon = document.getElementById('buscarNombre');
     const selectGeneracion = document.getElementById('generationFilter');
+    const contenedorFichas = document.querySelector('.contenedor-fichas');
+
+    // Al cargar realizar la obtención de los datos y mostrar pokémons
+    await cargaInicial();
+
+    // EVENTO - Select generación
     selectGeneracion.addEventListener('change', async (event) => {
-        mostrarSpinner();
+        //mostrarSpinner();
+        let pokemons;
         const generacionSeleccionada = event.target.value;
 
         if (generacionSeleccionada === 'all') {
-            mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('todos'));
+            pokemons = await app.obtenerDatosDesdeIndexedDB('todos');
         } else {
-            mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('generacion', generacionSeleccionada));
+            pokemons = await app.obtenerDatosDesdeIndexedDB('generacion', generacionSeleccionada);
         }
 
-        ocultarSpinner();
+        if (pokemons) {
+            mostrarFichaPokemon(pokemons);
+        }
+
+        //ocultarSpinner();
     });
 
-    const nombre = document.getElementById('buscarNombre');
-    const inputBuscar = document.getElementById('btnBuscarPokemon');
-    inputBuscar.addEventListener('click', async () => {
-        mostrarSpinner();
+    // EVENTO - Contenedor búsqueda (botón 'Buscar' y 'Limpiar')
+    document.querySelector('.contenedor-busqueda-nombre').addEventListener('click', async (event) => {
+        if (event.target && event.target.tagName === 'INPUT' && event.target.type === 'button') {
+            const accion = event.target.dataset.accion;
 
-        mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('name', nombre.value));
+            switch (accion) {
+                case 'buscar':
+                    selectGeneracion.value = 'all';
+                    const pokemon = await app.obtenerDatosDesdeIndexedDB('name', inputNombrePokemon.value);
 
-        ocultarSpinner();
-    });
-
-    const inputLimpiar = document.getElementById('btnLimpiar');
-    inputLimpiar.addEventListener('click', async () => {
-        mostrarSpinner();
-        nombre.value = '';
-        selectGeneracion.value = 'all';
-        const datosExisten = await existeDatosEnGeneraciones();
-
-        if (!datosExisten) {
-            const generaciones = await app.obtenerDatosPokemon();
-
-            if (generaciones) {
-                await guardarDatosPokemon(generaciones);
+                    if (pokemon) {
+                        mostrarFichaPokemon(pokemon);
+                    }
+                    break;
+                case 'limpiar':
+                    contenedorFichas.innerHTML = '';
+                    inputNombrePokemon.value = '';
+                    selectGeneracion.value = 'all';
+                    await cargaInicial();
+                    break;
             }
         }
+    });
 
-        mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('todos'));
-        ocultarSpinner();
+    // EVENTO - vaciar tabla 'generaciones' de IndexedDB (para pruebas en desarrollo)
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'F2') {
+            limpiarDatosPokemon();
+        }
     });
 });

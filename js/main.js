@@ -1,6 +1,6 @@
 'use strict';
 
-import { mostrarFichaPokemon, obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, capitalizarPrimeraLetra } from "./utils.js";
+import { mostrarFichaPokemon, obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, capitalizarPrimeraLetra, buscarPokemonPorNombre } from "./utils.js";
 import Pokemon from "./Pokemon.js";
 
 export const app = (function () {
@@ -82,9 +82,19 @@ export const app = (function () {
         mostrarFichaPokemon(pokemons);
     }
 
+    async function buscarYMostrarPokemonPorNombre(nombre) {
+        const pokemon = await buscarPokemonPorNombre(nombre);
+        if (pokemon) {
+            mostrarFichaPokemon(pokemon);
+        } else {
+            alert('Pokémon no encontrado');
+        }
+    }
+
     return {
         obtenerDatosPokemon,
-        obtenerDatosDesdeIndexedDB
+        obtenerDatosDesdeIndexedDB,
+        buscarYMostrarPokemonPorNombre
     };
 
 })();

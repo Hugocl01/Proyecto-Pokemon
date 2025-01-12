@@ -3,6 +3,10 @@
 import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon } from "./utils.js";
 import { app } from "./main.js";
 
+let pokemons = [];
+let inicio = 0;
+const cantidad = 12;
+
 async function cargaInicial() {
     mostrarSpinner();
     const datosExisten = await existeDatosEnGeneraciones();
@@ -15,10 +19,15 @@ async function cargaInicial() {
         }
     }
 
-    const pokemons = await app.obtenerDatosDesdeIndexedDB('todos');
+    pokemons = await app.obtenerDatosDesdeIndexedDB('todos');
 
-    if (pokemons) {
-        mostrarFichaPokemon(pokemons);
+    if (pokemons.length) {
+        mostrarFichaPokemon(pokemons, inicio, cantidad);
+        inicio += cantidad;
+
+        if (pokemons.length > cantidad) {
+            document.getElementById('cargarMas').style.display = 'block';
+        }
     }
 
     ocultarSpinner();
@@ -29,6 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inputNombrePokemon = document.getElementById('buscarNombre');
     const selectGeneracion = document.getElementById('generationFilter');
     const contenedorFichas = document.querySelector('.contenedor-fichas');
+    const botonCargarMas = document.getElementById('cargarMas');
+    const botonVolverArriba = document.getElementById('volverArriba');
 
     // Al cargar realizar la obtención de los datos y mostrar pokémons
     await cargaInicial();
@@ -36,7 +47,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // EVENTO - Select generación
     selectGeneracion.addEventListener('change', async (event) => {
         //mostrarSpinner();
-        let pokemons;
+        pokemons = [];
+        inicio = 0;
         const generacionSeleccionada = event.target.value;
 
         if (generacionSeleccionada === 'all') {
@@ -45,8 +57,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             pokemons = await app.obtenerDatosDesdeIndexedDB('generacion', generacionSeleccionada);
         }
 
-        if (pokemons) {
-            mostrarFichaPokemon(pokemons);
+        if (pokemons.length) {
+            mostrarFichaPokemon(pokemons, inicio, cantidad);
+            inicio += cantidad;
+
+            if (pokemons.length > cantidad) {
+                botonCargarMas.style.display = 'block';
+            } else {
+                botonCargarMas.style.display = 'none';
+            }
         }
 
         //ocultarSpinner();
@@ -56,17 +75,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.contenedor-busqueda-nombre').addEventListener('click', async (event) => {
         if (event.target && event.target.tagName === 'INPUT' && event.target.type === 'button') {
             const accion = event.target.dataset.accion;
+            pokemons = [];
 
             switch (accion) {
                 case 'buscar':
                     selectGeneracion.value = 'all';
-                    const pokemon = await app.obtenerDatosDesdeIndexedDB('name', inputNombrePokemon.value);
+                    pokemons = await app.obtenerDatosDesdeIndexedDB('name', inputNombrePokemon.value);
 
-                    if (pokemon) {
-                        mostrarFichaPokemon(pokemon);
+                    if (pokemons) {
+                        mostrarFichaPokemon(pokemons);
+                        botonCargarMas.style.display = 'none';
                     }
                     break;
                 case 'limpiar':
+                    inicio = 0;
                     contenedorFichas.innerHTML = '';
                     inputNombrePokemon.value = '';
                     selectGeneracion.value = 'all';
@@ -74,6 +96,30 @@ document.addEventListener('DOMContentLoaded', async () => {
                     break;
             }
         }
+    });
+
+    // EVENTO - Botón "Cargar más"
+    botonCargarMas.addEventListener('click', () => {
+        mostrarFichaPokemon(pokemons, inicio, cantidad);
+        inicio += cantidad;
+
+        if (inicio >= pokemons.length) {
+            botonCargarMas.style.display = 'none';
+        }
+    });
+
+    // EVENTO - Mostrar/Ocultar botón "Volver arriba"
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+            botonVolverArriba.style.display = 'block';
+        } else {
+            botonVolverArriba.style.display = 'none';
+        }
+    });
+
+    // EVENTO - Botón "Volver arriba"
+    botonVolverArriba.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // EVENTO - vaciar tabla 'generaciones' de IndexedDB (para pruebas en desarrollo)

@@ -411,7 +411,7 @@ footer .footer-content {
     cursor: pointer;
 }
 
-.contenedor-filtro-generacion select:focus, .contenedor-busqueda-nombre input:focus {
+.contenedor-filtro-generacion select:focus, .contenedor-busqueda-nombre input:focus, .boton-cargar-mas:focus {
     outline: 2px solid #2f5d85;
 }
 
@@ -421,10 +421,51 @@ footer .footer-content {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .contenedor-busqueda-nombre input[type="button"]:hover {
     background-color: #f9d71c;
     cursor: pointer;
     color: black;
+}
+
+.contenedor-boton-cargar-mas {
+    display: flex;
+    justify-content: center;
+}
+
+.boton-cargar-mas {
+    padding: 15px 40px;
+    background-color: #2f5d85;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-cargar-mas:hover {
+    background-color: #f9d71c;
+    cursor: pointer;
+    color: black;
+}
+
+/* Botón Volver Arriba */
+.boton-volver-arriba {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    background-color: #f9d71c;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-volver-arriba:hover {
+    outline: solid 3px #2f5d85;
 }

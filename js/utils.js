@@ -27,13 +27,17 @@ export function capitalizarPrimeraLetra(cadena) {
     return cadena.charAt(0).toUpperCase() + cadena.slice(1);
 }
 
-export function mostrarFichaPokemon(pokemons) {
+export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
     const contenedorFichas = document.querySelector('.contenedor-fichas');
-    contenedorFichas.innerHTML = '';
+
+    if (inicio === 0) {
+        contenedorFichas.innerHTML = '';
+    }
 
     pokemons = Array.isArray(pokemons) ? pokemons : [pokemons];
+    const pokemonsAMostrar = pokemons.slice(inicio, inicio + cantidad);
 
-    for (const pokemon of pokemons) {
+    for (const pokemon of pokemonsAMostrar) {
         const divFicha = document.createElement('div');
         divFicha.classList.add('ficha');
         divFicha.dataset.id = pokemon.id;

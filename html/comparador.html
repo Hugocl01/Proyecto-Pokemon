@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
-    <script type="module" src="../js/pokedex.js"></script>
+    <title>Comparador Pokémon</title>
+    <script type="module" src="../js/comparador.js"></script>
     <link rel="shortcut icon" href="../img/logoPokeball.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -27,10 +27,7 @@
         </nav>
     </header>
 
-
     <main>
-        <h1>Pokedex</h1>
-
         <div class="contenedor-filtros">
             <div class="contenedor-filtro-generacion">
                 <label for="generationFilter">Filtrar por generación:</label>
@@ -50,7 +47,8 @@
 
             <div class="contenedor-busqueda-nombre">
                 <label for="buscarNombre">Buscar Pokémon: </label>
-                <input type="text" name="buscarNombre" id="buscarNombre" placeholder="Pikachu" title="Nombre del Pokémon">
+                <input type="text" name="buscarNombre" id="buscarNombre" placeholder="Pikachu"
+                    title="Nombre del Pokémon">
                 <input type="button" value="Buscar" id="btnBuscarPokemon" title="Buscar Pokémon">
                 <input type="button" value="Limpiar" id="btnLimpiar" title="Limpiar filtros">
             </div>

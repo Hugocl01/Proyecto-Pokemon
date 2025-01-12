@@ -13,7 +13,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #f0f4f8;
-    /* Fondo suave para la página */
 }
 
 /* Main ocupa el espacio disponible */
@@ -29,11 +28,9 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #2f5d85;
-    /* Color de fondo acorde con Pokémon */
     padding: 12px 24px;
     color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Agregado sombra para resaltar el header */
 }
 
 header .logo {
@@ -43,7 +40,6 @@ header .logo {
 
 header .logo img {
     height: 50px;
-    /* Ajusta el tamaño del logo según sea necesario */
 }
 
 header nav ul {
@@ -52,7 +48,6 @@ header nav ul {
     padding: 0;
     display: flex;
     gap: 20px;
-    /* Espacio entre los enlaces */
 }
 
 header nav ul li {
@@ -248,7 +243,6 @@ footer .footer-content {
     margin-bottom: 20px;
 }
 
-
 /* Estilo del carrusel */
 .carrusel {
     position: relative;
@@ -271,14 +265,11 @@ footer .footer-content {
 .carrusel-controles {
     position: absolute;
     top: 50%;
-    /* Posición vertical al centro */
     width: 100%;
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
-    /* Ajusta para centrar perfectamente */
     pointer-events: none;
-    /* Permite que los botones no interfieran con las imágenes */
 }
 
 .carrusel-controles button {
@@ -393,7 +384,6 @@ footer .footer-content {
 }
 
 /* FILTROS POKEDEX */
-
 .contenedor-filtros {
     display: flex;
     flex-wrap: wrap;
@@ -454,12 +444,15 @@ footer .footer-content {
     gap: 20px; /* Espacio entre columnas */
     padding: 20px;
 }
+
 /* Columna de contenido principal (filtros y fichas) */
 .contenedor-principal {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 75vh;
+    overflow: scroll;
 }
 
 /* Columna del comparador */

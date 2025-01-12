@@ -1,6 +1,6 @@
 'use strict';
 
-import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner } from "./utils.js";
+import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon } from "./utils.js";
 import { app } from "./main.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    await app.obtenerDatosDesdeIndexedDB();
+    mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('todos'));
     ocultarSpinner();
 
     const selectGeneracion = document.getElementById('generationFilter');
@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const generacionSeleccionada = event.target.value;
 
         if (generacionSeleccionada === 'all') {
-            await app.obtenerDatosDesdeIndexedDB();
+            mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('todos'));
         } else {
-            await app.obtenerDatosDesdeIndexedDB(generacionSeleccionada);
+            mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('generacion', generacionSeleccionada));
         }
 
         ocultarSpinner();
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     inputBuscar.addEventListener('click', async () => {
         mostrarSpinner();
 
-        await app.buscarYMostrarPokemonPorNombre(nombre.value);
+        mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('name', nombre.value));
 
         ocultarSpinner();
     });
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
 
-        await app.obtenerDatosDesdeIndexedDB();
+        mostrarFichaPokemon(await app.obtenerDatosDesdeIndexedDB('todos'));
         ocultarSpinner();
     });
 });

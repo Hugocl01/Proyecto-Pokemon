@@ -1,5 +1,6 @@
+import { app } from "./main.js";
 import Pokemon from './Pokemon.js';
-import { buscarPokemon, capitalizarPrimeraLetra } from './utils.js';
+import { capitalizarPrimeraLetra } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Obtener el ID del Pokémon desde la URL
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const id = parseInt(params.get('id'), 10);
 
     // Buscar el Pokémon
-    const pokemon = new Pokemon(await buscarPokemon(id));
+    const pokemon = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', id));
 
     if (!pokemon) {
         alert('Pokémon no encontrado');

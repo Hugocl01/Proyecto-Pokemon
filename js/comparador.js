@@ -83,3 +83,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
+
+// Obtener el ID del Pokémon desde la URL
+const params = new URLSearchParams(window.location.search);
+const id1 = parseInt(params.get('pokemon1'), 10);
+const id2 = parseInt(params.get('pokemon2'), 10);
+
+// Buscar el Pokémon
+const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', id1));
+const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', id2));
+
+if (!pokemon1) {
+    alert('Pokémon no encontrado');
+}
+
+if (!pokemon2) {
+    alert('Pokémon no encontrado');
+}

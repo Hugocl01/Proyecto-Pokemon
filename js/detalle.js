@@ -54,6 +54,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const btnComparar = document.querySelector('#comparar');
     btnComparar.addEventListener('click', function () {
-        window.location.href = `comparar.html?=pokemon1=${pokemon.id}`;
+        window.location.href = `comparador.html?pokemon1=${pokemon.id}`;
     });
 });

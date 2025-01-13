@@ -25,6 +25,54 @@ async function cargaInicial() {
     ocultarSpinner();
 }
 
+async function cargarTarjetas() {
+    // Obtener el ID del Pokémon desde la URL
+    const params = new URLSearchParams(window.location.search);
+
+    const divPokemon1 = document.querySelector('#pokemon1');
+    const divPokemon2 = document.querySelector('#pokemon2');
+
+    switch (params.size) {
+        case 0: {
+
+        }
+            break;
+        case 1: {
+            if (params.has('pokemon1')) {
+                const idPokemon1 = parseInt(params.get('pokemon1'));
+
+                // Busca el Pokémon
+                const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
+
+                console.log(pokemon1);
+                divPokemon1.innerHTML = '';
+            }
+        }
+            break;
+        case 2: {
+            if (params.has('pokemon1') && params.has('pokemon2')) {
+                const idPokemon1 = parseInt(params.get('pokemon1'));
+                const idPokemon2 = parseInt(params.get('pokemon2'));
+
+                // Busca el Pokémon
+                const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
+                const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
+
+                console.log(pokemon1);
+                console.log(pokemon2);
+
+                divPokemon1.innerHTML = '';
+                divPokemon2.innerHTML = '';
+            }
+        }
+            break;
+        default: {
+            console.error("Parametros URL invalidos");
+        }
+            break;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     // Recoger elementos del HTML
     const inputNombrePokemon = document.getElementById('buscarNombre');
@@ -33,6 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Al cargar realizar la obtención de los datos y mostrar pokémons
     await cargaInicial();
+    await cargarTarjetas();
 
     // EVENTO - Select generación
     selectGeneracion.addEventListener('change', async (event) => {
@@ -83,49 +132,4 @@ document.addEventListener('DOMContentLoaded', async () => {
             limpiarDatosPokemon();
         }
     });
-
-    // Obtener el ID del Pokémon desde la URL
-    const params = new URLSearchParams(window.location.search);
-
-    const divPokemon1 = document.querySelector('#pokemon1');
-    const divPokemon2 = document.querySelector('#pokemon2');
-
-    console.log(divPokemon1);
-
-    switch (params.size) {
-        case 0: {
-
-        }
-            break;
-        case 1: {
-            if (params.has('pokemon1')) {
-                const idPokemon1 = parseInt(params.get('pokemon1'));
-
-                // Busca el Pokémon
-                const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
-
-                console.log(pokemon1);
-                divPokemon1.innerHTML = '';
-            }
-        }
-            break;
-        case 2: {
-            if (params.has('pokemon1') && params.has('pokemon2')) {
-                const idPokemon1 = parseInt(params.get('pokemon1'));
-                const idPokemon2 = parseInt(params.get('pokemon2'));
-
-                // Busca el Pokémon
-                const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
-                const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
-
-                console.log(pokemon1);
-                console.log(pokemon2);
-            }
-        }
-            break;
-        default: {
-            console.error("Parametros URL invalidos");
-        }
-            break;
-    }
 });

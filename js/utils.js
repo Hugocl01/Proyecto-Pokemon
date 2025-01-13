@@ -82,6 +82,7 @@ export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
             const ficha = event.target.closest('.ficha');
             if (ficha) {
                 const id = ficha.dataset.id;
+                // TODO
                 window.location.href = `detalle.html?id=${id}`;
             }
         }

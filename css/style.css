@@ -13,7 +13,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #f0f4f8;
-    /* Fondo suave para la página */
 }
 
 /* Main ocupa el espacio disponible */
@@ -29,11 +28,9 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #2f5d85;
-    /* Color de fondo acorde con Pokémon */
     padding: 12px 24px;
     color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Agregado sombra para resaltar el header */
 }
 
 header .logo {
@@ -43,7 +40,6 @@ header .logo {
 
 header .logo img {
     height: 50px;
-    /* Ajusta el tamaño del logo según sea necesario */
 }
 
 header nav ul {
@@ -52,7 +48,6 @@ header nav ul {
     padding: 0;
     display: flex;
     gap: 20px;
-    /* Espacio entre los enlaces */
 }
 
 header nav ul li {
@@ -69,7 +64,6 @@ header nav ul li a {
 
 header nav ul li a:hover {
     background-color: #f9d71c;
-    /* Color amarillo similar al de los Pokémon */
     color: #000;
 }
 
@@ -249,7 +243,6 @@ footer .footer-content {
     margin-bottom: 20px;
 }
 
-
 /* Estilo del carrusel */
 .carrusel {
     position: relative;
@@ -272,14 +265,11 @@ footer .footer-content {
 .carrusel-controles {
     position: absolute;
     top: 50%;
-    /* Posición vertical al centro */
     width: 100%;
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
-    /* Ajusta para centrar perfectamente */
     pointer-events: none;
-    /* Permite que los botones no interfieran con las imágenes */
 }
 
 .carrusel-controles button {
@@ -394,14 +384,14 @@ footer .footer-content {
 }
 
 /* FILTROS POKEDEX */
-
 .contenedor-filtros {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
-.contenedor-filtro-generacion select, .contenedor-busqueda-nombre input[type="text"] {
+.contenedor-filtro-generacion select,
+.contenedor-busqueda-nombre input[type="text"] {
     padding: 10px;
     border: 1px solid lightgray;
     border-radius: 4px;
@@ -411,7 +401,9 @@ footer .footer-content {
     cursor: pointer;
 }
 
-.contenedor-filtro-generacion select:focus, .contenedor-busqueda-nombre input:focus, .boton-cargar-mas:focus {
+.contenedor-filtro-generacion select:focus,
+.contenedor-busqueda-nombre input:focus,
+.boton-cargar-mas:focus {
     outline: 2px solid #2f5d85;
 }
 
@@ -468,4 +460,49 @@ footer .footer-content {
 
 .boton-volver-arriba:hover {
     outline: solid 3px #2f5d85;
+}
+
+.btn {
+    background-color: #f9d71c;
+    color: #000;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ffca28;
+    transform: scale(1.1);
+}
+
+.layout-comparador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Espacio entre columnas */
+    padding: 20px;
+}
+
+/* Columna de contenido principal (filtros y fichas) */
+.contenedor-principal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 75vh;
+    overflow: scroll;
+}
+
+/* Columna del comparador */
+.comparador {
+    flex: 1;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -2,6 +2,7 @@
 
 import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon } from "./utils.js";
 import { app } from "./main.js";
+import Pokemon from "./Pokemon.js";
 
 async function cargaInicial() {
     mostrarSpinner();
@@ -86,12 +87,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Obtener el ID del Pokémon desde la URL
 const params = new URLSearchParams(window.location.search);
-const id1 = parseInt(params.get('pokemon1'), 10);
-const id2 = parseInt(params.get('pokemon2'), 10);
+const idPokemon1 = parseInt(params.get('pokemon1'));
+const idPokemon2 = parseInt(params.get('pokemon2'));
 
 // Buscar el Pokémon
-const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', id1));
-const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', id2));
+const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
+const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
 
 if (!pokemon1) {
     alert('Pokémon no encontrado');
@@ -100,3 +101,6 @@ if (!pokemon1) {
 if (!pokemon2) {
     alert('Pokémon no encontrado');
 }
+
+console.log(pokemon1);
+console.log(pokemon2);

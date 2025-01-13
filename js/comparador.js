@@ -31,10 +31,12 @@ async function cargarTarjetas() {
 
     const divPokemon1 = document.querySelector('#pokemon1');
     const divPokemon2 = document.querySelector('#pokemon2');
+    const mensejeSeleccion = '<p>Selecciona un pokémon</p>';
 
     switch (params.size) {
         case 0: {
-
+            divPokemon1.innerHTML = mensejeSeleccion;
+            divPokemon2.innerHTML = mensejeSeleccion;
         }
             break;
         case 1: {
@@ -45,7 +47,9 @@ async function cargarTarjetas() {
                 const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
 
                 console.log(pokemon1);
+
                 divPokemon1.innerHTML = '';
+                divPokemon2.innerHTML = mensejeSeleccion;
             }
         }
             break;

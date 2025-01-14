@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             switch (accion) {
                 case 'buscar':
+                    inicio = 0;
                     selectGeneracion.value = 'all';
                     const idPokemon = parseInt(inputNombrePokemon.value);
                     let camposFiltro = [];
@@ -91,17 +92,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     pokemons = await app.obtenerDatosDesdeIndexedDB(camposFiltro[0], camposFiltro[1]);
 
-                    if (Array.isArray(pokemons)) {
+                    if (Array.isArray(pokemons)) { // Puede ser un array de pokemons = por NOMBRE o parte del NOMBRE
+                        mostrarFichaPokemon(pokemons, inicio, cantidad);
+                        inicio += cantidad;
+
                         if (pokemons.length > cantidad) {
                             botonCargarMas.style.display = 'block';
                         } else {
                             botonCargarMas.style.display = 'none';
                         }
                     } else {
+                        mostrarFichaPokemon(pokemons); // Puede ser un objeto = por ID
                         botonCargarMas.style.display = 'none';
                     }
 
-                    mostrarFichaPokemon(pokemons);
                     break;
                 case 'limpiar':
                     inicio = 0;

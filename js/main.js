@@ -8,17 +8,18 @@ export const app = (function () {
     const urlAPI = 'https://pokeapi.co/api/v2';
 
     async function obtenerDatos(url) {
-        return fetch(url)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error();
-                }
-                return response.json();
-            })
-            .catch((error) => {
-                console.error(`Error obteniendo datos de ${url}:`, error);
-                throw error;
-            });
+        try {
+            const response = await fetch(url);
+    
+            if (!response.ok) {
+                throw new Error();
+            }
+    
+            return await response.json();
+        } catch (error) {
+            console.error(`Error obteniendo datos de ${url}:`, error);
+            throw error;
+        }
     }
 
     async function obtenerDatosEspecies(desde, hasta) {

@@ -91,10 +91,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     pokemons = await app.obtenerDatosDesdeIndexedDB(camposFiltro[0], camposFiltro[1]);
 
-                    if (pokemons) {
-                        mostrarFichaPokemon(pokemons);
+                    if (Array.isArray(pokemons)) {
+                        if (pokemons.length > cantidad) {
+                            botonCargarMas.style.display = 'block';
+                        } else {
+                            botonCargarMas.style.display = 'none';
+                        }
+                    } else {
                         botonCargarMas.style.display = 'none';
                     }
+
+                    mostrarFichaPokemon(pokemons);
                     break;
                 case 'limpiar':
                     inicio = 0;

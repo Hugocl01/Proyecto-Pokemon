@@ -4,6 +4,9 @@ import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultar
 import { app } from "./main.js";
 import Pokemon from "./Pokemon.js";
 
+const divPokemon1 = document.querySelector('#pokemon1');
+const divPokemon2 = document.querySelector('#pokemon2');
+
 async function cargaInicial() {
     mostrarSpinner();
     const datosExisten = await existeDatosEnGeneraciones();
@@ -28,9 +31,6 @@ async function cargaInicial() {
 async function cargarTarjetas() {
     // Obtener el ID del Pokémon desde la URL
     const params = new URLSearchParams(window.location.search);
-
-    const divPokemon1 = document.querySelector('#pokemon1');
-    const divPokemon2 = document.querySelector('#pokemon2');
     const mensejeSeleccion = '<p>Selecciona un pokémon</p>';
 
     switch (params.size) {
@@ -46,8 +46,6 @@ async function cargarTarjetas() {
                 // Busca el Pokémon
                 const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
 
-                console.log(pokemon1);
-
                 divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = mensejeSeleccion;
             }
@@ -61,9 +59,6 @@ async function cargarTarjetas() {
                 // Busca el Pokémon
                 const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
                 const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
-
-                console.log(pokemon1);
-                console.log(pokemon2);
 
                 divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
@@ -95,7 +90,7 @@ function devolverDetallePokemon(pokemon) {
     const html = `
             <div class="pokemon">
                 <h1>${pokemon.name} (#${pokemon.id})</h1>
-                <img src="${pokemon.sprites.front_default}" alt="Sprite de ${pokemon.name}">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="Sprite de ${pokemon.name}">
                 <p><strong>Generación:</strong> ${pokemon.generation || "Desconocida"}</p>
                 <p><strong>Altura:</strong> ${pokemon.height} decímetros</p>
                 <p><strong>Peso:</strong> ${pokemon.weight} hectogramos</p>
@@ -120,7 +115,24 @@ function devolverDetallePokemon(pokemon) {
 }
 
 function comparar(pokemon1, pokemon2) {
+    pokemon1.stats.forEach(stat1 => {
+        const stat2 = pokemon2.stats.find(s => s.stat.name === stat1.stat.name);
+        if (stat2) {
+            const statElement1 = document.querySelector(`.stat.${stat1.stat.name}[data-pokemon-id="1"]`);
+            const statElement2 = document.querySelector(`.stat.${stat2.stat.name}[data-pokemon-id="2"]`);
 
+            if (stat1.base_stat > stat2.base_stat) {
+                statElement1?.classList.add('higher');
+                statElement2?.classList.add('lower');
+            } else if (stat1.base_stat < stat2.base_stat) {
+                statElement1?.classList.add('lower');
+                statElement2?.classList.add('higher');
+            } else {
+                statElement1?.classList.add('equal');
+                statElement2?.classList.add('equal');
+            }
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

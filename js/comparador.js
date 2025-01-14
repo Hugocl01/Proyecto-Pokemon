@@ -60,6 +60,9 @@ async function cargarTarjetas() {
                 const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
                 const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
 
+                console.log(pokemon1);
+                console.log(pokemon2);
+
                 divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
 

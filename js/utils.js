@@ -203,21 +203,25 @@ export async function obtenerPokemon(campo, valor) {
 
         solicitud.onsuccess = (event) => {
             const generaciones = event.target.result;
-            let pokemonEncontrado = null;
+            let pokemonEncontrado = [];
 
             // Iterar sobre cada generación para buscar el Pokémon con el campo dado
             for (const generacion of generaciones) {
-                if (typeof valor === "number") {
+                if (campo === 'id') {
                     pokemonEncontrado = generacion.pokemons.find(pokemon => pokemon[campo] === valor);
-                } else {
-                    valor = valor.toLowerCase();
-                    pokemonEncontrado = generacion.pokemons.find(pokemon => pokemon[campo].toLowerCase() === valor);
-                }
 
-                if (pokemonEncontrado) break; // Salir del bucle si se encuentra el Pokémon
+                    if (pokemonEncontrado) {
+                        break; // Salir del bucle si se encuentra el Pokémon
+                    } else {
+                        pokemonEncontrado = [];
+                    }
+                } else if (campo === 'name') {
+                    let pokemonsFiltrados = generacion.pokemons.filter(pokemon => pokemon[campo].toLowerCase().includes(valor.toLowerCase()));
+                    pokemonEncontrado = pokemonEncontrado.concat(pokemonsFiltrados);
+                }
             }
 
-            // Devolver el Pokémon encontrado o null si no se encuentra
+            // Devolver el Pokémon encontrado o [] si no se encuentra
             resolve(pokemonEncontrado);
         };
 

@@ -48,7 +48,7 @@ async function cargarTarjetas() {
 
                 console.log(pokemon1);
 
-                divPokemon1.innerHTML = '';
+                divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = mensejeSeleccion;
             }
         }
@@ -65,8 +65,10 @@ async function cargarTarjetas() {
                 console.log(pokemon1);
                 console.log(pokemon2);
 
-                divPokemon1.innerHTML = '';
-                divPokemon2.innerHTML = '';
+                divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
+                divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
+
+                comparar(pokemon1, pokemon2);
             }
         }
             break;
@@ -75,6 +77,50 @@ async function cargarTarjetas() {
         }
             break;
     }
+}
+
+function devolverDetallePokemon(pokemon) {
+    // Construir tipos
+    const typesHTML = pokemon.getFormattedTypes();
+
+    // Construir estadísticas
+    const statsHTML = pokemon.stats.map(stat => `
+            <li><strong>${stat.stat.name}:</strong> ${stat.base_stat}</li>`).join("\n");
+
+    // Construir habilidades
+    const abilitiesHTML = pokemon.abilities.map(ability => `
+            <li>${ability.ability.name}</li>`).join("\n");
+
+    // Construir estructura HTML
+    const html = `
+            <div class="pokemon">
+                <h1>${pokemon.name} (#${pokemon.id})</h1>
+                <img src="${pokemon.sprites.front_default}" alt="Sprite de ${pokemon.name}">
+                <p><strong>Generación:</strong> ${pokemon.generation || "Desconocida"}</p>
+                <p><strong>Altura:</strong> ${pokemon.height} decímetros</p>
+                <p><strong>Peso:</strong> ${pokemon.weight} hectogramos</p>
+
+                <h2>Tipos</h2>
+                <p>${typesHTML}</p>
+
+                <h2>Estadísticas Base</h2>
+                <ul>
+                    ${statsHTML}
+                </ul>
+
+                <h2>Habilidades</h2>
+                <ul>
+                    ${abilitiesHTML}
+                </ul>
+            </div>
+        `;
+
+    return html;
+
+}
+
+function comparar(pokemon1, pokemon2) {
+
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

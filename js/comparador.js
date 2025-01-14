@@ -89,6 +89,33 @@ function devolverDetallePokemon(pokemon) {
     const abilitiesHTML = pokemon.abilities.map(ability => `
             <li>${capitalizarPrimeraLetra(ability.ability.name)}</li>`).join("\n");
 
+    const btnEliminar = document.createElement('a');
+    btnEliminar.classList.add('btn');
+    btnEliminar.textContent = 'Eliminar';
+    const params = new URLSearchParams(window.location.search);
+    const paramPokemon1 = params.get('pokemon1');
+    const paramPokemon2 = params.get('pokemon2');
+    let cadenaURL = `${window.location.pathname}`;
+
+    if (params.size > 0) {
+        cadenaURL += `?${params.toString()}`;
+    }
+
+    //btnEliminar.href = cadenaURL;
+
+    // Agregar evento de clic al botón para eliminar el Pokémon de la URL
+    btnEliminar.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (paramPokemon1) {
+            params.delete('pokemon1');
+        }
+        if (paramPokemon2) {
+            params.delete('pokemon2');
+        }
+        console.log(params);
+        //window.location.search = params.toString();
+    });
+
     // Construir estructura HTML
     const html = `
             <div class="pokemon">
@@ -110,12 +137,15 @@ function devolverDetallePokemon(pokemon) {
                 <ul>
                     ${abilitiesHTML}
                 </ul>
+
+                ${btnEliminar.outerHTML}
             </div>
         `;
 
     return html;
-
 }
+
+
 
 function comparar(pokemon1, pokemon2) {
     pokemon1.stats.forEach(stat1 => {

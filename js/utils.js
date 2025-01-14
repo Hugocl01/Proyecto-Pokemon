@@ -82,8 +82,27 @@ export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
             const ficha = event.target.closest('.ficha');
             if (ficha) {
                 const id = ficha.dataset.id;
-                // TODO
-                window.location.href = `detalle.html?id=${id}`;
+                const params = new URLSearchParams(window.location.search)
+
+                if (window.location.pathname.endsWith('pokedex.html')) {
+                    window.location.href = `detalle.html?id=${id}`;
+                }
+
+                if (window.location.pathname.endsWith('comparador.html')) {
+                    switch (params.size) {
+                        case 0:
+                            window.location.href += `?&pokemon1=${id}`;
+                            break;
+
+                        case 1:
+                            window.location.href += `&pokemon2=${id}`;
+                            break;
+
+                        default:
+                            alert('No puedes comparar mas Pokémon, elimna uno para realizar otra comparación')
+                            break;
+                    }
+                }
             }
         }
     });

@@ -1,6 +1,6 @@
 'use strict';
 
-import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon } from "./utils.js";
+import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, capitalizarPrimeraLetra } from "./utils.js";
 import { app } from "./main.js";
 import Pokemon from "./Pokemon.js";
 
@@ -83,16 +83,16 @@ function devolverDetallePokemon(pokemon) {
 
     // Construir estadísticas
     const statsHTML = pokemon.stats.map(stat => `
-            <li><strong>${stat.stat.name}:</strong> ${stat.base_stat}</li>`).join("\n");
+            <li><strong>${capitalizarPrimeraLetra(stat.stat.name)}:</strong> ${stat.base_stat}</li>`).join("\n");
 
     // Construir habilidades
     const abilitiesHTML = pokemon.abilities.map(ability => `
-            <li>${ability.ability.name}</li>`).join("\n");
+            <li>${capitalizarPrimeraLetra(ability.ability.name)}</li>`).join("\n");
 
     // Construir estructura HTML
     const html = `
             <div class="pokemon">
-                <h1>${pokemon.name} (#${pokemon.id})</h1>
+                <h1>${capitalizarPrimeraLetra(pokemon.name)} (#${pokemon.id})</h1>
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="Sprite de ${pokemon.name}">
                 <p><strong>Generación:</strong> ${pokemon.generation || "Desconocida"}</p>
                 <p><strong>Altura:</strong> ${pokemon.height} decímetros</p>

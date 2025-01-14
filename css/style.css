@@ -80,6 +80,10 @@ header nav ul li a:hover {
     }
 }
 
+ul {
+    list-style: none;
+}
+
 /* Sección de bienvenida */
 .bienvenida {
     display: flex;
@@ -478,12 +482,13 @@ footer .footer-content {
     transform: scale(1.1);
 }
 
-.layout-comparador{
+.layout-comparador {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px; /* Espacio entre columnas */
+    gap: 20px;
+    /* Espacio entre columnas */
     padding: 20px;
 }
 
@@ -493,7 +498,6 @@ footer .footer-content {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 75vh;
     overflow: scroll;
 }
 
@@ -507,10 +511,10 @@ footer .footer-content {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.higher{
+.higher {
     background-color: #00ff15;
 }
 
-.lower{
-background-color: #ff0000;
+.lower {
+    background-color: #ff0000;
 }

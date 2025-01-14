@@ -80,7 +80,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             switch (accion) {
                 case 'buscar':
                     selectGeneracion.value = 'all';
-                    pokemons = await app.obtenerDatosDesdeIndexedDB('name', inputNombrePokemon.value);
+                    const idPokemon = parseInt(inputNombrePokemon.value);
+                    let camposFiltro = [];
+
+                    if (idPokemon) {
+                        camposFiltro = ['id', idPokemon];
+                    } else {
+                        camposFiltro = ['name', inputNombrePokemon.value];
+                    }
+
+                    pokemons = await app.obtenerDatosDesdeIndexedDB(camposFiltro[0], camposFiltro[1]);
 
                     if (pokemons) {
                         mostrarFichaPokemon(pokemons);

@@ -89,13 +89,21 @@ export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
                 }
 
                 if (window.location.pathname.endsWith('comparador.html')) {
+                    const validarPokemon1 = params.get('pokemon1');
+                    const validarPokemon2 = params.get('pokemon2');
+
                     switch (params.size) {
                         case 0:
                             window.location.href += `?&pokemon1=${id}`;
                             break;
 
                         case 1:
-                            window.location.href += `&pokemon2=${id}`;
+                            if (validarPokemon1) {
+                                window.location.href += `&pokemon2=${id}`;
+                            }
+                            if (validarPokemon2) {
+                                window.location.href += `&pokemon1=${id}`;
+                            }
                             break;
 
                         default:

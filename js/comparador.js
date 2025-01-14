@@ -39,18 +39,29 @@ async function cargarTarjetas() {
             divPokemon2.innerHTML = mensejeSeleccion;
         }
             break;
+
         case 1: {
+            const idPokemon1 = parseInt(params.get('pokemon1'));
+            const idPokemon2 = parseInt(params.get('pokemon2'));
+
             if (params.has('pokemon1')) {
-                const idPokemon1 = parseInt(params.get('pokemon1'));
-
-                // Busca el Pokémon
-                const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
-
+                if (idPokemon1) {
+                    const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
+                }
                 divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = mensejeSeleccion;
             }
+
+            if (params.has('pokemon2')) {
+                if (idPokemon2) {
+                    const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
+                    divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
+                    divPokemon1.innerHTML = mensejeSeleccion;
+                }
+            }
         }
             break;
+
         case 2: {
             if (params.has('pokemon1') && params.has('pokemon2')) {
                 const idPokemon1 = parseInt(params.get('pokemon1'));
@@ -60,8 +71,8 @@ async function cargarTarjetas() {
                 const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
                 const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
 
-                console.log(pokemon1);
-                console.log(pokemon2);
+                // console.log(pokemon1);
+                // console.log(pokemon2);
 
                 divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
@@ -70,6 +81,7 @@ async function cargarTarjetas() {
             }
         }
             break;
+
         default: {
             console.error("Parametros URL invalidos");
         }
@@ -83,67 +95,64 @@ function devolverDetallePokemon(pokemon) {
 
     // Construir estadísticas
     const statsHTML = pokemon.stats.map(stat => `
-            <li><strong>${capitalizarPrimeraLetra(stat.stat.name)}:</strong> ${stat.base_stat}</li>`).join("\n");
+        <li><strong>${capitalizarPrimeraLetra(stat.stat.name)}:</strong> ${stat.base_stat}</li>`).join("\n");
 
     // Construir habilidades
     const abilitiesHTML = pokemon.abilities.map(ability => `
-            <li>${capitalizarPrimeraLetra(ability.ability.name)}</li>`).join("\n");
+        <li>${capitalizarPrimeraLetra(ability.ability.name)}</li>`).join("\n");
 
-    const btnEliminar = document.createElement('a');
-    btnEliminar.classList.add('btn');
-    btnEliminar.textContent = 'Eliminar';
-    const params = new URLSearchParams(window.location.search);
-    const paramPokemon1 = params.get('pokemon1');
-    const paramPokemon2 = params.get('pokemon2');
-    let cadenaURL = `${window.location.pathname}`;
-
-    if (params.size > 0) {
-        cadenaURL += `?${params.toString()}`;
-    }
-
-    //btnEliminar.href = cadenaURL;
-
-    // Agregar evento de clic al botón para eliminar el Pokémon de la URL
-    btnEliminar.addEventListener('click', function(event) {
-        event.preventDefault();
-        if (paramPokemon1) {
-            params.delete('pokemon1');
-        }
-        if (paramPokemon2) {
-            params.delete('pokemon2');
-        }
-        console.log(params);
-        //window.location.search = params.toString();
-    });
-
-    // Construir estructura HTML
+    // Construir estructura HTML con un botón de eliminación
     const html = `
-            <div class="pokemon">
-                <h1>${capitalizarPrimeraLetra(pokemon.name)} (#${pokemon.id})</h1>
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="Sprite de ${pokemon.name}">
-                <p><strong>Generación:</strong> ${pokemon.generation || "Desconocida"}</p>
-                <p><strong>Altura:</strong> ${pokemon.height} decímetros</p>
-                <p><strong>Peso:</strong> ${pokemon.weight} hectogramos</p>
+        <div class="pokemon" id="pokemon-${pokemon.id}">
+            <h1>${capitalizarPrimeraLetra(pokemon.name)} (#${pokemon.id})</h1>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="Sprite de ${pokemon.name}">
+            <p><strong>Generación:</strong> ${pokemon.generation || "Desconocida"}</p>
+            <p><strong>Altura:</strong> ${pokemon.height} decímetros</p>
+            <p><strong>Peso:</strong> ${pokemon.weight} hectogramos</p>
 
-                <h2>Tipos</h2>
-                <p>${typesHTML}</p>
+            <h2>Tipos</h2>
+            <p>${typesHTML}</p>
 
-                <h2>Estadísticas Base</h2>
-                <ul>
-                    ${statsHTML}
-                </ul>
+            <h2>Estadísticas Base</h2>
+            <ul>
+                ${statsHTML}
+            </ul>
 
-                <h2>Habilidades</h2>
-                <ul>
-                    ${abilitiesHTML}
-                </ul>
+            <h2>Habilidades</h2>
+            <ul>
+                ${abilitiesHTML}
+            </ul>
 
-                ${btnEliminar.outerHTML}
-            </div>
-        `;
+            <button class="btn eliminar-pokemon" data-pokemon-id="${pokemon.id}">Eliminar</button>
+        </div>
+    `;
 
     return html;
 }
+
+// Vincular el evento después de insertar el HTML
+document.addEventListener('click', (event) => {
+    if (event.target && event.target.classList.contains('eliminar-pokemon')) {
+        event.preventDefault();
+
+        // Obtener el ID del Pokémon a eliminar
+        const pokemonId = event.target.getAttribute('data-pokemon-id');
+
+        // Actualizar los parámetros de la URL
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.has('pokemon1') && params.get('pokemon1') === pokemonId) {
+            params.delete('pokemon1');
+        } else if (params.has('pokemon2') && params.get('pokemon2') === pokemonId) {
+            params.delete('pokemon2');
+        }
+
+        // Redirigir a la nueva URL
+        const nuevaURL = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ''}`;
+        window.location.href = nuevaURL;
+    }
+});
+
 
 
 

@@ -45,6 +45,11 @@ class Pokemon {
         return abilitiesWithDescriptions;
     }
 
+    // Método para calcular la media de las estadísticas base
+    getAverageStats() {
+        const totalStats = this.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
+        return totalStats / this.stats.length;
+    }
 }
 
 export default Pokemon;

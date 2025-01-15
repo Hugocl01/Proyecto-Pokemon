@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         li.textContent = `${stat.stat.name.toUpperCase()}: ${stat.base_stat}`;
         listaEstadisticas.appendChild(li);
     });
+    const media = document.createElement('li');
+    media.textContent = `AVERAGE: ${pokemon.getAverageStats()}`;
+    listaEstadisticas.appendChild(media);
 
     // Mostrar habilidades
     const listaHabilidades = document.getElementById('lista-habilidades');

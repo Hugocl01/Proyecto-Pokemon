@@ -153,9 +153,6 @@ document.addEventListener('click', (event) => {
     }
 });
 
-
-
-
 function comparar(pokemon1, pokemon2) {
     pokemon1.stats.forEach(stat1 => {
         const stat2 = pokemon2.stats.find(s => s.stat.name === stat1.stat.name);

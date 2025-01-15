@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Pokémon</title>
-    <script type="module" src="../js/detalle.js"></script>
+    <script type="module" src="../js/detalle.js" defer></script>
     <link rel="shortcut icon" href="../img/logoPokeball.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -21,6 +21,7 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="pokedex.html">Pokédex</a></li>
                 <li><a href="equipos.html">Equipos</a></li>
+                <li><a href="comparador.html">Comparador</a></li>
                 <li><a href="jugar.html">Jugar</a></li>
             </ul>
         </nav>
@@ -32,6 +33,8 @@
                 <h2 id="nombre-pokemon">Nombre del Pokémon</h2>
                 <p id="id-pokemon">N.º ID</p>
                 <img id="imagen-pokemon" src="" alt="Imagen del Pokémon">
+                <p id="peso"></p>
+                <p id="altura"></p>
             </div>
 
             <div class="tipos">
@@ -53,6 +56,10 @@
                 <ul id="lista-habilidades">
                     <!-- Aquí se agregarán dinámicamente las habilidades -->
                 </ul>
+            </div>
+
+            <div>
+                <a id="comparar" name="comparar" class="btn">Comparar</a>
             </div>
         </section>
     </main>

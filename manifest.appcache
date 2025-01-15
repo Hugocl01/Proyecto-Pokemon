@@ -9,6 +9,11 @@ index.html
 css/style.css
 js/main.js
 js/utils.js
+js/pokedex.js
+js/comparador.js
+js/detalle.js
+js/carrusel.js
+js/Pokemon.js
 
 # Imágenes locales
 img/logoPokeball.ico

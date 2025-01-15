@@ -107,8 +107,8 @@ function devolverDetallePokemon(pokemon) {
             <h1>${capitalizarPrimeraLetra(pokemon.name)} (#${pokemon.id})</h1>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="Sprite de ${pokemon.name}">
             <p><strong>Generación:</strong> ${pokemon.generation || "Desconocida"}</p>
-            <p><strong>Altura:</strong> ${pokemon.height} decímetros</p>
-            <p><strong>Peso:</strong> ${pokemon.weight} hectogramos</p>
+            <p><strong>Altura:</strong> ${pokemon.height} metros</p>
+            <p><strong>Peso:</strong> ${pokemon.weight} kilogramos</p>
 
             <h2>Tipos</h2>
             <p>${typesHTML}</p>

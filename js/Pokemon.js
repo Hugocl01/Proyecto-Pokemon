@@ -7,8 +7,8 @@ class Pokemon {
         this.stats = data.stats; // Estadísticas base
         this.sprites = data.sprites; // Imagenes o sprites
         this.generation = generation; // Generación del Pokémon
-        this.height = data.height;
-        this.weight = data.weight;
+        this.height = data.height / 10; // Altura del Pokémon
+        this.weight = data.weight / 10; // Peso del Pokémon
     }
 
     // Método para mostrar los tipos del Pokémon como texto
@@ -22,28 +22,28 @@ class Pokemon {
     }
 
     async getAbilities() {
-    const abilitiesWithDescriptions = [];
+        const abilitiesWithDescriptions = [];
 
-    for (const ability of this.abilities) {
-        try {
-            // Obtiene los detalles de la habilidad desde la API
-            const response = await fetch(ability.ability.url);
-            const abilityData = await response.json();
+        for (const ability of this.abilities) {
+            try {
+                // Obtiene los detalles de la habilidad desde la API
+                const response = await fetch(ability.ability.url);
+                const abilityData = await response.json();
 
-            // Busca la descripción en español dentro de `effect_entries`
-            const effectEntryEs = abilityData.effect_entries.find(entry => entry.language.name === 'es');
-            const flavorTextEs = abilityData.flavor_text_entries.find(entry => entry.language.name === 'es');
+                // Busca la descripción en español dentro de `effect_entries`
+                const effectEntryEs = abilityData.effect_entries.find(entry => entry.language.name === 'es');
+                const flavorTextEs = abilityData.flavor_text_entries.find(entry => entry.language.name === 'es');
 
-            abilitiesWithDescriptions.push({
-                name: ability.ability.name,
-                description: flavorTextEs ? flavorTextEs.flavor_text : 'Descripción no disponible en español.',
-            });
-        } catch (error) {
-            console.error(`Error al obtener detalles de la habilidad ${ability.ability.name}:`, error);
+                abilitiesWithDescriptions.push({
+                    name: ability.ability.name,
+                    description: flavorTextEs ? flavorTextEs.flavor_text : 'Descripción no disponible en español.',
+                });
+            } catch (error) {
+                console.error(`Error al obtener detalles de la habilidad ${ability.ability.name}:`, error);
+            }
         }
+        return abilitiesWithDescriptions;
     }
-    return abilitiesWithDescriptions;
-}
 
 }
 

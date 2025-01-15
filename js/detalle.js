@@ -19,8 +19,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('nombre-pokemon').textContent = pokemon.name.toUpperCase();
     document.getElementById('id-pokemon').textContent = `N.º ${pokemon.id}`;
     document.getElementById('imagen-pokemon').src = pokemon.sprites.other['official-artwork'].front_default;
-    document.getElementById('peso').textContent = `${pokemon.weight} kilogramos`;
-    document.getElementById('altura').textContent = `${pokemon.height} metros`;
+    console.log(pokemon);
+    document.getElementById('generacion').textContent = `Generación: ${pokemon.generation}`;
+    document.getElementById('peso').textContent = `Peso: ${pokemon.weight} kilogramos`;
+    document.getElementById('altura').textContent = `ALtura: ${pokemon.height} metros`;
 
     // Mostrar tipos
     const tiposContenedor = document.getElementById('contenedor-tipos');

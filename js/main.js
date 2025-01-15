@@ -10,11 +10,11 @@ export const app = (function () {
     async function obtenerDatos(url) {
         try {
             const response = await fetch(url);
-    
+
             if (!response.ok) {
                 throw new Error();
             }
-    
+
             return await response.json();
         } catch (error) {
             console.error(`Error obteniendo datos de ${url}:`, error);
@@ -48,8 +48,9 @@ export const app = (function () {
 
             const datosPokemons = await Promise.all(datosEspecies.map(async (especie) => {
                 const datosPokemon = await obtenerDatos(especie.pokemonUrl);
+                datosPokemon.generation = especie.generation;
 
-                return new Pokemon(datosPokemon, especie.generation);
+                return new Pokemon(datosPokemon);
             }));
 
             const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);

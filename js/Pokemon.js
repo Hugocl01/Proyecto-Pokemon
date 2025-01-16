@@ -1,3 +1,5 @@
+import { capitalizarPrimeraLetra } from './utils.js';
+
 class Pokemon {
     constructor(data) {
         this.id = data.id; // ID del Pokémon

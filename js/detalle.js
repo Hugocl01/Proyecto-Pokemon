@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log(pokemon);
     document.getElementById('generacion').textContent = `Generación: ${pokemon.generation}`;
     document.getElementById('peso').textContent = `Peso: ${pokemon.weight} kilogramos`;
-    document.getElementById('altura').textContent = `ALtura: ${pokemon.height} metros`;
+    document.getElementById('altura').textContent = `Altura: ${pokemon.height} metros`;
 
     // Mostrar tipos
     const tiposContenedor = document.getElementById('contenedor-tipos');
@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const listaEstadisticas = document.getElementById('lista-estadisticas');
     pokemon.stats.forEach(stat => {
         const li = document.createElement('li');
-        li.textContent = `${stat.stat.name.toUpperCase()}: ${stat.base_stat}`;
+        li.textContent = `${capitalizarPrimeraLetra(stat.stat.name)}: ${stat.base_stat}`;
         listaEstadisticas.appendChild(li);
     });
     const media = document.createElement('li');
-    media.textContent = `AVERAGE: ${pokemon.getAverageStats()}`;
+    media.textContent = `Average: ${pokemon.getAverageStats()}`;
     listaEstadisticas.appendChild(media);
 
     // Mostrar habilidades

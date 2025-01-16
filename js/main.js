@@ -48,6 +48,7 @@ export const app = (function () {
 
             const datosPokemons = await Promise.all(datosEspecies.map(async (especie) => {
                 const datosPokemon = await obtenerDatos(especie.pokemonUrl);
+                // Correccion unidades y generacion
                 datosPokemon.height = datosPokemon.height / 10;
                 datosPokemon.weight = datosPokemon.weight / 10;
                 datosPokemon.generation = especie.generation;

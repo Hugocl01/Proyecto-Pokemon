@@ -181,6 +181,7 @@ function comparar(pokemon1, pokemon2) {
 
         // Buscar el elemento <li> correspondiente al nombre de la estadística
         const statElement1 = document.querySelector(`#pokemon-${pokemon1.id} li#${statName}`);
+        console.log(statElement1);
         const statElement2 = document.querySelector(`#pokemon-${pokemon2.id} li#${statName}`);
 
         if (statElement1 && statElement2) {

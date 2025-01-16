@@ -103,25 +103,38 @@ function devolverDetallePokemon(pokemon) {
 
     // Construir estructura HTML con un botón de eliminación
     const html = `
-        <div class="pokemon" id="pokemon-${pokemon.id}">
-            <h1>${capitalizarPrimeraLetra(pokemon.name)} (#${pokemon.id})</h1>
+        <div class="card-pokemon" id="pokemon-${pokemon.id}">
+            <div>
+                <p>N.º ${pokemon.id}</p>
+                <h1>${capitalizarPrimeraLetra(pokemon.name)}</h1>
+            </div>
+
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="Sprite de ${pokemon.name}">
-            <p><strong>Generación:</strong> ${pokemon.generation || "Desconocida"}</p>
-            <p><strong>Altura:</strong> ${pokemon.height} metros</p>
-            <p><strong>Peso:</strong> ${pokemon.weight} kilogramos</p>
 
-            <h2>Tipos</h2>
-            <p>${typesHTML}</p>
+            <div>
+                <p>Generación: ${pokemon.generation || "Desconocida"}</p>
+                <p>Altura: ${pokemon.height} metros</p>
+                <p>Peso:${pokemon.weight} kilogramos</p>
+            </div>
 
-            <h2>Estadísticas Base</h2>
-            <ul>
-                ${statsHTML}
-            </ul>
+            <div>
+                <h2>Tipos</h2>
+                <p>${typesHTML}</p>
+            </div>
 
-            <h2>Habilidades</h2>
-            <ul>
-                ${abilitiesHTML}
-            </ul>
+            <div class="estadisticas">
+                <h2>Estadísticas Base</h2>
+                <ul>
+                    ${statsHTML}
+                </ul>
+            </div>
+
+            <div class="habilidades">
+                <h2>Habilidades</h2>
+                <ul>
+                    ${abilitiesHTML}
+                </ul>
+            </div>
 
             <button class="btn eliminar-pokemon" data-pokemon-id="${pokemon.id}">Eliminar</button>
         </div>

@@ -95,7 +95,7 @@ function devolverDetallePokemon(pokemon) {
 
     // Construir estadísticas
     const statsHTML = pokemon.stats.map(stat => `
-        <li><strong>${capitalizarPrimeraLetra(stat.stat.name)}:</strong> ${stat.base_stat}</li>`).join("\n");
+        <li id="${stat.stat.name}"><strong>${capitalizarPrimeraLetra(stat.stat.name)}:</strong> ${stat.base_stat}</li>`).join("\n");
 
     // Construir habilidades
     const abilitiesHTML = pokemon.abilities.map(ability => `
@@ -154,25 +154,39 @@ document.addEventListener('click', (event) => {
 });
 
 function comparar(pokemon1, pokemon2) {
-    pokemon1.stats.forEach(stat1 => {
-        const stat2 = pokemon2.stats.find(s => s.stat.name === stat1.stat.name);
-        if (stat2) {
-            const statElement1 = document.querySelector(`.stat.${stat1.stat.name}[data-pokemon-id="1"]`);
-            const statElement2 = document.querySelector(`.stat.${stat2.stat.name}[data-pokemon-id="2"]`);
+    // Crear un objeto para acceder rápidamente a las estadísticas del segundo Pokémon
+    const stats2 = pokemon2.stats.reduce((acc, stat) => {
+        acc[stat.stat.name] = stat.base_stat;
+        return acc;
+    }, {});
 
-            if (stat1.base_stat > stat2.base_stat) {
-                statElement1?.classList.add('higher');
-                statElement2?.classList.add('lower');
-            } else if (stat1.base_stat < stat2.base_stat) {
-                statElement1?.classList.add('lower');
-                statElement2?.classList.add('higher');
+    // Recorrer las estadísticas del primer Pokémon y compararlas
+    pokemon1.stats.forEach(stat1 => {
+        const statName = stat1.stat.name;
+        const statValue1 = stat1.base_stat;
+        const statValue2 = stats2[statName];
+
+        // Buscar el elemento <li> correspondiente al nombre de la estadística
+        const statElement1 = document.querySelector(`#pokemon-${pokemon1.id} li#${statName}`);
+        const statElement2 = document.querySelector(`#pokemon-${pokemon2.id} li#${statName}`);
+
+        if (statElement1 && statElement2) {
+            // Aplicar clases según la comparación
+            if (statValue1 > statValue2) {
+                statElement1.classList.add('higher');
+                statElement2.classList.add('lower');
+            } else if (statValue1 < statValue2) {
+                statElement1.classList.add('lower');
+                statElement2.classList.add('higher');
             } else {
-                statElement1?.classList.add('equal');
-                statElement2?.classList.add('equal');
+                // Si son iguales, no aplicar ninguna clase
+                statElement1.classList.remove('higher', 'lower');
+                statElement2.classList.remove('higher', 'lower');
             }
         }
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Recoger elementos del HTML

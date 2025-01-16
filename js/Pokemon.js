@@ -28,6 +28,7 @@ class Pokemon {
         this.generation = data.generation; // Generación del Pokémon
         this.height = data.height; // Altura del Pokémon
         this.weight = data.weight // Peso del Pokémon
+        this.average = data.stats.reduce((sum, stat) => sum + stat.base_stat, 0) / data.stats.length; // Media de las estadisticas
     }
 
     /**

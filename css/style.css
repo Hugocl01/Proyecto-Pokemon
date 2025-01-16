@@ -415,7 +415,7 @@ footer .footer-content {
     color: #1d3557;
 }
 
-.contenedor-tipos .tipos {
+.tipos {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -433,12 +433,19 @@ footer .footer-content {
     justify-content: center;
     align-items: center;
     align-content: center;
+    gap: 24px;
 }
 
 .info-basica img {
     max-width: 280px;
     border: 3px solid #ddd;
     border-radius: 10px;
+}
+
+.info-stats-hab {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 /* Panel derecho */

@@ -181,6 +181,9 @@ ul {
     text-align: center;
     padding: 50px 20px;
     background-color: #fafafa;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .galeria h2 {
@@ -212,7 +215,9 @@ ul {
     color: white;
     padding: 40px 20px;
     text-align: center;
-    border-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cta h2 {
@@ -277,7 +282,7 @@ footer .footer-content {
 }
 
 .carrusel-controles button {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #2f5d85cc;
     border: none;
     color: white;
     font-size: 2rem;
@@ -293,7 +298,8 @@ footer .footer-content {
 }
 
 .carrusel-controles button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #f9d81ccb;
+    color: black;
 }
 
 /* POKEDEX */

@@ -12,7 +12,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f0f4f8;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
 /* Main ocupa el espacio disponible */
@@ -354,26 +355,141 @@ footer .footer-content {
     gap: 4px;
 }
 
-.ficha .tipos {
+.tipos {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
     gap: 5%;
 }
 
-.ficha .tipos img {
-    width: 45%;
-    border-radius: 4px;
+.ficha .tipos {
+    justify-content: flex-start;
 }
 
+.tipos img {
+    width: 45%;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.tipos img:hover {
+    transform: scale(1.1);
+}
+
+/* Contenedor principal */
 .detalles-pokemon {
+    display: flex;
+    justify-content: space-between;
+    max-width: 2000px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Información general */
+.info-general {
+    flex: 1;
     text-align: center;
 }
 
 .info-basica img {
-    max-width: 200px;
+    max-width: 220px;
     border: 3px solid #ddd;
     border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.info-basica p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+#nombre-pokemon {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1d3557;
+}
+
+/* Tipos */
+.info-tipos h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #1d3557;
+}
+
+.tipos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5%;
+}
+
+.detalles-pokemon {
+    display: flex;
+    text-align: center;
+}
+
+.info-general {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 24px;
+}
+
+.info-basica img {
+    max-width: 280px;
+    border: 3px solid #ddd;
+    border-radius: 10px;
+}
+
+.info-stats-hab {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Panel derecho */
+.estadisticas,
+.habilidades {
+    flex: 1;
+}
+
+.estadisticas h3,
+.habilidades h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1d3557;
+    margin-bottom: 10px;
+    border-left: 4px solid #457b9d;
+    padding-left: 10px;
+}
+
+/* Estadísticas */
+.estadisticas ul,
+.habilidades ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.estadisticas li,
+.habilidades li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    margin: 5px 0;
+    background: #f1f6f9;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* SPINNER */
@@ -495,7 +611,6 @@ footer .footer-content {
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    /* Espacio entre columnas */
     padding: 20px;
 }
 

@@ -29,37 +29,40 @@
 
     <main>
         <section class="detalles-pokemon">
-            <div class="info-basica">
-                <h2 id="nombre-pokemon">Nombre del Pokémon</h2>
-                <p id="id-pokemon">N.º ID</p>
-                <img id="imagen-pokemon" src="" alt="Imagen del Pokémon">
-                <p id="peso"></p>
-                <p id="altura"></p>
-            </div>
-
-            <div class="tipos">
-                <h3>Tipos</h3>
-                <div id="contenedor-tipos">
-                    <!-- Aquí se agregarán dinámicamente los tipos -->
+            <div class="info-general">
+                <div class="info-basica">
+                    <p id="id-pokemon">N.º ID</p>
+                    <h2 id="nombre-pokemon">Nombre del Pokémon</h2>
+                    <img id="imagen-pokemon" src="" alt="Imagen del Pokémon">
+                    <p id="generacion"></p>
+                    <p id="altura"></p>
+                    <p id="peso"></p>
                 </div>
-            </div>
 
-            <div class="estadisticas">
-                <h3>Estadísticas</h3>
-                <ul id="lista-estadisticas">
-                    <!-- Aquí se agregarán dinámicamente las estadísticas -->
-                </ul>
-            </div>
+                <div class="info-tipos">
+                    <h3>Tipos</h3>
+                    <div id="contenedor-tipos" class="tipos">
+                        <!-- Aquí se agregarán dinámicamente los tipos -->
+                    </div>
+                </div>
 
-            <div class="habilidades">
-                <h3>Habilidades</h3>
-                <ul id="lista-habilidades">
-                    <!-- Aquí se agregarán dinámicamente las habilidades -->
-                </ul>
-            </div>
-
-            <div>
                 <a id="comparar" name="comparar" class="btn">Comparar</a>
+            </div>
+
+            <div class="info-stats-hab">
+                <div class="estadisticas">
+                    <h3>Estadísticas</h3>
+                    <ul id="lista-estadisticas">
+                        <!-- Aquí se agregarán dinámicamente las estadísticas -->
+                    </ul>
+                </div>
+
+                <div class="habilidades">
+                    <h3>Habilidades</h3>
+                    <ul id="lista-habilidades">
+                        <!-- Aquí se agregarán dinámicamente las habilidades -->
+                    </ul>
+                </div>
             </div>
         </section>
     </main>

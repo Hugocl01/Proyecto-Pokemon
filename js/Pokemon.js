@@ -10,7 +10,7 @@ class Pokemon {
         this.sprites = data.sprites; // Imagenes o sprites
         this.generation = data.generation; // Generación del Pokémon
         this.height = data.height; // Altura del Pokémon
-        this.weight = data.weight / 10; // Peso del Pokémon
+        this.weight = data.weight // Peso del Pokémon
     }
 
     // Método para mostrar los tipos del Pokémon como texto

@@ -87,9 +87,42 @@ export const app = (function () {
         return pokemons;
     }
 
+    function extraerID(url) {
+        const partes = url.split('/');
+        return partes[partes.length - 2];
+    }
+
+    async function obtenerEvoluciones(pokemonID) {
+        try {
+            // Obtener datos de la especie del Pokémon
+            const datosEspecie = await obtenerDatos(`${urlAPI}/pokemon-species/${pokemonID}`);
+            const urlCadenaEvolutiva = datosEspecie.evolution_chain.url;
+
+            // Obtener datos de la cadena evolutiva
+            const datosCadenaEvolutiva = await obtenerDatos(urlCadenaEvolutiva);
+
+            // Recorrer la cadena evolutiva
+            const evoluciones = [];
+            let actual = datosCadenaEvolutiva.chain;
+            //console.log(actual);
+
+            do {
+                const idPokemon = parseInt(extraerID(actual.species.url));
+                const nombrePokemon = actual.species.name;
+                evoluciones.push({ idPokemon, nombrePokemon });
+                actual = actual.evolves_to[0];
+            } while (actual);
+
+            return evoluciones;
+        } catch (error) {
+            console.error("Error obteniendo evoluciones del Pokémon:", error);
+        }
+    }
+
     return {
         obtenerDatosPokemon,
-        obtenerDatosDesdeIndexedDB
+        obtenerDatosDesdeIndexedDB,
+        obtenerEvoluciones
     };
 
 })();

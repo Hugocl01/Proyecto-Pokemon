@@ -363,7 +363,7 @@ footer .footer-content {
 .tipos {
     display: flex;
     flex-wrap: wrap;
-    gap: 5%;
+    gap: 8px;
 }
 
 .ficha .tipos {
@@ -372,6 +372,10 @@ footer .footer-content {
 
 .cont-tipos .tipos {
     justify-content: space-between;
+}
+
+#contenedor-tipos.tipos img {
+    width: auto;
 }
 
 .tipos img {
@@ -437,13 +441,6 @@ footer .footer-content {
     color: #1d3557;
 }
 
-.tipos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5%;
-}
-
 .sprites,
 .evoluciones {
     display: flex;
@@ -487,12 +484,6 @@ footer .footer-content {
     display: flex;
     flex-direction: column;
     gap: 24px;
-}
-
-/* Panel derecho */
-.estadisticas,
-.habilidades {
-    flex: 1;
 }
 
 .estadisticas h3,

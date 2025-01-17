@@ -90,7 +90,6 @@ async function cargarTarjetas() {
 }
 
 function devolverDetallePokemon(pokemon) {
-    console.log(pokemon);
     // Construir tipos
     const typesHTML = pokemon.types.map(tipo => {
         const imgTipo = document.createElement('img');

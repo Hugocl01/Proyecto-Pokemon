@@ -1,6 +1,6 @@
 'use strict';
 
-import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon } from "./utils.js";
+import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, modificarImagenHeader } from "./utils.js";
 import { app } from "./main.js";
 
 let pokemons = [];
@@ -76,6 +76,9 @@ async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon,
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Modificar la imagen del header al hacer hover
+    modificarImagenHeader();
+
     // Recoger elementos del HTML
     const inputNombrePokemon = document.getElementById('buscarNombre');
     const selectGeneracion = document.getElementById('generationFilter');

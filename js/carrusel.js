@@ -1,3 +1,7 @@
+'use strict';
+
+import { modificarImagenHeader } from "./utils.js";
+
 const carrusel = document.querySelector('.carrusel-imagenes');
 const image = document.querySelector('.carrusel-imagenes img');
 //const prevButton = document.querySelector('.prev');
@@ -38,6 +42,9 @@ function reiniciarAutoSlide() {
     clearInterval(autoSlide);
     autoSlide = setInterval(cambiarSlide, 3000);
 }
+
+// Modificar la imagen del header al hacer hover
+modificarImagenHeader();
 
 // Inicializa el carrusel con una imagen aleatoria al cargar la página
 actualizarCarrusel();

@@ -1,8 +1,11 @@
 import { app } from "./main.js";
 import Pokemon from './Pokemon.js';
-import { capitalizarPrimeraLetra, extraerID } from './utils.js';
+import { capitalizarPrimeraLetra, extraerID, modificarImagenHeader } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Modificar la imagen del header al hacer hover
+    modificarImagenHeader();
+
     const main = document.querySelector('body');
     main.classList.add('fondo');
 

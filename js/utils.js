@@ -263,3 +263,17 @@ export function extraerID(url) {
     const partes = url.split('/');
     return partes[partes.length - 2];
 }
+
+// Cambiar pokéball por un pokémon
+export function modificarImagenHeader() {
+    const imgPokeball = document.querySelector('.animar-pokeball');
+    const defaultImgPokeballSrc = imgPokeball.src;
+    imgPokeball.addEventListener('mouseover', () => {
+        imgPokeball.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Math.floor(Math.random() * 1025) + 1}.png`;
+    });
+
+    imgPokeball.addEventListener('mouseout', () => {
+        imgPokeball.src = defaultImgPokeballSrc;
+        imgPokeball.width = 100;
+    });
+}

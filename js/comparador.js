@@ -1,10 +1,13 @@
 'use strict';
 
-import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, capitalizarPrimeraLetra, extraerID } from "./utils.js";
+import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, capitalizarPrimeraLetra, extraerID, modificarImagenHeader } from "./utils.js";
 import { app } from "./main.js";
 import Pokemon from "./Pokemon.js";
 
 let pokemons = [];
+
+// Modificar la imagen del header al hacer hover
+modificarImagenHeader();
 
 const divPokemon1 = document.querySelector('#pokemon1');
 const divPokemon2 = document.querySelector('#pokemon2');

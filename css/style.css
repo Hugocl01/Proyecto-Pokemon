@@ -32,6 +32,9 @@ header {
     padding: 12px 24px;
     color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 /* Animación de rotación */
@@ -59,7 +62,7 @@ header .logo {
 }
 
 .animar-pokeball {
-    width: 40px;
+    width: 60px;
     animation: rotarPokeball 1s infinite;
     align-self: center;
 }

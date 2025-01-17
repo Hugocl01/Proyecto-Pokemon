@@ -361,7 +361,8 @@ footer .footer-content {
     gap: 5%;
 }
 
-.ficha .tipos {
+.ficha .tipos,
+.cont-tipos .tipos {
     justify-content: flex-start;
 }
 

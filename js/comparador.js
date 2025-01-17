@@ -91,7 +91,23 @@ async function cargarTarjetas() {
 
 function devolverDetallePokemon(pokemon) {
     // Construir tipos
-    const typesHTML = pokemon.getFormattedTypes();
+    const typesHTML = pokemon.types.map(tipo => {
+        const imgTipo = document.createElement('img');
+
+        // Extrae el número al final de la URL
+        const partes = tipo.type.url.split('/');  // Dividir la URL por las barras
+        const id = partes[partes.length - 2]; // Obtener el penúltimo elemento, el id
+        imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
+
+        console.log(imgTipo);
+
+        return imgTipo.outerHTML;
+    }).join("");
+
+    // Crear un contenedor para los tipos y añadir la clase
+    const typesContainer = document.createElement('div');
+    typesContainer.classList.add('tipos');
+    typesContainer.innerHTML = typesHTML;
 
     // Construir estadísticas
     const statsHTML = pokemon.stats.map(stat => `
@@ -119,7 +135,9 @@ function devolverDetallePokemon(pokemon) {
 
             <div>
                 <h2>Tipos</h2>
-                <p>${typesHTML}</p>
+                <div class="cont-tipos">
+                    ${typesContainer.outerHTML}
+                </div>
             </div>
 
             <div class="estadisticas">
@@ -208,10 +226,6 @@ function comparar(pokemon1, pokemon2) {
     // Seleccionar los elementos de las estadísticas promedio
     const liMediaPokemon1 = document.querySelector(`#pokemon-${pokemon1.id} li#average`);
     const liMediaPokemon2 = document.querySelector(`#pokemon-${pokemon2.id} li#average`);
-
-    console.log(`Media Pokémon 1: ${mediaPokemon1}, Media Pokémon 2: ${mediaPokemon2}`);
-    console.log('Elemento Media Pokémon 1:', liMediaPokemon1);
-    console.log('Elemento Media Pokémon 2:', liMediaPokemon2);
 
     if (liMediaPokemon1 && liMediaPokemon2) {
         if (mediaPokemon1 > mediaPokemon2) {

@@ -200,6 +200,26 @@ function comparar(pokemon1, pokemon2) {
             }
         }
     });
+
+    const mediaPokemon1 = pokemon1.getAverageStats();
+    const mediaPokemon2 = pokemon2.getAverageStats();
+
+    const liMediaPokemon1 = document.querySelector(`#pokemon-${pokemon1.id} li#average`);
+    const liMediaPokemon2 = document.querySelector(`#pokemon-${pokemon2.id} li#average`);
+
+    if (mediaPokemon1 && mediaPokemon2) {
+        if (mediaPokemon1 > mediaPokemon2) {
+            liMediaPokemon1.classList.add('higher');
+            liMediaPokemon2.classList.add('lower');
+        } else if (mediaPokemon1 < mediaPokemon2) {
+            liMediaPokemon1.classList.add('lower');
+            liMediaPokemon2.classList.add('higher');
+        } else {
+            // Si son iguales
+            liMediaPokemon1.classList.add('equal');
+            liMediaPokemon2.classList.add('equal');
+        }
+    }
 }
 
 

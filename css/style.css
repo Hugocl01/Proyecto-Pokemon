@@ -568,6 +568,13 @@ footer .footer-content {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.centrado {
+    text-align: center;
+    padding-bottom: 16px;
 }
 
 .contenedor-filtro-generacion select,

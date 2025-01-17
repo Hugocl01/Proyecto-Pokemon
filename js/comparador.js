@@ -4,6 +4,8 @@ import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultar
 import { app } from "./main.js";
 import Pokemon from "./Pokemon.js";
 
+let pokemons = [];
+
 const divPokemon1 = document.querySelector('#pokemon1');
 const divPokemon2 = document.querySelector('#pokemon2');
 
@@ -19,13 +21,38 @@ async function cargaInicial() {
         }
     }
 
-    const pokemons = await app.obtenerDatosDesdeIndexedDB('todos');
+    pokemons = await app.obtenerDatosDesdeIndexedDB('todos');
 
     if (pokemons) {
         mostrarFichaPokemon(pokemons, 0, pokemons.length);
     }
 
     ocultarSpinner();
+}
+
+async function desencadenadorEventoBuscarPokemon(inputNombrePokemon, selectGeneracion) {
+    selectGeneracion.value = 'all';
+    const idPokemon = parseInt(inputNombrePokemon.value);
+    let camposFiltro = [];
+
+    if (idPokemon) {
+        camposFiltro = ['id', idPokemon];
+    } else {
+        camposFiltro = ['name', inputNombrePokemon.value];
+    }
+
+    pokemons = await app.obtenerDatosDesdeIndexedDB(camposFiltro[0], camposFiltro[1]);
+
+    if (pokemons) {
+        mostrarFichaPokemon(pokemons);
+    }
+}
+
+async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon, selectGeneracion) {
+    contenedorFichas.innerHTML = '';
+    inputNombrePokemon.value = '';
+    selectGeneracion.value = 'all';
+    await cargaInicial();
 }
 
 async function cargarTarjetas() {
@@ -241,8 +268,6 @@ function comparar(pokemon1, pokemon2) {
     }
 }
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
     // Recoger elementos del HTML
     const inputNombrePokemon = document.getElementById('buscarNombre');
@@ -256,7 +281,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // EVENTO - Select generación
     selectGeneracion.addEventListener('change', async (event) => {
         //mostrarSpinner();
-        let pokemons;
+        pokemons = [];
         const generacionSeleccionada = event.target.value;
 
         if (generacionSeleccionada === 'all') {
@@ -279,20 +304,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             switch (accion) {
                 case 'buscar':
-                    selectGeneracion.value = 'all';
-                    const pokemon = await app.obtenerDatosDesdeIndexedDB('name', inputNombrePokemon.value);
-
-                    if (pokemon) {
-                        mostrarFichaPokemon(pokemon);
-                    }
+                    await desencadenadorEventoBuscarPokemon(inputNombrePokemon, selectGeneracion);
                     break;
                 case 'limpiar':
-                    contenedorFichas.innerHTML = '';
-                    inputNombrePokemon.value = '';
-                    selectGeneracion.value = 'all';
-                    await cargaInicial();
+                    await desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon, selectGeneracion);
                     break;
             }
+        }
+    });
+
+    // EVENTO - Limpiar al presionar F1
+    document.addEventListener('keydown', async (event) => {
+        if (event.key === 'F1') {
+            event.preventDefault();
+            await desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon, selectGeneracion);
         }
     });
 
@@ -300,6 +325,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'F2') {
             limpiarDatosPokemon();
+        }
+    });
+
+    // EVENTO - Buscar al presionar Enter en el input de búsqueda
+    inputNombrePokemon.addEventListener('keydown', async (event) => {
+        if (event.key === 'Enter') {
+            await desencadenadorEventoBuscarPokemon(inputNombrePokemon, selectGeneracion);
         }
     });
 });

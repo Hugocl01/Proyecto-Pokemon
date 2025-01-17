@@ -397,6 +397,11 @@ footer .footer-content {
     gap: 20px;
 }
 
+.fondo {
+    background-image: url(../img/fondoAzul.jpg);
+    background-size: cover;
+}
+
 /* Información general */
 .info-general {
     flex: 1;
@@ -423,7 +428,9 @@ footer .footer-content {
 }
 
 /* Tipos, Sprites, Evoluciones */
-.info-tipos h3, .info-sprites h3, .info-evoluciones h3 {
+.info-tipos h3,
+.info-sprites h3,
+.info-evoluciones h3 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -437,7 +444,8 @@ footer .footer-content {
     gap: 5%;
 }
 
-.sprites, .evoluciones {
+.sprites,
+.evoluciones {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -445,11 +453,13 @@ footer .footer-content {
     gap: 0.5rem;
 }
 
-.sprites img, .evoluciones img {
+.sprites img,
+.evoluciones img {
     transition: transform 0.3s ease;
 }
 
-.sprites img:hover, .evoluciones img:hover {
+.sprites img:hover,
+.evoluciones img:hover {
     transform: scale(1.1);
 }
 

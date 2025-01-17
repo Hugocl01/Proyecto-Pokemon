@@ -3,6 +3,9 @@ import Pokemon from './Pokemon.js';
 import { capitalizarPrimeraLetra } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    const main = document.querySelector('body');
+    main.classList.add('fondo');
+
     // Obtener el ID del Pokémon desde la URL
     const params = new URLSearchParams(window.location.search);
     const id = parseInt(params.get('id'), 10);

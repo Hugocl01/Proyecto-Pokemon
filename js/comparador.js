@@ -198,8 +198,11 @@ function comparar(pokemon1, pokemon2) {
         const statValue2 = stats2[statName];
 
         // Buscar el elemento <li> correspondiente al nombre de la estadística
-        const statElement1 = document.querySelector(`#pokemon-${pokemon1.id} li#${statName}`);
-        const statElement2 = document.querySelector(`#pokemon-${pokemon2.id} li#${statName}`);
+        const statElement1 = document.querySelector(`div#pokemon1.comparador li#${statName}`);
+        const statElement2 = document.querySelector(`div#pokemon2.comparador li#${statName}`);
+
+        console.log(statElement1);
+        console.log(statElement2);
 
         if (statElement1 && statElement2) {
             // Aplicar clases según la comparación
@@ -222,8 +225,8 @@ function comparar(pokemon1, pokemon2) {
     const mediaPokemon2 = pokemon2.getAverageStats();
 
     // Seleccionar los elementos de las estadísticas promedio
-    const liMediaPokemon1 = document.querySelector(`#pokemon-${pokemon1.id} li#average`);
-    const liMediaPokemon2 = document.querySelector(`#pokemon-${pokemon2.id} li#average`);
+    const liMediaPokemon1 = document.querySelector(`div#pokemon1.comparador  li#average`);
+    const liMediaPokemon2 = document.querySelector(`div#pokemon2.comparador  li#average`);
 
     if (liMediaPokemon1 && liMediaPokemon2) {
         if (mediaPokemon1 > mediaPokemon2) {

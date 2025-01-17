@@ -16,13 +16,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Actualizar información básica
+    //console.log(pokemon);
     document.getElementById('nombre-pokemon').textContent = pokemon.name.toUpperCase();
     document.getElementById('id-pokemon').textContent = `N.º ${pokemon.id}`;
-    document.getElementById('imagen-pokemon').src = pokemon.sprites.other['official-artwork'].front_default;
-    console.log(pokemon);
     document.getElementById('generacion').textContent = `Generación: ${pokemon.generation}`;
     document.getElementById('peso').textContent = `Peso: ${pokemon.weight} kilogramos`;
     document.getElementById('altura').textContent = `Altura: ${pokemon.height} metros`;
+
+    // Mostrar la foto normal o shiny al pasar el ratón
+    const imagenPokemon = document.getElementById('imagen-pokemon');
+    const defaultSrc = pokemon.sprites.other['official-artwork'].front_default;
+    const hoverSrc = pokemon.sprites.other['official-artwork'].front_shiny;
+
+    imagenPokemon.src = defaultSrc;
+
+    imagenPokemon.addEventListener('mouseover', () => {
+        imagenPokemon.src = hoverSrc;
+    });
+
+    imagenPokemon.addEventListener('mouseout', () => {
+        imagenPokemon.src = defaultSrc;
+    });
 
     // Mostrar tipos
     const tiposContenedor = document.getElementById('contenedor-tipos');
@@ -37,6 +51,46 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         tiposContenedor.appendChild(imgTipo);
     });
+
+    // Mostrar sprites
+    const spritesContenedor = document.getElementById('contenedor-sprites');
+    const spritesCampos = ['front_default', 'back_default', 'front_shiny', 'back_shiny'];
+
+    spritesCampos.forEach(campoSprite => {
+        const spriteImg = document.createElement('img');
+        spriteImg.alt = campoSprite;
+        spriteImg.src = pokemon.sprites[campoSprite];
+
+        if (!pokemon.sprites[campoSprite]) {
+            spriteImg.src = '../img/logoPokeball.png';
+            spriteImg.width = 50;
+            spriteImg.height = 50;
+        }
+        spritesContenedor.appendChild(spriteImg);
+    });
+
+    // Mostrar evoluciones
+    const evolucionesContenedor = document.getElementById('contenedor-evoluciones');
+    const evoluciones = await app.obtenerEvoluciones(pokemon.id);
+    for (const evolucion of evoluciones) {
+        const aDetallePokemon = document.createElement('a');
+        aDetallePokemon.href = `detalle.html?id=${evolucion.idPokemon}`;
+        //aDetallePokemon.classList.add('ficha');
+
+        const divNombre = document.createElement('div');
+        divNombre.textContent = capitalizarPrimeraLetra(evolucion.nombrePokemon);
+        //divNombre.classList.add('contenedor-nombre-evolucion');
+
+        const evolucionImg = document.createElement('img');
+        evolucionImg.alt = evolucion.nombrePokemon;
+        const evolucionData = await app.obtenerDatosDesdeIndexedDB('id', evolucion.idPokemon);
+        evolucionImg.src = evolucionData.sprites.other['official-artwork'].front_default;
+        evolucionImg.width = 100;
+
+        aDetallePokemon.appendChild(evolucionImg);
+        aDetallePokemon.appendChild(divNombre);
+        evolucionesContenedor.appendChild(aDetallePokemon);
+    }
 
     // Mostrar estadísticas
     const listaEstadisticas = document.getElementById('lista-estadisticas');

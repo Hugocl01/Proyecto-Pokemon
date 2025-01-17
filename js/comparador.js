@@ -91,11 +91,25 @@ async function cargarTarjetas() {
 
 function devolverDetallePokemon(pokemon) {
     // Construir tipos
-    const typesHTML = pokemon.getFormattedTypes();
+    const typesHTML = pokemon.types.map(tipo => {
+        const imgTipo = document.createElement('img');
+
+        // Extrae el número al final de la URL // TODO
+        const partes = tipo.type.url.split('/');  // Dividir la URL por las barras
+        const id = partes[partes.length - 2]; // Obtener el penúltimo elemento, el id
+        imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
+
+        return imgTipo.outerHTML;
+    }).join("");
+
+    // Crear un contenedor para los tipos y añadir la clase
+    const typesContainer = document.createElement('div');
+    typesContainer.classList.add('tipos');
+    typesContainer.innerHTML = typesHTML;
 
     // Construir estadísticas
     const statsHTML = pokemon.stats.map(stat => `
-        <li><strong>${capitalizarPrimeraLetra(stat.stat.name)}:</strong> ${stat.base_stat}</li>`).join("\n");
+        <li id="${stat.stat.name}"><strong>${capitalizarPrimeraLetra(stat.stat.name)}:</strong> ${stat.base_stat}</li>`).join("\n");
 
     // Construir habilidades
     const abilitiesHTML = pokemon.abilities.map(ability => `
@@ -103,25 +117,42 @@ function devolverDetallePokemon(pokemon) {
 
     // Construir estructura HTML con un botón de eliminación
     const html = `
-        <div class="pokemon" id="pokemon-${pokemon.id}">
-            <h1>${capitalizarPrimeraLetra(pokemon.name)} (#${pokemon.id})</h1>
+        <div class="card-pokemon" id="pokemon-${pokemon.id}">
+            <div>
+                <p>N.º ${pokemon.id}</p>
+                <h1>${capitalizarPrimeraLetra(pokemon.name)}</h1>
+            </div>
+
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="Sprite de ${pokemon.name}">
-            <p><strong>Generación:</strong> ${pokemon.generation || "Desconocida"}</p>
-            <p><strong>Altura:</strong> ${pokemon.height} metros</p>
-            <p><strong>Peso:</strong> ${pokemon.weight} kilogramos</p>
 
-            <h2>Tipos</h2>
-            <p>${typesHTML}</p>
+            <div>
+                <p>Generación: ${pokemon.generation || "Desconocida"}</p>
+                <p>Altura: ${pokemon.height} metros</p>
+                <p>Peso:${pokemon.weight} kilogramos</p>
+            </div>
 
-            <h2>Estadísticas Base</h2>
-            <ul>
-                ${statsHTML}
-            </ul>
+            <div>
+                <h2>Tipos</h2>
+                <div class="cont-tipos">
+                    ${typesContainer.outerHTML}
+                </div>
+            </div>
 
-            <h2>Habilidades</h2>
-            <ul>
-                ${abilitiesHTML}
-            </ul>
+            <div class="estadisticas">
+                <h2>Estadísticas Base</h2>
+                <ul>
+                    ${statsHTML}
+                    <h2>Media</h2>
+                    <li id="average"><strong>Average:</strong> ${pokemon.getAverageStats()}</li>
+                </ul>
+            </div>
+
+            <div class="habilidades">
+                <h2>Habilidades</h2>
+                <ul>
+                    ${abilitiesHTML}
+                </ul>
+            </div>
 
             <button class="btn eliminar-pokemon" data-pokemon-id="${pokemon.id}">Eliminar</button>
         </div>
@@ -154,25 +185,67 @@ document.addEventListener('click', (event) => {
 });
 
 function comparar(pokemon1, pokemon2) {
-    pokemon1.stats.forEach(stat1 => {
-        const stat2 = pokemon2.stats.find(s => s.stat.name === stat1.stat.name);
-        if (stat2) {
-            const statElement1 = document.querySelector(`.stat.${stat1.stat.name}[data-pokemon-id="1"]`);
-            const statElement2 = document.querySelector(`.stat.${stat2.stat.name}[data-pokemon-id="2"]`);
+    // Crear un objeto para acceder rápidamente a las estadísticas del segundo Pokémon
+    const stats2 = pokemon2.stats.reduce((acc, stat) => {
+        acc[stat.stat.name] = stat.base_stat;
+        return acc;
+    }, {});
 
-            if (stat1.base_stat > stat2.base_stat) {
-                statElement1?.classList.add('higher');
-                statElement2?.classList.add('lower');
-            } else if (stat1.base_stat < stat2.base_stat) {
-                statElement1?.classList.add('lower');
-                statElement2?.classList.add('higher');
+    // Recorrer las estadísticas del primer Pokémon y compararlas
+    pokemon1.stats.forEach(stat1 => {
+        const statName = stat1.stat.name;
+        const statValue1 = stat1.base_stat;
+        const statValue2 = stats2[statName];
+
+        // Buscar el elemento <li> correspondiente al nombre de la estadística
+        const statElement1 = document.querySelector(`div#pokemon1.comparador li#${statName}`);
+        const statElement2 = document.querySelector(`div#pokemon2.comparador li#${statName}`);
+
+        console.log(statElement1);
+        console.log(statElement2);
+
+        if (statElement1 && statElement2) {
+            // Aplicar clases según la comparación
+            if (statValue1 > statValue2) {
+                statElement1.classList.add('higher');
+                statElement2.classList.add('lower');
+            } else if (statValue1 < statValue2) {
+                statElement1.classList.add('lower');
+                statElement2.classList.add('higher');
             } else {
-                statElement1?.classList.add('equal');
-                statElement2?.classList.add('equal');
+                // Si son iguales
+                statElement1.classList.add('equal');
+                statElement2.classList.add('equal');
             }
         }
     });
+
+    // Comparar las estadísticas promedio
+    const mediaPokemon1 = pokemon1.getAverageStats();
+    const mediaPokemon2 = pokemon2.getAverageStats();
+
+    // Seleccionar los elementos de las estadísticas promedio
+    const liMediaPokemon1 = document.querySelector(`div#pokemon1.comparador  li#average`);
+    const liMediaPokemon2 = document.querySelector(`div#pokemon2.comparador  li#average`);
+
+    if (liMediaPokemon1 && liMediaPokemon2) {
+        if (mediaPokemon1 > mediaPokemon2) {
+            liMediaPokemon1.classList.add('higher');
+            liMediaPokemon2.classList.add('lower');
+        } else if (mediaPokemon1 < mediaPokemon2) {
+            liMediaPokemon1.classList.add('lower');
+            liMediaPokemon2.classList.add('higher');
+        } else {
+            // Si son iguales
+            liMediaPokemon1.classList.add('equal');
+            liMediaPokemon2.classList.add('equal');
+        }
+    } else {
+        console.error('No se encontraron los elementos para las medias.');
+    }
 }
+
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Recoger elementos del HTML

@@ -28,6 +28,7 @@ class Pokemon {
         this.height = data.height; // Altura del Pokémon
         this.weight = data.weight; // Peso del Pokémon
         this.evolution_chain_url = data.evolution_chain_url; // URL de la evolución
+        this.average = data.stats.reduce((sum, stat) => sum + stat.base_stat, 0) / data.stats.length; // Media de las estadisticas
     }
 
     /**
@@ -81,7 +82,8 @@ class Pokemon {
      */
     getAverageStats() {
         const totalStats = this.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
-        return totalStats / this.stats.length;
+        const average = totalStats / this.stats.length;
+        return parseFloat(average.toFixed(2));
     }
 }
 

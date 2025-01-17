@@ -201,13 +201,19 @@ function comparar(pokemon1, pokemon2) {
         }
     });
 
+    // Comparar las estadísticas promedio
     const mediaPokemon1 = pokemon1.getAverageStats();
     const mediaPokemon2 = pokemon2.getAverageStats();
 
+    // Seleccionar los elementos de las estadísticas promedio
     const liMediaPokemon1 = document.querySelector(`#pokemon-${pokemon1.id} li#average`);
     const liMediaPokemon2 = document.querySelector(`#pokemon-${pokemon2.id} li#average`);
 
-    if (mediaPokemon1 && mediaPokemon2) {
+    console.log(`Media Pokémon 1: ${mediaPokemon1}, Media Pokémon 2: ${mediaPokemon2}`);
+    console.log('Elemento Media Pokémon 1:', liMediaPokemon1);
+    console.log('Elemento Media Pokémon 2:', liMediaPokemon2);
+
+    if (liMediaPokemon1 && liMediaPokemon2) {
         if (mediaPokemon1 > mediaPokemon2) {
             liMediaPokemon1.classList.add('higher');
             liMediaPokemon2.classList.add('lower');
@@ -219,8 +225,11 @@ function comparar(pokemon1, pokemon2) {
             liMediaPokemon1.classList.add('equal');
             liMediaPokemon2.classList.add('equal');
         }
+    } else {
+        console.error('No se encontraron los elementos para las medias.');
     }
 }
+
 
 
 document.addEventListener('DOMContentLoaded', async () => {

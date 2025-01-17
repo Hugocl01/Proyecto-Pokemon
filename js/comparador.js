@@ -1,6 +1,6 @@
 'use strict';
 
-import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, capitalizarPrimeraLetra } from "./utils.js";
+import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, capitalizarPrimeraLetra, extraerID } from "./utils.js";
 import { app } from "./main.js";
 import Pokemon from "./Pokemon.js";
 
@@ -94,9 +94,8 @@ function devolverDetallePokemon(pokemon) {
     const typesHTML = pokemon.types.map(tipo => {
         const imgTipo = document.createElement('img');
 
-        // Extrae el número al final de la URL // TODO
-        const partes = tipo.type.url.split('/');  // Dividir la URL por las barras
-        const id = partes[partes.length - 2]; // Obtener el penúltimo elemento, el id
+        // Extrae el número al final de la URL
+        const id = extraerID(tipo.type.url);
         imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
 
         return imgTipo.outerHTML;
@@ -200,9 +199,6 @@ function comparar(pokemon1, pokemon2) {
         // Buscar el elemento <li> correspondiente al nombre de la estadística
         const statElement1 = document.querySelector(`div#pokemon1.comparador li#${statName}`);
         const statElement2 = document.querySelector(`div#pokemon2.comparador li#${statName}`);
-
-        console.log(statElement1);
-        console.log(statElement2);
 
         if (statElement1 && statElement2) {
             // Aplicar clases según la comparación

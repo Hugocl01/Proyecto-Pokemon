@@ -1,6 +1,6 @@
 import { app } from "./main.js";
 import Pokemon from './Pokemon.js';
-import { capitalizarPrimeraLetra } from './utils.js';
+import { capitalizarPrimeraLetra, extraerID } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const main = document.querySelector('body');
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Actualizar información básica
-    //console.log(pokemon);
     document.getElementById('nombre-pokemon').textContent = pokemon.name.toUpperCase();
     document.getElementById('id-pokemon').textContent = `N.º ${pokemon.id}`;
     document.getElementById('generacion').textContent = `Generación: ${pokemon.generation}`;
@@ -48,8 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const imgTipo = document.createElement('img');
 
         // Extrae el número al final de la URL
-        const partes = tipo.type.url.split('/');  // Dividir la URL por las barras
-        const id = partes[partes.length - 2]; // Obtener el penúltimo elemento, el id
+        const id = extraerID(tipo.type.url);
         imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
 
         tiposContenedor.appendChild(imgTipo);

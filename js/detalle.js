@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('nombre-pokemon').textContent = pokemon.name.toUpperCase();
     document.getElementById('id-pokemon').textContent = `N.º ${pokemon.id}`;
     document.getElementById('imagen-pokemon').src = pokemon.sprites.other['official-artwork'].front_default;
+    document.getElementById('peso').textContent = `${pokemon.weight} kilogramos`;
+    document.getElementById('altura').textContent = `${pokemon.height} metros`;
 
     // Mostrar tipos
     const tiposContenedor = document.getElementById('contenedor-tipos');
@@ -41,6 +43,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         li.textContent = `${stat.stat.name.toUpperCase()}: ${stat.base_stat}`;
         listaEstadisticas.appendChild(li);
     });
+    const media = document.createElement('li');
+    media.textContent = `AVERAGE: ${pokemon.getAverageStats()}`;
+    listaEstadisticas.appendChild(media);
 
     // Mostrar habilidades
     const listaHabilidades = document.getElementById('lista-habilidades');
@@ -52,4 +57,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         listaHabilidades.appendChild(li);
     });
 
+    const btnComparar = document.querySelector('#comparar');
+    btnComparar.addEventListener('click', function () {
+        window.location.href = `comparador.html?pokemon1=${pokemon.id}`;
+    });
 });

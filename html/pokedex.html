@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
-    <script type="module" src="../js/pokedex.js"></script>
+    <script type="module" src="../js/pokedex.js" defer></script>
     <link rel="shortcut icon" href="../img/logoPokeball.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -15,7 +15,7 @@
         <div class="logo">
             <a href="index.html">
                 <img src="../img/logoPokeball.png" alt="Logo Pokémon">
-            </a> 
+            </a>
             <h1>Juego Pokémon</h1>
         </div>
         <nav>
@@ -23,6 +23,7 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="pokedex.html">Pokédex</a></li>
                 <li><a href="equipos.html">Equipos</a></li>
+                <li><a href="comparador.html">Comparador</a></li>
                 <li><a href="jugar.html">Jugar</a></li>
             </ul>
         </nav>
@@ -48,7 +49,7 @@
                     <option value="generation-ix">Generación IX</option>
                 </select>
             </div>
-    
+
             <div class="contenedor-busqueda-nombre">
                 <label for="buscarNombre">Buscar Pokémon: </label>
                 <input type="text" name="buscarNombre" id="buscarNombre" placeholder="Pikachu" title="Nombre del Pokémon">

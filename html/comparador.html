@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipos Pokémon</title>
-    <script type="module" src="../js/equipos.js" defer></script>
+    <title>Pokedex</title>
+    <script type="module" src="../js/comparador.js" defer></script>
     <link rel="shortcut icon" href="../img/logoPokeball.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -22,7 +22,7 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="pokedex.html">Pokédex</a></li>
-                <li><a href="equipos.html" class="active">Equipos</a></li>
+                <li><a href="equipos.html">Equipos</a></li>
                 <li><a href="comparador.html">Comparador</a></li>
                 <li><a href="jugar.html">Jugar</a></li>
             </ul>
@@ -30,17 +30,16 @@
     </header>
 
     <main>
-        <div class="contenedor-equipos">
-            <!-- Panel izquierdo -->
-            <aside class="panel-equipos">
-                <button class="boton-anadir-equipo" title="Añadir un nuevo equipo">Añadir equipo</button>
-                <button class="boton-eliminar-equipo" title="Eliminar el equipo seleccionado">Eliminar equipo</button>
-            </aside>
+        <div class="layout-comparador">
+            <div id="pokemon1" class="comparador">
+                <p>Selecciona un pokémon</p>
+            </div>
 
-            <!-- Panel derecho -->
-            <section class="panel-pokedex">
-                <h1>Pokédex</h1>
+            <div id="pokemon2" class="comparador">
+                <p>Selecciona un pokémon</p>
+            </div>
 
+            <div class="contenedor-principal">
                 <div class="contenedor-filtros">
                     <div class="contenedor-filtro-generacion">
                         <label for="generationFilter">Filtrar por generación:</label>
@@ -60,22 +59,17 @@
 
                     <div class="contenedor-busqueda-nombre">
                         <label for="buscarNombre">Buscar Pokémon: </label>
-                        <input type="text" name="buscarNombre" id="buscarNombre" placeholder="Pikachu" title="Nombre del Pokémon">
+                        <input type="text" name="buscarNombre" id="buscarNombre" placeholder="Pikachu"
+                            title="Nombre del Pokémon">
                         <input type="button" value="Buscar" title="Buscar Pokémon" data-accion="buscar">
                         <input type="button" value="Limpiar" title="Limpiar filtros" data-accion="limpiar">
                     </div>
                 </div>
 
                 <div class="contenedor-fichas">
-                    <!-- Aquí se mostrarán las cartas de Pokémon -->
-                </div>
 
-                <div class="contenedor-boton-cargar-mas">
-                    <input type="button" value="Cargar más Pokémons" id="cargarMas" style="display: none;" class="boton-cargar-mas" title="Cargar más Pokémons"/>
                 </div>
-
-                <input type="button" value="🡹" id="volverArriba" title="Volver arriba" class="boton-volver-arriba"/>
-            </section>
+            </div>
         </div>
     </main>
 

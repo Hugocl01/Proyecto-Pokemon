@@ -13,7 +13,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #f0f4f8;
-    /* Fondo suave para la página */
 }
 
 /* Main ocupa el espacio disponible */
@@ -29,16 +28,18 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #2f5d85;
-    /* Color de fondo acorde con Pokémon */
     padding: 12px 24px;
     color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Agregado sombra para resaltar el header */
 }
 
 header .logo {
     display: flex;
     gap: 12px;
+}
+
+header .logo img {
+    height: 50px;
 }
 
 /* Estilos del logo */
@@ -53,13 +54,13 @@ header .logo {
 .logo img:hover {
     transform: scale(1.1); /* Agranda el logo ligeramente */
 }
+
 header nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
     gap: 20px;
-    /* Espacio entre los enlaces */
 }
 
 header nav ul li {
@@ -71,7 +72,6 @@ header nav ul li a {
     text-decoration: none;
     padding: 8px 15px;
     border-radius: 5px;
-    font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -79,8 +79,8 @@ header nav ul li a:hover {
     background-color: #f9d71c;
     /* Color amarillo similar al de los Pokémon */
     color: #000;
+    font:bold;
 }
-
 /* Estilos responsivos */
 @media (max-width: 768px) {
     header {
@@ -92,6 +92,10 @@ header nav ul li a:hover {
         flex-direction: column;
         gap: 10px;
     }
+}
+
+ul {
+    list-style: none;
 }
 
 /* Sección de bienvenida */
@@ -133,7 +137,6 @@ header nav ul li a:hover {
 .bienvenida-imagen img:hover {
     transform: scale(1.1); /* Aumenta la imagen en un 10% */
 }
-
 /* Botón de acción (jugar) */
 .btn-jugar {
     background-color: #f9d71c;
@@ -262,6 +265,35 @@ footer .footer-content {
     margin-bottom: 20px;
 }
 
+/* Estilo del carrusel */
+.carrusel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.carrusel-imagenes {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carrusel-imagenes img {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.carrusel-controles {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
 /* Estilo minimalista para las flechas del carrusel */
 .carrusel-controles button {
     background: none;
@@ -284,37 +316,6 @@ footer .footer-content {
 .carrusel-controles button:hover {
     transform: scale(1.5); /* Agranda ligeramente al pasar el cursor */
     color: #f9d71c; /* Cambia el color al amarillo */
-}
-
-.carrusel {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    max-width: 650px;
-    margin: 0 auto;
-}
-
-.carrusel-imagenes {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carrusel-imagenes img {
-    width: 100%;
-    flex-shrink: 0;
-}
-
-.carrusel-controles {
-    position: absolute;
-    top: 50%;
-    /* Posición vertical al centro */
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    /* Ajusta para centrar perfectamente */
-    pointer-events: none;
-    /* Permite que los botones no interfieran con las imágenes */
 }
 
 /* POKEDEX */
@@ -380,77 +381,118 @@ footer .footer-content {
     width: 45%;
     border-radius: 4px;
 }
-
-/* --- */
+/*
+------------
+*/
+/* Detalles del Pokémon */
 .detalles-pokemon {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 20px;
     padding: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: 20px auto;
 }
 
+.detalles-pokemon h2,
 .detalles-pokemon h3 {
-    font-size: 1.5rem;
+    text-align: center;
     color: #2f5d85;
     margin-bottom: 10px;
 }
 
-.tipos {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.detalles-pokemon img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.detalles-pokemon img:hover {
+    transform: scale(1.1);
+}
+
+.info-basica {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+    font:bold;
+}
+
+.info-basica p {
+    margin: 5px 0;
+}
+
+.tipos, .estadisticas, .habilidades {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 #contenedor-tipos {
     display: flex;
-    flex-wrap: wrap; /* Permite que las imágenes se ajusten si es necesario */
-    gap: 10px; /* Espaciado entre las imágenes */
-    margin-top: 10px;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-#contenedor-tipos img {
-    width: 90px; /* Ajusta el tamaño de las imágenes */
-    height: 90px; /* Mantiene la altura proporcional */
-    object-fit: contain; /* Asegura que la imagen mantenga su proporción original */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el hover */
-}
-
-#contenedor-tipos img:hover {
-    transform: scale(1.1); /* Aumenta el tamaño de la imagen al hacer hover */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Añade una sombra al pasar el cursor */
+#contenedor-tipos span {
+    background-color: #2f5d85;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    text-transform: capitalize;
 }
 
 #lista-estadisticas, #lista-habilidades {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 #lista-estadisticas li, #lista-habilidades li {
-    margin-bottom: 10px;
-}
-
-.descripcion p, .altura-peso p {
+    padding: 8px 12px;
+    background-color: #e0f7fa;
+    border-radius: 5px;
     font-size: 1rem;
-    color: #555;
+    color: #2f5d85;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
 }
 
-/* ----- */
-
-.detalles-pokemon {
+#comparar {
+    display: block;
     text-align: center;
+    padding: 10px 20px;
+    background-color: #f9d71c;
+    color: #2f5d85;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    max-width: 200px;
+    margin: 20px auto;
 }
 
-.info-basica img {
-    max-width: 200px;
-    border: 3px solid #ddd;
-    border-radius: 10px;
+#comparar:hover {
+    background-color: #ffca28;
+    transform: scale(1.05);
 }
+/*
+---------
+*/
 
 /* SPINNER */
 .spinner {
@@ -470,14 +512,14 @@ footer .footer-content {
 }
 
 /* FILTROS POKEDEX */
-
 .contenedor-filtros {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
-.contenedor-filtro-generacion select, .contenedor-busqueda-nombre input[type="text"] {
+.contenedor-filtro-generacion select,
+.contenedor-busqueda-nombre input[type="text"] {
     padding: 10px;
     border: 1px solid lightgray;
     border-radius: 4px;
@@ -487,7 +529,9 @@ footer .footer-content {
     cursor: pointer;
 }
 
-.contenedor-filtro-generacion select:focus, .contenedor-busqueda-nombre input:focus, .boton-cargar-mas:focus {
+.contenedor-filtro-generacion select:focus,
+.contenedor-busqueda-nombre input:focus,
+.boton-cargar-mas:focus {
     outline: 2px solid #2f5d85;
 }
 
@@ -545,3 +589,60 @@ footer .footer-content {
 .boton-volver-arriba:hover {
     outline: solid 3px #2f5d85;
 }
+
+.btn {
+    background-color: #f9d71c;
+    color: #000;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #ffca28;
+    transform: scale(1.1);
+}
+
+.layout-comparador {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    /* Espacio entre columnas */
+    padding: 20px;
+}
+
+/* Columna de contenido principal (filtros y fichas) */
+.contenedor-principal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: scroll;
+}
+
+/* Columna del comparador */
+.comparador {
+    flex: 1;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.higher {
+    background-color: #00ff15;
+}
+
+.lower {
+    background-color: #ff0000;
+}
+
+/*Estilos para la pagina de equipos*/
+

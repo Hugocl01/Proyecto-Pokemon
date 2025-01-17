@@ -492,7 +492,8 @@ footer .footer-content {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.layout-comparador .estadisticas li{
+.layout-comparador .estadisticas li,
+.layout-comparador .habilidades li {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -657,4 +658,8 @@ footer .footer-content {
 
 .lower {
     background-color: #fa4444;
+}
+
+.equal {
+    background-color: #4ab7fc;
 }

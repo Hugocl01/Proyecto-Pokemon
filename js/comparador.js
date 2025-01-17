@@ -126,6 +126,8 @@ function devolverDetallePokemon(pokemon) {
                 <h2>Estadísticas Base</h2>
                 <ul>
                     ${statsHTML}
+                    <h2>Media</h2>
+                    <li id="average"><strong>Average:</strong> ${pokemon.getAverageStats()}</li>
                 </ul>
             </div>
 
@@ -192,9 +194,9 @@ function comparar(pokemon1, pokemon2) {
                 statElement1.classList.add('lower');
                 statElement2.classList.add('higher');
             } else {
-                // Si son iguales, no aplicar ninguna clase
-                statElement1.classList.remove('higher', 'lower');
-                statElement2.classList.remove('higher', 'lower');
+                // Si son iguales
+                statElement1.classList.add('equal');
+                statElement2.classList.add('equal');
             }
         }
     });

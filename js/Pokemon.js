@@ -82,8 +82,10 @@ class Pokemon {
      */
     getAverageStats() {
         const totalStats = this.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
-        return totalStats / this.stats.length;
+        const average = totalStats / this.stats.length;
+        return parseFloat(average.toFixed(2));
     }
+
 }
 
 export default Pokemon;

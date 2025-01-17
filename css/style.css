@@ -397,7 +397,7 @@ footer .footer-content {
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 32px;
     gap: 20px;
 }
 
@@ -484,6 +484,7 @@ footer .footer-content {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    justify-content: space-between;
 }
 
 .estadisticas h3,

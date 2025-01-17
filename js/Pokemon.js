@@ -1,5 +1,3 @@
-import { capitalizarPrimeraLetra } from './utils.js';
-
 /**
  * Representa a un Pokémon con sus propiedades, tipos, estadísticas, habilidades, etc.
  * @class
@@ -17,6 +15,7 @@ class Pokemon {
      * @param {number} data.generation - Generación del Pokémon.
      * @param {number} data.height - Altura del Pokémon en decímetros.
      * @param {number} data.weight - Peso del Pokémon en hectogramos.
+     * @param {string} data.evolution_chain_url - URL de la evolución.
      */
     constructor(data) {
         this.id = data.id; // ID del Pokémon
@@ -27,7 +26,8 @@ class Pokemon {
         this.sprites = data.sprites; // Imagenes o sprites
         this.generation = data.generation; // Generación del Pokémon
         this.height = data.height; // Altura del Pokémon
-        this.weight = data.weight // Peso del Pokémon
+        this.weight = data.weight; // Peso del Pokémon
+        this.evolution_chain_url = data.evolution_chain_url; // URL de la evolución
         this.average = data.stats.reduce((sum, stat) => sum + stat.base_stat, 0) / data.stats.length; // Media de las estadisticas
     }
 
@@ -85,7 +85,6 @@ class Pokemon {
         const average = totalStats / this.stats.length;
         return parseFloat(average.toFixed(2));
     }
-
 }
 
 export default Pokemon;

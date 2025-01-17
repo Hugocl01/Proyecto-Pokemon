@@ -1,6 +1,6 @@
 'use strict';
 
-import { obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, obtenerPokemon } from "./utils.js";
+import { obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, obtenerPokemon, extraerID } from "./utils.js";
 import Pokemon from "./Pokemon.js";
 
 export const app = (function () {
@@ -87,11 +87,6 @@ export const app = (function () {
         }
 
         return pokemons;
-    }
-
-    function extraerID(url) {
-        const partes = url.split('/');
-        return partes[partes.length - 2];
     }
 
     async function obtenerEvoluciones(pokemonID) {

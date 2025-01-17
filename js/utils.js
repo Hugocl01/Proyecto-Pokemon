@@ -258,3 +258,8 @@ export async function obtenerPokemon(campo, valor) {
         };
     });
 }
+
+export function extraerID(url) {
+    const partes = url.split('/');
+    return partes[partes.length - 2];
+}

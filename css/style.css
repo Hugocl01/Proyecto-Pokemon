@@ -361,9 +361,12 @@ footer .footer-content {
     gap: 5%;
 }
 
-.ficha .tipos,
-.cont-tipos .tipos {
+.ficha .tipos {
     justify-content: flex-start;
+}
+
+.cont-tipos .tipos {
+    justify-content: space-between;
 }
 
 .tipos img {

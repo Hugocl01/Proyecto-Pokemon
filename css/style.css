@@ -326,6 +326,14 @@ footer .footer-content {
     */
 }
 
+.contenedor-scroll {
+    height: 700px;
+    overflow-y: auto;
+    border: 2px solid #dee2e6;
+    border-radius: 5px;
+    padding: 20px;
+}
+
 .ficha {
     display: flex;
     flex-direction: column;

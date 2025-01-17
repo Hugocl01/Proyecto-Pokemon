@@ -94,12 +94,10 @@ function devolverDetallePokemon(pokemon) {
     const typesHTML = pokemon.types.map(tipo => {
         const imgTipo = document.createElement('img');
 
-        // Extrae el número al final de la URL
+        // Extrae el número al final de la URL // TODO
         const partes = tipo.type.url.split('/');  // Dividir la URL por las barras
         const id = partes[partes.length - 2]; // Obtener el penúltimo elemento, el id
         imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
-
-        console.log(imgTipo);
 
         return imgTipo.outerHTML;
     }).join("");

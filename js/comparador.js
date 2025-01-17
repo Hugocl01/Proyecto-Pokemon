@@ -6,9 +6,6 @@ import Pokemon from "./Pokemon.js";
 
 let pokemons = [];
 
-// Modificar la imagen del header al hacer hover
-modificarImagenHeader(await app.obtenerMaxPokemons());
-
 const divPokemon1 = document.querySelector('#pokemon1');
 const divPokemon2 = document.querySelector('#pokemon2');
 
@@ -272,6 +269,9 @@ function comparar(pokemon1, pokemon2) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Modificar la imagen del header al hacer hover
+    modificarImagenHeader(await app.obtenerMaxPokemons());
+
     // Recoger elementos del HTML
     const inputNombrePokemon = document.getElementById('buscarNombre');
     const selectGeneracion = document.getElementById('generationFilter');

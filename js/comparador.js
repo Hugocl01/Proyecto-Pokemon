@@ -47,9 +47,9 @@ async function cargarTarjetas() {
             if (params.has('pokemon1')) {
                 if (idPokemon1) {
                     const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
+                    divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
+                    divPokemon2.innerHTML = mensejeSeleccion;
                 }
-                divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
-                divPokemon2.innerHTML = mensejeSeleccion;
             }
 
             if (params.has('pokemon2')) {
@@ -90,6 +90,7 @@ async function cargarTarjetas() {
 }
 
 function devolverDetallePokemon(pokemon) {
+    console.log(pokemon);
     // Construir tipos
     const typesHTML = pokemon.types.map(tipo => {
         const imgTipo = document.createElement('img');

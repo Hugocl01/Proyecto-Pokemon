@@ -7,7 +7,7 @@ import Pokemon from "./Pokemon.js";
 let pokemons = [];
 
 // Modificar la imagen del header al hacer hover
-modificarImagenHeader();
+modificarImagenHeader(await app.obtenerMaxPokemons());
 
 const divPokemon1 = document.querySelector('#pokemon1');
 const divPokemon2 = document.querySelector('#pokemon2');

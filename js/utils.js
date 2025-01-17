@@ -265,11 +265,11 @@ export function extraerID(url) {
 }
 
 // Cambiar pokéball por un pokémon
-export function modificarImagenHeader() {
+export function modificarImagenHeader(maxPokemons) {
     const imgPokeball = document.querySelector('.animar-pokeball');
     const defaultImgPokeballSrc = imgPokeball.src;
     imgPokeball.addEventListener('mouseover', () => {
-        imgPokeball.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Math.floor(Math.random() * 1025) + 1}.png`;
+        imgPokeball.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Math.floor(Math.random() * maxPokemons) + 1}.png`;
     });
 
     imgPokeball.addEventListener('mouseout', () => {

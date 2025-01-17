@@ -4,7 +4,7 @@ import { capitalizarPrimeraLetra, extraerID, modificarImagenHeader } from './uti
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Modificar la imagen del header al hacer hover
-    modificarImagenHeader();
+    modificarImagenHeader(await app.obtenerMaxPokemons());
 
     const main = document.querySelector('body');
     main.classList.add('fondo');

@@ -22,6 +22,16 @@ export const app = (function () {
         }
     }
 
+    async function obtenerMaxPokemons() {
+        try {
+            const datosRespuesta = await obtenerDatos(`${urlAPI}/pokemon-species`);
+            return datosRespuesta.count;
+        } catch (error) {
+            console.error("Error obteniendo el número máximo de Pokémons:", error);
+            return 1025;
+        }
+    }
+
     async function obtenerDatosEspecies(desde, hasta) {
         try {
             const datosRespuesta = await obtenerDatos(`${urlAPI}/pokemon-species?limit=${hasta}&offset=${desde}`);
@@ -45,7 +55,8 @@ export const app = (function () {
 
     async function obtenerDatosPokemon() {
         try {
-            const datosEspecies = await obtenerDatosEspecies(0, 1025);
+            const maxPokemons = await obtenerMaxPokemons();
+            const datosEspecies = await obtenerDatosEspecies(0, maxPokemons);
     
             const datosPokemons = await Promise.all(datosEspecies.map(async (especie) => {
                 const datosPokemon = await obtenerDatos(especie.pokemonUrl);
@@ -122,7 +133,8 @@ export const app = (function () {
     return {
         obtenerDatosPokemon,
         obtenerDatosDesdeIndexedDB,
-        obtenerEvoluciones
+        obtenerEvoluciones, 
+        obtenerMaxPokemons
     };
 
 })();

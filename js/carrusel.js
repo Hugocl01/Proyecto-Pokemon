@@ -1,15 +1,17 @@
 'use strict';
 
+import { app } from "./main.js";
 import { modificarImagenHeader } from "./utils.js";
 
 const carrusel = document.querySelector('.carrusel-imagenes');
 const image = document.querySelector('.carrusel-imagenes img');
 //const prevButton = document.querySelector('.prev');
 //const nextButton = document.querySelector('.next');
+const maxPokemons = await app.obtenerMaxPokemons();
 
 // Función para actualizar el carrusel
 function actualizarCarrusel() {
-    const numeroAleatorio = Math.floor(Math.random() * 1025) + 1; // Genera un número aleatorio entre 1 y 1025
+    const numeroAleatorio = Math.floor(Math.random() * maxPokemons) + 1; // Genera un número aleatorio entre 1 y el máximo de pokémons disponibles
     image.src = '../img/logoPokeball.png'; // Cambia la imagen a la Pokéball
     carrusel.style.transform = 'scale(0.5)';
     setTimeout(() => {
@@ -44,7 +46,7 @@ function reiniciarAutoSlide() {
 }
 
 // Modificar la imagen del header al hacer hover
-modificarImagenHeader();
+modificarImagenHeader(await app.obtenerMaxPokemons());
 
 // Inicializa el carrusel con una imagen aleatoria al cargar la página
 actualizarCarrusel();

@@ -77,7 +77,7 @@ async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon,
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Modificar la imagen del header al hacer hover
-    modificarImagenHeader();
+    modificarImagenHeader(await app.obtenerMaxPokemons());
 
     // Recoger elementos del HTML
     const inputNombrePokemon = document.getElementById('buscarNombre');

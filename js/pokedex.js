@@ -1,6 +1,7 @@
 'use strict';
 
-import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, modificarImagenHeader } from "./utils.js";
+import { guardarDatosPokemon, existeDatosEnGeneraciones, limpiarDatosPokemon } from "./helpers/indexedDB.js";
+import { mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, modificarImagenHeader } from "./helpers/ui.js";
 import { app } from "./main.js";
 
 /**

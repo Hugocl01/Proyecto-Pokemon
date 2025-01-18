@@ -3,7 +3,12 @@ CACHE MANIFEST
 
 CACHE:
 # Páginas
-index.html
+html/index.html
+html/pokedex.html
+html/detalle.html
+html/comparador.html
+html/equipos.html
+html/jugar.html
 
 # Estilos y scripts
 css/style.css

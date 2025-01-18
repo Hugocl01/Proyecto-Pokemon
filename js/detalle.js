@@ -18,12 +18,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const id = parseInt(params.get('id'), 10); // Convierte el parámetro 'id' en número
 
     // Busca el Pokémon en la base de datos
-    const pokemon = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', id));
+    const datosPokemon = await app.obtenerDatosDesdeIndexedDB('id', id);
 
-    if (!pokemon) {
+    if (Array.isArray(datosPokemon) && !datosPokemon.length) {
         alert('Pokémon no encontrado'); // Muestra un mensaje si no se encuentra el Pokémon
+        window.location.href = 'pokedex.html';
         return;
     }
+
+    const pokemon = new Pokemon(datosPokemon);
 
     // Actualiza la información básica del Pokémon
     document.getElementById('nombre-pokemon').textContent = pokemon.name.toUpperCase();

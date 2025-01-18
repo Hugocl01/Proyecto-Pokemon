@@ -672,6 +672,7 @@ footer .footer-content {
     font-size: 1.2rem;
     border-radius: 5px;
     text-decoration: none;
+    text-align: center;
     display: inline-block;
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer;

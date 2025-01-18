@@ -210,7 +210,7 @@ function devolverDetallePokemon(pokemon) {
                 </ul>
             </div>
 
-            <button class="btn eliminar-pokemon" data-pokemon-id="${pokemon.id}">Eliminar</button>
+            <a class="btn eliminar-pokemon" data-pokemon-id="${pokemon.id}">Eliminar</a>
         </div>
     `;
 

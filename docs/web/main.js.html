@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>main.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Equipo.html">Equipo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#agregarPokemon">agregarPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#eliminarPokemon">eliminarPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#equipoCompleto">equipoCompleto</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#limpiarEquipo">limpiarEquipo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#obtenerDetalles">obtenerDetalles</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Pokemon.html">Pokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Pokemon.html#getAbilities">getAbilities</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Pokemon.html#getAverageStats">getAverageStats</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Pokemon.html#getFormattedStats">getFormattedStats</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Pokemon.html#getFormattedTypes">getFormattedTypes</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-comparador.html">comparador</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~cargaInicial">cargaInicial</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~cargarTarjetas">cargarTarjetas</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~comparar">comparar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~desencadenadorEventoBuscarPokemon">desencadenadorEventoBuscarPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~desencadenadorEventoLimpiar">desencadenadorEventoLimpiar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~devolverDetallePokemon">devolverDetallePokemon</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="app.html">app</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerDatos">obtenerDatos</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerDatosDesdeIndexedDB">obtenerDatosDesdeIndexedDB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerDatosEspecies">obtenerDatosEspecies</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerDatosPokemon">obtenerDatosPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerEvoluciones">obtenerEvoluciones</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerMaxPokemons">obtenerMaxPokemons</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#abrirBaseDeDatos">abrirBaseDeDatos</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#actualizarCarrusel">actualizarCarrusel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#almacenarDatosEnLocalStorage">almacenarDatosEnLocalStorage</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cambiarSlide">cambiarSlide</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#cantidad">cantidad</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#capitalizarPrimeraLetra">capitalizarPrimeraLetra</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cargaInicial">cargaInicial</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#desencadenadorEventoBuscarPokemon">desencadenadorEventoBuscarPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#desencadenadorEventoLimpiar">desencadenadorEventoLimpiar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#existeDatosEnGeneraciones">existeDatosEnGeneraciones</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#extraerID">extraerID</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#guardarDatosPokemon">guardarDatosPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#inicio">inicio</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#limpiarDatosPokemon">limpiarDatosPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modificarImagenHeader">modificarImagenHeader</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#mostrarFichaPokemon">mostrarFichaPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#mostrarSpinner">mostrarSpinner</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#obtenerDatosDeLocalStorage">obtenerDatosDeLocalStorage</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#obtenerPokemon">obtenerPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#obtenerPokemonPorGeneracion">obtenerPokemonPorGeneracion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#obtenerTodosLosPokemon">obtenerTodosLosPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ocultarSpinner">ocultarSpinner</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#pokemons">pokemons</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#reiniciarAutoSlide">reiniciarAutoSlide</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">main.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+import { obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, obtenerPokemon } from "./helpers/indexedDB.js";
+import { extraerID } from "./helpers/utils.js";
+import Pokemon from "./models/Pokemon.js";
+
+/**
+ * @namespace app
+ * @description Módulo principal de la aplicación que maneja la obtención de datos de Pokémon desde la API y IndexedDB.
+ */
+export const app = (function () {
+
+    /**
+     * La URL base de la API de Pokémon.
+     * @constant {string}
+     */
+    const urlAPI = 'https://pokeapi.co/api/v2';
+
+    /**
+     * Obtiene datos de una URL.
+     * @param {string} url - La URL desde la cual obtener los datos.
+     * @returns {Promise&lt;Object>} Los datos obtenidos de la URL.
+     * @throws {Error} Si hay un error al obtener los datos.
+     * @memberof app
+     */
+    async function obtenerDatos(url) {
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error();
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error(`Error obteniendo datos de ${url}:`, error);
+            throw error;
+        }
+    }
+
+    /**
+     * Obtiene el número máximo de Pokémon disponibles desde la API.
+     * @returns {Promise&lt;number>} El número máximo de Pokémon.
+     * @throws {Error} Si hay un error al obtener los datos.
+     * @memberof app
+     */
+    async function obtenerMaxPokemons() {
+        try {
+            const datosRespuesta = await obtenerDatos(`${urlAPI}/pokemon-species`);
+            return datosRespuesta.count;
+        } catch (error) {
+            console.error("Error obteniendo el número máximo de Pokémons:", error);
+            return 1025;
+        }
+    }
+
+    /**
+     * Obtiene datos de las especies de Pokémon desde la API.
+     * @param {number} desde - El índice inicial desde el cual obtener los datos.
+     * @param {number} hasta - El número máximo de datos a obtener.
+     * @returns {Promise&lt;Array&lt;Object>>} Una promesa que resuelve a un array de objetos con los datos de las especies.
+     * @throws {Error} Si hay un error al obtener los datos.
+     * @memberof app
+     */
+    async function obtenerDatosEspecies(desde, hasta) {
+        try {
+            const datosRespuesta = await obtenerDatos(`${urlAPI}/pokemon-species?limit=${hasta}&amp;offset=${desde}`);
+            const especiesURLs = datosRespuesta.results.map(specie => specie.url);
+    
+            const datosEspecies = await Promise.all(especiesURLs.map(async (url) => {
+                const datosEspecie = await obtenerDatos(url);
+    
+                return {
+                    generation: datosEspecie.generation.name,
+                    pokemonUrl: datosEspecie.varieties[0].pokemon.url,
+                    evolution_chain_url: datosEspecie.evolution_chain.url
+                };
+            }));
+    
+            return datosEspecies;
+        } catch (error) {
+            console.error("Error obteniendo datos de especies:", error);
+        }
+    }
+
+    /**
+     * Obtiene datos de los Pokémon desde la API.
+     * @returns {Promise&lt;Object>} Una promesa que resuelve a un objeto con los datos de los Pokémon agrupados por generación.
+     * @throws {Error} Si hay un error al obtener los datos.
+     * @memberof app
+     */
+    async function obtenerDatosPokemon() {
+        try {
+            const maxPokemons = await obtenerMaxPokemons();
+            const datosEspecies = await obtenerDatosEspecies(0, maxPokemons);
+    
+            const datosPokemons = await Promise.all(datosEspecies.map(async (especie) => {
+                const datosPokemon = await obtenerDatos(especie.pokemonUrl);
+                // Correccion unidades y generacion
+                datosPokemon.height = datosPokemon.height / 10;
+                datosPokemon.weight = datosPokemon.weight / 10;
+                datosPokemon.generation = especie.generation;
+                datosPokemon.evolution_chain_url = especie.evolution_chain_url;
+    
+                return new Pokemon(datosPokemon);
+            }));
+    
+            const generaciones = Object.groupBy(datosPokemons, pokemon => pokemon.generation);
+            //console.log("Datos de las generaciones agrupadas:", generaciones);
+            //console.log(datosPokemons);
+    
+            return generaciones;
+        } catch (error) {
+            console.error("Error obteniendo datos de Pokémon:", error);
+        }
+    }
+
+    /**
+     * Obtiene datos de los Pokémon desde IndexedDB según el filtro proporcionado.
+     * @param {string} filtrarPor - El criterio de filtrado (puede ser 'todos', 'generacion', 'name' o 'id').
+     * @param {string|number|null} [valor=null] - El valor del filtro (puede ser el nombre, ID o generación del Pokémon).
+     * @returns {Promise&lt;Array&lt;Object>|Object>} Una promesa que resuelve a un array de objetos con los datos de los Pokémon o un objeto con los datos de un Pokémon.
+     * @throws {Error} Si hay un error al obtener los datos.
+     * @memberof app
+     */
+    async function obtenerDatosDesdeIndexedDB(filtrarPor, valor = null) {
+        try {
+            let pokemons;
+
+            switch (filtrarPor) {
+                case 'todos':
+                    pokemons = await obtenerTodosLosPokemon();
+                    break;
+                case 'generacion':
+                    pokemons = await obtenerPokemonPorGeneracion(valor);
+                    break;
+                case 'name':
+                case 'id':
+                    pokemons = await obtenerPokemon(filtrarPor, valor);
+                    break;
+                default:
+                    throw new Error(`Filtro desconocido: ${filtrarPor}`);
+            }
+
+            return pokemons;
+        } catch (error) {
+            console.error(`Error obteniendo datos desde IndexedDB con filtro ${filtrarPor}:`, error);
+            throw error;
+        }
+    }
+
+    /**
+     * Obtiene la cadena evolutiva de un Pokémon desde IndexedDB y la API.
+     * @param {number} pokemonID - El ID del Pokémon para el cual obtener la cadena evolutiva.
+     * @returns {Promise&lt;Array&lt;Object>>} Una promesa que resuelve a un array de objetos con los datos de las evoluciones del Pokémon.
+     * @throws {Error} Si hay un error al obtener los datos.
+     * @memberof app
+     */
+    async function obtenerEvoluciones(pokemonID) {
+        try {
+            // Obtener datos de la especie del Pokémon
+            //const datosEspecie = await obtenerDatos(`${urlAPI}/pokemon-species/${pokemonID}`);
+            //const urlCadenaEvolutiva = datosEspecie.evolution_chain.url;
+
+            const pokemon = await obtenerDatosDesdeIndexedDB('id', pokemonID);
+            const urlCadenaEvolutiva = pokemon.evolution_chain_url;
+    
+            // Obtener datos de la cadena evolutiva
+            const datosCadenaEvolutiva = await obtenerDatos(urlCadenaEvolutiva);
+    
+            // Recorrer la cadena evolutiva
+            const evoluciones = [];
+            let actual = datosCadenaEvolutiva.chain;
+            //console.log(actual);
+    
+            do {
+                const idPokemon = parseInt(extraerID(actual.species.url));
+                const nombrePokemon = actual.species.name;
+                evoluciones.push({ idPokemon, nombrePokemon });
+                actual = actual.evolves_to[0];
+            } while (actual);
+    
+            return evoluciones;
+        } catch (error) {
+            console.error("Error obteniendo evoluciones del Pokémon:", error);
+        }
+    }
+
+    return {
+        obtenerDatosPokemon,
+        obtenerDatosDesdeIndexedDB,
+        obtenerEvoluciones, 
+        obtenerMaxPokemons
+    };
+
+})();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sat Jan 18 2025 19:34:28 GMT+0100 (hora estándar de Europa central) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

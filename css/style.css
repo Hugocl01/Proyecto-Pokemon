@@ -42,15 +42,19 @@ header {
     0% {
         transform: rotate(0deg);
     }
+
     25% {
         transform: rotate(-15deg);
     }
+
     50% {
         transform: rotate(0deg);
     }
+
     75% {
         transform: rotate(15deg);
     }
+
     100% {
         transform: rotate(0deg);
     }
@@ -149,23 +153,6 @@ ul {
     border-radius: 8px;
 }
 
-/* Botón de acción (jugar) */
-.btn-jugar {
-    background-color: #f9d71c;
-    color: #000;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn-jugar:hover {
-    background-color: #ffca28;
-    transform: scale(1.1);
-}
-
 /* Características del juego */
 .caracteristicas {
     text-align: center;
@@ -255,19 +242,6 @@ ul {
     margin-bottom: 20px;
 }
 
-.cta .btn-jugar {
-    background-color: #ffffff;
-    color: #2f5d85;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-}
-
-.cta .btn-jugar:hover {
-    background-color: #f9d71c;
-    color: black;
-}
-
 /* Footer */
 footer {
     background-color: #2f5d85;
@@ -351,11 +325,24 @@ footer .footer-content {
 }
 
 .contenedor-scroll {
-    height: 700px;
+    height: 100vh;
     overflow-y: auto;
     border: 2px solid #dee2e6;
     border-radius: 5px;
-    padding: 20px;
+}
+
+/* Opcional: Estiliza el scroll para una mejor apariencia */
+.contenedor-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contenedor-scroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.contenedor-scroll::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
 }
 
 .ficha {
@@ -570,6 +557,11 @@ footer .footer-content {
     gap: 24px;
 }
 
+.card-pokemon img {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
 /* SPINNER */
 .spinner {
     border: 10px solid #0000001a;
@@ -680,6 +672,7 @@ footer .footer-content {
     font-size: 1.2rem;
     border-radius: 5px;
     text-decoration: none;
+    text-align: center;
     display: inline-block;
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer;
@@ -691,6 +684,7 @@ footer .footer-content {
 }
 
 .layout-comparador {
+    max-height: 150vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -701,11 +695,11 @@ footer .footer-content {
 
 /* Columna de contenido principal (filtros y fichas) */
 .contenedor-principal {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow: auto;
+    overflow: hidden;
 }
 
 /* Columna del comparador */

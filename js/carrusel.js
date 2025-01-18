@@ -5,11 +5,16 @@ import { modificarImagenHeader } from "./utils.js";
 
 const carrusel = document.querySelector('.carrusel-imagenes');
 const image = document.querySelector('.carrusel-imagenes img');
-//const prevButton = document.querySelector('.prev');
-//const nextButton = document.querySelector('.next');
+
+// const prevButton = document.querySelector('.prev');
+// const nextButton = document.querySelector('.next');
+
 const maxPokemons = await app.obtenerMaxPokemons();
 
-// Función para actualizar el carrusel
+/**
+ * Actualiza el carrusel mostrando un Pokémon aleatorio.
+ * Cambia temporalmente la imagen a una Pokéball mientras se carga la imagen del Pokémon.
+ */
 function actualizarCarrusel() {
     const numeroAleatorio = Math.floor(Math.random() * maxPokemons) + 1; // Genera un número aleatorio entre 1 y el máximo de pokémons disponibles
     image.src = '../img/logoPokeball.png'; // Cambia la imagen a la Pokéball
@@ -20,7 +25,10 @@ function actualizarCarrusel() {
     }, 700); // Cambia a la nueva imagen después de 700ms
 }
 
-// Función para generar otro slide
+/**
+ * Cambia la imagen del carrusel a otra aleatoria.
+ * Llama internamente a `actualizarCarrusel`.
+ */
 function cambiarSlide() {
     actualizarCarrusel();
 }
@@ -39,7 +47,10 @@ prevButton.addEventListener('click', () => {
 // Desplazamiento automático
 let autoSlide = setInterval(cambiarSlide, 3000); // Cambia cada 3 segundos
 
-// Reinicia el temporizador de desplazamiento automático
+/**
+ * Reinicia el temporizador del desplazamiento automático.
+ * Se utiliza cuando el usuario interactúa manualmente con el carrusel.
+ */
 function reiniciarAutoSlide() {
     clearInterval(autoSlide);
     autoSlide = setInterval(cambiarSlide, 3000);

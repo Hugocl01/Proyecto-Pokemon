@@ -6,8 +6,7 @@
 'use strict';
 
 import { guardarDatosPokemon, existeDatosEnGeneraciones, limpiarDatosPokemon } from "./helpers/indexedDB.js";
-import { mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, modificarImagenHeader } from "./helpers/ui.js";
-import { capitalizarPrimeraLetra, extraerID } from "./helpers/utils.js";
+import { mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, modificarImagenHeader, devolverDetallePokemon, comparar } from "./helpers/ui.js";
 import { app } from "./main.js";
 import Pokemon from "./models/Pokemon.js";
 
@@ -160,83 +159,6 @@ async function cargarTarjetas() {
     }
 }
 
-/**
- * Genera el detalle del Pokémon en formato HTML.
- * @function devolverDetallePokemon
- * @param {Pokemon} pokemon - Instancia de la clase Pokemon con la información del Pokémon.
- * @returns {string} HTML generado para mostrar el Pokémon.
- */
-function devolverDetallePokemon(pokemon) {
-    // Construir tipos
-    const typesHTML = pokemon.types.map(tipo => {
-        const imgTipo = document.createElement('img');
-
-        // Extrae el número al final de la URL
-        const id = extraerID(tipo.type.url);
-        imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
-
-        return imgTipo.outerHTML;
-    }).join("");
-
-    // Crear un contenedor para los tipos y añadir la clase
-    const typesContainer = document.createElement('div');
-    typesContainer.classList.add('tipos');
-    typesContainer.innerHTML = typesHTML;
-
-    // Construir estadísticas
-    const statsHTML = pokemon.stats.map(stat => `
-        <li id="${stat.stat.name}"><strong>${capitalizarPrimeraLetra(stat.stat.name)}:</strong> ${stat.base_stat}</li>`).join("\n");
-
-    // Construir habilidades
-    const abilitiesHTML = pokemon.abilities.map(ability => `
-        <li>${capitalizarPrimeraLetra(ability.ability.name)}</li>`).join("\n");
-
-    // Construir estructura HTML con un botón de eliminación
-    const html = `
-        <div class="card-pokemon" id="pokemon-${pokemon.id}">
-            <div>
-                <p>N.º ${pokemon.id}</p>
-                <h1>${capitalizarPrimeraLetra(pokemon.name)}</h1>
-            </div>
-
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="Sprite de ${pokemon.name}">
-
-            <div>
-                <p>Generación: ${pokemon.generation || "Desconocida"}</p>
-                <p>Altura: ${pokemon.height} metros</p>
-                <p>Peso: ${pokemon.weight} kilogramos</p>
-            </div>
-
-            <div>
-                <h2>Tipos</h2>
-                <div class="cont-tipos">
-                    ${typesContainer.outerHTML}
-                </div>
-            </div>
-
-            <div class="estadisticas">
-                <h2>Estadísticas Base</h2>
-                <ul>
-                    ${statsHTML}
-                    <h2>Media</h2>
-                    <li id="average"><strong>Average:</strong> ${pokemon.getAverageStats()}</li>
-                </ul>
-            </div>
-
-            <div class="habilidades">
-                <h2>Habilidades</h2>
-                <ul>
-                    ${abilitiesHTML}
-                </ul>
-            </div>
-
-            <a class="btn eliminar-pokemon" data-pokemon-id="${pokemon.id}">Eliminar</a>
-        </div>
-    `;
-
-    return html;
-}
-
 // Vincula el evento después de insertar el HTML
 document.addEventListener('click', (event) => {
     if (event.target && event.target.classList.contains('eliminar-pokemon')) {
@@ -259,70 +181,6 @@ document.addEventListener('click', (event) => {
         window.location.href = nuevaURL;
     }
 });
-
-/**
- * Compara las estadísticas entre dos Pokémon y actualiza las clases de los elementos del DOM.
- * @function comparar
- * @param {Pokemon} pokemon1 - Primer Pokémon a comparar.
- * @param {Pokemon} pokemon2 - Segundo Pokémon a comparar.
- */
-function comparar(pokemon1, pokemon2) {
-    // Crear un objeto para acceder rápidamente a las estadísticas del segundo Pokémon
-    const stats2 = pokemon2.stats.reduce((acc, stat) => {
-        acc[stat.stat.name] = stat.base_stat;
-        return acc;
-    }, {});
-
-    // Recorrer las estadísticas del primer Pokémon y compararlas
-    pokemon1.stats.forEach(stat1 => {
-        const statName = stat1.stat.name;
-        const statValue1 = stat1.base_stat;
-        const statValue2 = stats2[statName];
-
-        // Buscar el elemento <li> correspondiente al nombre de la estadística
-        const statElement1 = document.querySelector(`div#pokemon1.comparador li#${statName}`);
-        const statElement2 = document.querySelector(`div#pokemon2.comparador li#${statName}`);
-
-        if (statElement1 && statElement2) {
-            // Aplicar clases según la comparación
-            if (statValue1 > statValue2) {
-                statElement1.classList.add('higher');
-                statElement2.classList.add('lower');
-            } else if (statValue1 < statValue2) {
-                statElement1.classList.add('lower');
-                statElement2.classList.add('higher');
-            } else {
-                // Si son iguales
-                statElement1.classList.add('equal');
-                statElement2.classList.add('equal');
-            }
-        }
-    });
-
-    // Comparar las estadísticas promedio
-    const mediaPokemon1 = pokemon1.getAverageStats();
-    const mediaPokemon2 = pokemon2.getAverageStats();
-
-    // Seleccionar los elementos de las estadísticas promedio
-    const liMediaPokemon1 = document.querySelector(`div#pokemon1.comparador  li#average`);
-    const liMediaPokemon2 = document.querySelector(`div#pokemon2.comparador  li#average`);
-
-    if (liMediaPokemon1 && liMediaPokemon2) {
-        if (mediaPokemon1 > mediaPokemon2) {
-            liMediaPokemon1.classList.add('higher');
-            liMediaPokemon2.classList.add('lower');
-        } else if (mediaPokemon1 < mediaPokemon2) {
-            liMediaPokemon1.classList.add('lower');
-            liMediaPokemon2.classList.add('higher');
-        } else {
-            // Si son iguales
-            liMediaPokemon1.classList.add('equal');
-            liMediaPokemon2.classList.add('equal');
-        }
-    } else {
-        console.error('No se encontraron los elementos para las medias.');
-    }
-}
 
 // Eventos globales
 document.addEventListener('DOMContentLoaded', async () => {

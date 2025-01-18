@@ -149,23 +149,6 @@ ul {
     border-radius: 8px;
 }
 
-/* Botón de acción (jugar) */
-.btn-jugar {
-    background-color: #f9d71c;
-    color: #000;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn-jugar:hover {
-    background-color: #ffca28;
-    transform: scale(1.1);
-}
-
 /* Características del juego */
 .caracteristicas {
     text-align: center;
@@ -253,19 +236,6 @@ ul {
 .cta h2 {
     font-size: 2rem;
     margin-bottom: 20px;
-}
-
-.cta .btn-jugar {
-    background-color: #ffffff;
-    color: #2f5d85;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-}
-
-.cta .btn-jugar:hover {
-    background-color: #f9d71c;
-    color: black;
 }
 
 /* Footer */

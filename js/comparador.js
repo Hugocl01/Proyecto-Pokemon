@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Manejo de la lógica principal para cargar, buscar, comparar y mostrar información sobre Pokémon.
+ * @module comparador
+ */
+
 'use strict';
 
 import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, capitalizarPrimeraLetra, extraerID, modificarImagenHeader } from "./utils.js";
@@ -6,9 +11,17 @@ import Pokemon from "./Pokemon.js";
 
 let pokemons = [];
 
+/** @type {HTMLElement} Contenedor para el primer Pokémon */
 const divPokemon1 = document.querySelector('#pokemon1');
+
+/** @type {HTMLElement} Contenedor para el segundo Pokémon */
 const divPokemon2 = document.querySelector('#pokemon2');
 
+/**
+ * Carga inicial de datos y muestra los Pokémon almacenados.
+ * @async
+ * @function cargaInicial
+ */
 async function cargaInicial() {
     mostrarSpinner();
     const datosExisten = await existeDatosEnGeneraciones();
@@ -30,6 +43,13 @@ async function cargaInicial() {
     ocultarSpinner();
 }
 
+/**
+ * Busca un Pokémon por nombre o ID.
+ * @async
+ * @function desencadenadorEventoBuscarPokemon
+ * @param {HTMLInputElement} inputNombrePokemon - Input donde se escribe el nombre o ID del Pokémon.
+ * @param {HTMLSelectElement} selectGeneracion - Select para filtrar por generación.
+ */
 async function desencadenadorEventoBuscarPokemon(inputNombrePokemon, selectGeneracion) {
     selectGeneracion.value = 'all';
     const idPokemon = parseInt(inputNombrePokemon.value);
@@ -48,6 +68,14 @@ async function desencadenadorEventoBuscarPokemon(inputNombrePokemon, selectGener
     }
 }
 
+/**
+ * Limpia los datos de la pantalla y reinicia la carga inicial.
+ * @async
+ * @function desencadenadorEventoLimpiar
+ * @param {HTMLElement} contenedorFichas - Contenedor donde se muestran los Pokémon.
+ * @param {HTMLInputElement} inputNombrePokemon - Input de búsqueda.
+ * @param {HTMLSelectElement} selectGeneracion - Select para filtrar por generación.
+ */
 async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon, selectGeneracion) {
     contenedorFichas.innerHTML = '';
     inputNombrePokemon.value = '';
@@ -55,8 +83,12 @@ async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon,
     await cargaInicial();
 }
 
+/**
+ * Carga las tarjetas de Pokémon en base a los parámetros de la URL.
+ * @async
+ * @function cargarTarjetas
+ */
 async function cargarTarjetas() {
-    // Obtener el ID del Pokémon desde la URL
     const params = new URLSearchParams(window.location.search);
     const mensejeSeleccion = '<p>Selecciona un pokémon</p>';
 
@@ -71,20 +103,16 @@ async function cargarTarjetas() {
             const idPokemon1 = parseInt(params.get('pokemon1'));
             const idPokemon2 = parseInt(params.get('pokemon2'));
 
-            if (params.has('pokemon1')) {
-                if (idPokemon1) {
-                    const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
-                    divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
-                    divPokemon2.innerHTML = mensejeSeleccion;
-                }
+            if (params.has('pokemon1') && idPokemon1) {
+                const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
+                divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
+                divPokemon2.innerHTML = mensejeSeleccion;
             }
 
-            if (params.has('pokemon2')) {
-                if (idPokemon2) {
-                    const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
-                    divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
-                    divPokemon1.innerHTML = mensejeSeleccion;
-                }
+            if (params.has('pokemon2') && idPokemon2) {
+                const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
+                divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
+                divPokemon1.innerHTML = mensejeSeleccion;
             }
         }
             break;
@@ -94,12 +122,8 @@ async function cargarTarjetas() {
                 const idPokemon1 = parseInt(params.get('pokemon1'));
                 const idPokemon2 = parseInt(params.get('pokemon2'));
 
-                // Busca el Pokémon
                 const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
                 const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
-
-                // console.log(pokemon1);
-                // console.log(pokemon2);
 
                 divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
@@ -110,12 +134,18 @@ async function cargarTarjetas() {
             break;
 
         default: {
-            console.error("Parametros URL invalidos");
+            console.error("Parámetros URL inválidos");
         }
             break;
     }
 }
 
+/**
+ * Genera el detalle del Pokémon en formato HTML.
+ * @function devolverDetallePokemon
+ * @param {Pokemon} pokemon - Instancia de la clase Pokemon con la información del Pokémon.
+ * @returns {string} HTML generado para mostrar el Pokémon.
+ */
 function devolverDetallePokemon(pokemon) {
     // Construir tipos
     const typesHTML = pokemon.types.map(tipo => {
@@ -187,7 +217,7 @@ function devolverDetallePokemon(pokemon) {
     return html;
 }
 
-// Vincular el evento después de insertar el HTML
+// Vincula el evento después de insertar el HTML
 document.addEventListener('click', (event) => {
     if (event.target && event.target.classList.contains('eliminar-pokemon')) {
         event.preventDefault();
@@ -210,6 +240,12 @@ document.addEventListener('click', (event) => {
     }
 });
 
+/**
+ * Compara las estadísticas entre dos Pokémon y actualiza las clases de los elementos del DOM.
+ * @function comparar
+ * @param {Pokemon} pokemon1 - Primer Pokémon a comparar.
+ * @param {Pokemon} pokemon2 - Segundo Pokémon a comparar.
+ */
 function comparar(pokemon1, pokemon2) {
     // Crear un objeto para acceder rápidamente a las estadísticas del segundo Pokémon
     const stats2 = pokemon2.stats.reduce((acc, stat) => {
@@ -268,22 +304,20 @@ function comparar(pokemon1, pokemon2) {
     }
 }
 
+// Eventos globales
 document.addEventListener('DOMContentLoaded', async () => {
-    // Modificar la imagen del header al hacer hover
+    // Modificar la imagen del header
     modificarImagenHeader(await app.obtenerMaxPokemons());
 
-    // Recoger elementos del HTML
     const inputNombrePokemon = document.getElementById('buscarNombre');
     const selectGeneracion = document.getElementById('generationFilter');
     const contenedorFichas = document.querySelector('.contenedor-fichas');
 
-    // Al cargar realizar la obtención de los datos y mostrar pokémons
     await cargaInicial();
     await cargarTarjetas();
 
-    // EVENTO - Select generación
+    // Filtrar por generación
     selectGeneracion.addEventListener('change', async (event) => {
-        //mostrarSpinner();
         pokemons = [];
         const generacionSeleccionada = event.target.value;
 
@@ -296,11 +330,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (pokemons) {
             mostrarFichaPokemon(pokemons);
         }
-
-        //ocultarSpinner();
     });
 
-    // EVENTO - Contenedor búsqueda (botón 'Buscar' y 'Limpiar')
+    // Buscar o limpiar usando los botones
     document.querySelector('.contenedor-busqueda-nombre').addEventListener('click', async (event) => {
         if (event.target && event.target.tagName === 'INPUT' && event.target.type === 'button') {
             const accion = event.target.dataset.accion;
@@ -316,7 +348,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // EVENTO - Limpiar al presionar F1
+    // Limpiar con F1
     document.addEventListener('keydown', async (event) => {
         if (event.key === 'F1') {
             event.preventDefault();
@@ -324,14 +356,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // EVENTO - vaciar tabla 'generaciones' de IndexedDB (para pruebas en desarrollo)
+    // Vaciar IndexedDB con F2
     document.addEventListener('keydown', (event) => {
         if (event.key === 'F2') {
             limpiarDatosPokemon();
         }
     });
 
-    // EVENTO - Buscar al presionar Enter en el input de búsqueda
+    // Buscar con Enter
     inputNombrePokemon.addEventListener('keydown', async (event) => {
         if (event.key === 'Enter') {
             await desencadenadorEventoBuscarPokemon(inputNombrePokemon, selectGeneracion);

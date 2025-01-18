@@ -83,11 +83,11 @@ export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
                 const id = ficha.dataset.id;
                 const params = new URLSearchParams(window.location.search)
 
-                if (window.location.pathname.endsWith('pokedex')) {
+                if (window.location.pathname.endsWith('pokedex') || window.location.pathname.endsWith('pokedex.html')) {
                     window.location.href = `detalle.html?id=${id}`;
                 }
 
-                if (window.location.pathname.endsWith('comparador')) {
+                if (window.location.pathname.endsWith('comparador') || window.location.pathname.endsWith('comparador.html')) {
                     const validarPokemon1 = params.get('pokemon1');
                     const validarPokemon2 = params.get('pokemon2');
 

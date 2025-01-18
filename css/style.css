@@ -42,15 +42,19 @@ header {
     0% {
         transform: rotate(0deg);
     }
+
     25% {
         transform: rotate(-15deg);
     }
+
     50% {
         transform: rotate(0deg);
     }
+
     75% {
         transform: rotate(15deg);
     }
+
     100% {
         transform: rotate(0deg);
     }
@@ -325,7 +329,20 @@ footer .footer-content {
     overflow-y: auto;
     border: 2px solid #dee2e6;
     border-radius: 5px;
-    padding: 20px;
+}
+
+/* Opcional: Estiliza el scroll para una mejor apariencia */
+.contenedor-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contenedor-scroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.contenedor-scroll::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
 }
 
 .ficha {
@@ -540,6 +557,11 @@ footer .footer-content {
     gap: 24px;
 }
 
+.card-pokemon img {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
 /* SPINNER */
 .spinner {
     border: 10px solid #0000001a;
@@ -671,11 +693,11 @@ footer .footer-content {
 
 /* Columna de contenido principal (filtros y fichas) */
 .contenedor-principal {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow: auto;
+    overflow: hidden;
 }
 
 /* Columna del comparador */

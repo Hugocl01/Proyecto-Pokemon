@@ -90,7 +90,7 @@ async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon,
  * @function cargarTarjetas
  */
 async function cargarTarjetas() {
-    const validarIDUrl = async (datosPokemon) => {
+    const validarIDUrl = (datosPokemon) => {
         if (Array.isArray(datosPokemon) && !datosPokemon.length) {
             alert('Pokémon no encontrado'); // Muestra un mensaje si no se encuentra el Pokémon
             window.location.href = 'comparador.html';

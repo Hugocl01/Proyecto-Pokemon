@@ -3,10 +3,32 @@
 import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, modificarImagenHeader } from "./utils.js";
 import { app } from "./main.js";
 
+/**
+ * Array que contiene los datos de los Pokémon.
+ * @type {Array<Object>}
+ */
 let pokemons = [];
+
+/**
+ * Índice inicial para la carga de Pokémon.
+ * @type {number}
+ */
 let inicio = 0;
+
+/**
+ * Cantidad de Pokémon a mostrar por carga.
+ * @type {number}
+ */
 const cantidad = 12;
 
+/**
+ * Realiza la carga inicial de datos de Pokémon.
+ * Muestra un spinner mientras se cargan los datos.
+ * Verifica si los datos ya existen en IndexedDB.
+ * Si no existen, los obtiene de la API y los guarda en IndexedDB.
+ * Luego, obtiene los datos de IndexedDB y muestra los Pokémon.
+ * @returns {Promise<void>}
+ */
 async function cargaInicial() {
     mostrarSpinner();
     const datosExisten = await existeDatosEnGeneraciones();
@@ -33,6 +55,16 @@ async function cargaInicial() {
     ocultarSpinner();
 }
 
+/**
+ * Desencadena el evento de búsqueda de Pokémon.
+ * Resetea el índice de inicio y establece el filtro de generación a 'all'.
+ * Obtiene los datos del Pokémon desde IndexedDB según el nombre o ID proporcionado.
+ * Muestra los Pokémon obtenidos y controla la visibilidad del botón "Cargar más".
+ * @param {HTMLInputElement} inputNombrePokemon - El input de nombre del Pokémon.
+ * @param {HTMLSelectElement} selectGeneracion - El select de generación.
+ * @param {HTMLButtonElement|null} [botonCargarMas=null] - El botón "Cargar más" (opcional).
+ * @returns {Promise<void>}
+ */
 async function desencadenadorEventoBuscarPokemon(inputNombrePokemon, selectGeneracion, botonCargarMas = null) {
     inicio = 0;
     selectGeneracion.value = 'all';
@@ -67,6 +99,15 @@ async function desencadenadorEventoBuscarPokemon(inputNombrePokemon, selectGener
     }
 }
 
+/**
+ * Desencadena el evento de limpiar la búsqueda de Pokémon.
+ * Resetea el índice de inicio, limpia el contenedor de fichas, el input de nombre y el select de generación.
+ * Luego, realiza la carga inicial de datos de Pokémon.
+ * @param {HTMLElement} contenedorFichas - El contenedor de las fichas de Pokémon.
+ * @param {HTMLInputElement} inputNombrePokemon - El input de nombre del Pokémon.
+ * @param {HTMLSelectElement} selectGeneracion - El select de generación.
+ * @returns {Promise<void>}
+ */
 async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon, selectGeneracion) {
     inicio = 0;
     contenedorFichas.innerHTML = '';
@@ -75,6 +116,7 @@ async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon,
     await cargaInicial();
 }
 
+// Eventos globales
 document.addEventListener('DOMContentLoaded', async () => {
     // Modificar la imagen del header al hacer hover
     modificarImagenHeader(await app.obtenerMaxPokemons());

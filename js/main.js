@@ -3,10 +3,24 @@
 import { obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, obtenerPokemon, extraerID } from "./utils.js";
 import Pokemon from "./Pokemon.js";
 
+/**
+ * @module app
+ * @description Módulo principal de la aplicación que maneja la obtención de datos de Pokémon desde la API y IndexedDB.
+ */
 export const app = (function () {
 
+    /**
+     * La URL base de la API de Pokémon.
+     * @constant {string}
+     */
     const urlAPI = 'https://pokeapi.co/api/v2';
 
+    /**
+     * Obtiene datos de una URL.
+     * @param {string} url - La URL desde la cual obtener los datos.
+     * @returns {Promise<Object>} Los datos obtenidos de la URL.
+     * @throws {Error} Si hay un error al obtener los datos.
+     */
     async function obtenerDatos(url) {
         try {
             const response = await fetch(url);
@@ -22,6 +36,11 @@ export const app = (function () {
         }
     }
 
+    /**
+     * Obtiene el número máximo de Pokémon disponibles desde la API.
+     * @returns {Promise<number>} El número máximo de Pokémon.
+     * @throws {Error} Si hay un error al obtener los datos.
+     */
     async function obtenerMaxPokemons() {
         try {
             const datosRespuesta = await obtenerDatos(`${urlAPI}/pokemon-species`);
@@ -32,6 +51,13 @@ export const app = (function () {
         }
     }
 
+    /**
+     * Obtiene datos de las especies de Pokémon desde la API.
+     * @param {number} desde - El índice inicial desde el cual obtener los datos.
+     * @param {number} hasta - El número máximo de datos a obtener.
+     * @returns {Promise<Array<Object>>} Una promesa que resuelve a un array de objetos con los datos de las especies.
+     * @throws {Error} Si hay un error al obtener los datos.
+     */
     async function obtenerDatosEspecies(desde, hasta) {
         try {
             const datosRespuesta = await obtenerDatos(`${urlAPI}/pokemon-species?limit=${hasta}&offset=${desde}`);
@@ -53,6 +79,11 @@ export const app = (function () {
         }
     }
 
+    /**
+     * Obtiene datos de los Pokémon desde la API.
+     * @returns {Promise<Object>} Una promesa que resuelve a un objeto con los datos de los Pokémon agrupados por generación.
+     * @throws {Error} Si hay un error al obtener los datos.
+     */
     async function obtenerDatosPokemon() {
         try {
             const maxPokemons = await obtenerMaxPokemons();
@@ -79,27 +110,45 @@ export const app = (function () {
         }
     }
 
+    /**
+     * Obtiene datos de los Pokémon desde IndexedDB según el filtro proporcionado.
+     * @param {string} filtrarPor - El criterio de filtrado (puede ser 'todos', 'generacion', 'name' o 'id').
+     * @param {string|number|null} [valor=null] - El valor del filtro (puede ser el nombre, ID o generación del Pokémon).
+     * @returns {Promise<Array<Object>|Object>} Una promesa que resuelve a un array de objetos con los datos de los Pokémon o un objeto con los datos de un Pokémon.
+     * @throws {Error} Si hay un error al obtener los datos.
+     */
     async function obtenerDatosDesdeIndexedDB(filtrarPor, valor = null) {
-        let pokemons;
+        try {
+            let pokemons;
 
-        switch (filtrarPor) {
-            case 'todos':
-                pokemons = await obtenerTodosLosPokemon();
-                break;
-            case 'generacion':
-                pokemons = await obtenerPokemonPorGeneracion(valor);
-                break;
-            case 'name':
-                pokemons = await obtenerPokemon(filtrarPor, valor);
-                break;
-            case 'id':
-                pokemons = await obtenerPokemon(filtrarPor, valor);
-                break;
+            switch (filtrarPor) {
+                case 'todos':
+                    pokemons = await obtenerTodosLosPokemon();
+                    break;
+                case 'generacion':
+                    pokemons = await obtenerPokemonPorGeneracion(valor);
+                    break;
+                case 'name':
+                case 'id':
+                    pokemons = await obtenerPokemon(filtrarPor, valor);
+                    break;
+                default:
+                    throw new Error(`Filtro desconocido: ${filtrarPor}`);
+            }
+
+            return pokemons;
+        } catch (error) {
+            console.error(`Error obteniendo datos desde IndexedDB con filtro ${filtrarPor}:`, error);
+            throw error;
         }
-
-        return pokemons;
     }
 
+    /**
+     * Obtiene la cadena evolutiva de un Pokémon desde IndexedDB y la API.
+     * @param {number} pokemonID - El ID del Pokémon para el cual obtener la cadena evolutiva.
+     * @returns {Promise<Array<Object>>} Una promesa que resuelve a un array de objetos con los datos de las evoluciones del Pokémon.
+     * @throws {Error} Si hay un error al obtener los datos.
+     */
     async function obtenerEvoluciones(pokemonID) {
         try {
             // Obtener datos de la especie del Pokémon

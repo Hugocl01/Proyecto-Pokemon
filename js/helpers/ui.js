@@ -84,7 +84,7 @@ export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
                 const params = new URLSearchParams(window.location.search)
 
                 if (window.location.pathname.endsWith('pokedex.html')) {
-                    window.location.href = `detalle.html?id=${id}`;
+                    window.location.href = `./html/detalle.html?id=${id}`;
                 }
 
                 if (window.location.pathname.endsWith('comparador.html')) {

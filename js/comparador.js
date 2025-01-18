@@ -13,10 +13,10 @@ import Pokemon from "./models/Pokemon.js";
 
 let pokemons = [];
 
-/** @type {HTMLElement} Contenedor para el primer Pokémon */
+// Contenedor para el primer Pokémon
 const divPokemon1 = document.querySelector('#pokemon1');
 
-/** @type {HTMLElement} Contenedor para el segundo Pokémon */
+// Contenedor para el segundo Pokémon
 const divPokemon2 = document.querySelector('#pokemon2');
 
 /**

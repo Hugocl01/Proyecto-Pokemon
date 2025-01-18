@@ -184,7 +184,7 @@ function devolverDetallePokemon(pokemon) {
             <div>
                 <p>Generación: ${pokemon.generation || "Desconocida"}</p>
                 <p>Altura: ${pokemon.height} metros</p>
-                <p>Peso:${pokemon.weight} kilogramos</p>
+                <p>Peso: ${pokemon.weight} kilogramos</p>
             </div>
 
             <div>

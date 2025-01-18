@@ -325,7 +325,7 @@ footer .footer-content {
 }
 
 .contenedor-scroll {
-    height: 700px;
+    height: 100vh;
     overflow-y: auto;
     border: 2px solid #dee2e6;
     border-radius: 5px;
@@ -683,6 +683,7 @@ footer .footer-content {
 }
 
 .layout-comparador {
+    max-height: 150vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

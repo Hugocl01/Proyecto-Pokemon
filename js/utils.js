@@ -1,14 +1,27 @@
 'use strict';
 
+/**
+ * Almacena datos en el Local Storage del navegador.
+ * @param {string} clave - La clave bajo la cual se almacenarán los datos.
+ * @param {Object} datos - Los datos a almacenar.
+ */
 export function almacenarDatosEnLocalStorage(clave, datos) {
     localStorage.setItem(clave, JSON.stringify(datos));
 }
 
+/**
+ * Obtiene datos del Local Storage del navegador.
+ * @param {string} clave - La clave bajo la cual se almacenan los datos.
+ * @returns {Object|null} Los datos obtenidos del Local Storage o null si no existen.
+ */
 export function obtenerDatosDeLocalStorage(clave) {
     const datos = localStorage.getItem(clave);
     return datos ? JSON.parse(datos) : null;
 }
 
+/**
+ * Muestra un spinner de carga en el contenedor de fichas.
+ */
 export function mostrarSpinner() {
     const contenedorFichas = document.querySelector('.contenedor-fichas');
     const spinner = document.createElement('div');
@@ -16,6 +29,9 @@ export function mostrarSpinner() {
     contenedorFichas.appendChild(spinner);
 }
 
+/**
+ * Oculta el spinner de carga en el contenedor de fichas.
+ */
 export function ocultarSpinner() {
     const spinner = document.querySelector('.spinner');
     if (spinner) {
@@ -23,10 +39,21 @@ export function ocultarSpinner() {
     }
 }
 
+/**
+ * Capitaliza la primera letra de una cadena.
+ * @param {string} cadena - La cadena a capitalizar.
+ * @returns {string} La cadena con la primera letra capitalizada.
+ */
 export function capitalizarPrimeraLetra(cadena) {
     return cadena.charAt(0).toUpperCase() + cadena.slice(1);
 }
 
+/**
+ * Muestra las fichas de los Pokémon en el contenedor de fichas.
+ * @param {Array<Object>|Object} pokemons - Los datos de los Pokémon a mostrar.
+ * @param {number} [inicio=0] - El índice inicial desde el cual mostrar los Pokémon.
+ * @param {number} [cantidad=12] - La cantidad de Pokémon a mostrar por carga.
+ */
 export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
     const contenedorFichas = document.querySelector('.contenedor-fichas');
 
@@ -76,6 +103,7 @@ export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
         contenedorFichas.appendChild(divFicha);
     }
 
+    // EVENTO - Click en las fichas para mostrar sus detalles o comparar
     contenedorFichas.addEventListener('click', function (event) {
         const ficha = event.target.closest('.ficha');
         if (ficha) {
@@ -107,7 +135,7 @@ export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
                             break;
 
                         default:
-                            alert('No puedes comparar mas Pokémon, elimna uno para realizar otra comparación')
+                            alert('No puedes comparar más Pokémons, elimina uno para realizar otra comparación')
                             break;
                     }
                 }
@@ -117,6 +145,12 @@ export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
 }
 
 // Funciones de IndexedDB
+
+/**
+ * Abre la base de datos IndexedDB.
+ * @returns {Promise<IDBDatabase>} Una promesa que resuelve con la instancia de la base de datos.
+ * @throws {Error} Si hay un error al abrir la base de datos.
+ */
 export function abrirBaseDeDatos() {
     return new Promise((resolve, reject) => {
         const solicitud = indexedDB.open('PokemonDB', 1);
@@ -136,6 +170,12 @@ export function abrirBaseDeDatos() {
     });
 }
 
+/**
+ * Guarda los datos de los Pokémon en IndexedDB.
+ * @param {Object} generaciones - Un objeto que contiene los datos de los Pokémon agrupados por generación.
+ * @returns {Promise<void>} Una promesa que se resuelve cuando la transacción se completa.
+ * @throws {Error} Si hay un error al guardar los datos.
+ */
 export async function guardarDatosPokemon(generaciones) {
     const db = await abrirBaseDeDatos();
     const transaccion = db.transaction('generaciones', 'readwrite');
@@ -148,6 +188,11 @@ export async function guardarDatosPokemon(generaciones) {
     return transaccion.complete;
 }
 
+/**
+ * Obtiene todos los datos de los Pokémon desde IndexedDB.
+ * @returns {Promise<Array<Object>>} Una promesa que resuelve a un array de objetos con los datos de todos los Pokémon.
+ * @throws {Error} Si hay un error al obtener los datos.
+ */
 export async function obtenerTodosLosPokemon() {
     const db = await abrirBaseDeDatos();
     const transaccion = db.transaction('generaciones', 'readonly');
@@ -173,6 +218,12 @@ export async function obtenerTodosLosPokemon() {
     });
 }
 
+/**
+ * Obtiene los datos de los Pokémon de una generación específica desde IndexedDB.
+ * @param {string} nombreGeneracion - El nombre de la generación de Pokémon a obtener.
+ * @returns {Promise<Array<Object>>} Una promesa que resuelve a un array de objetos con los datos de los Pokémon de la generación especificada.
+ * @throws {Error} Si hay un error al obtener los datos.
+ */
 export async function obtenerPokemonPorGeneracion(nombreGeneracion) {
     const db = await abrirBaseDeDatos();
     const transaccion = db.transaction('generaciones', 'readonly');
@@ -192,6 +243,11 @@ export async function obtenerPokemonPorGeneracion(nombreGeneracion) {
     });
 }
 
+/**
+ * Limpia los datos de los Pokémon en IndexedDB.
+ * @returns {Promise<void>} Una promesa que se resuelve cuando la transacción se completa.
+ * @throws {Error} Si hay un error al limpiar los datos.
+ */
 export async function limpiarDatosPokemon() {
     const db = await abrirBaseDeDatos();
     const transaccion = db.transaction('generaciones', 'readwrite');
@@ -201,6 +257,11 @@ export async function limpiarDatosPokemon() {
     return transaccion.complete;
 }
 
+/**
+ * Verifica si existen datos en el object store 'generaciones' de IndexedDB.
+ * @returns {Promise<boolean>} Una promesa que resuelve a `true` si existen datos, o `false` en caso contrario.
+ * @throws {Error} Si hay un error al verificar los datos.
+ */
 export async function existeDatosEnGeneraciones() {
     const db = await abrirBaseDeDatos();
     const transaccion = db.transaction('generaciones', 'readonly');
@@ -219,6 +280,13 @@ export async function existeDatosEnGeneraciones() {
     });
 }
 
+/**
+ * Obtiene los datos de un Pokémon desde IndexedDB según el campo y valor proporcionados.
+ * @param {string} campo - El campo por el cual buscar el Pokémon (puede ser 'id' o 'name').
+ * @param {string|number} valor - El valor del campo por el cual buscar el Pokémon.
+ * @returns {Promise<Object|Array<Object>>} Una promesa que resuelve a un objeto con los datos del Pokémon encontrado o un array de objetos si se busca por nombre.
+ * @throws {Error} Si hay un error al obtener los datos.
+ */
 export async function obtenerPokemon(campo, valor) {
     // Obtener todas las generaciones de Pokémon desde IndexedDB
     const db = await abrirBaseDeDatos();
@@ -259,12 +327,22 @@ export async function obtenerPokemon(campo, valor) {
     });
 }
 
+/**
+ * Extrae el ID de un Pokémon desde una URL.
+ * @param {string} url - La URL desde la cual extraer el ID.
+ * @returns {string} El ID extraído de la URL.
+ */
 export function extraerID(url) {
     const partes = url.split('/');
     return partes[partes.length - 2];
 }
 
-// Cambiar pokéball por un pokémon
+/**
+ * Modifica la imagen del header al pasar el ratón sobre ella.
+ * Cambia la imagen de la Pokéball a una imagen aleatoria de un Pokémon.
+ * Restaura la imagen original al quitar el ratón.
+ * @param {number} maxPokemons - El número máximo de Pokémon disponibles.
+ */
 export function modificarImagenHeader(maxPokemons) {
     const imgPokeball = document.querySelector('.animar-pokeball');
     const defaultImgPokeballSrc = imgPokeball.src;
@@ -274,6 +352,6 @@ export function modificarImagenHeader(maxPokemons) {
 
     imgPokeball.addEventListener('mouseout', () => {
         imgPokeball.src = defaultImgPokeballSrc;
-        imgPokeball.width = 100;
+        //imgPokeball.width = 100;
     });
 }

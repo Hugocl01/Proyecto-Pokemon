@@ -1,62 +1,65 @@
-import { app } from "./main.js";
-import Pokemon from './Pokemon.js';
-import { capitalizarPrimeraLetra, extraerID, modificarImagenHeader } from './utils.js';
+import { app } from "./main.js"; // Importa la instancia de la aplicación principal
+import Pokemon from './Pokemon.js'; // Importa la clase Pokemon
+import { capitalizarPrimeraLetra, extraerID, modificarImagenHeader } from './utils.js'; // Importa utilidades
 
+/**
+ * Inicializa la página de detalles del Pokémon cuando el DOM está completamente cargado.
+ */
 document.addEventListener('DOMContentLoaded', async () => {
-    // Modificar la imagen del header al hacer hover
+    // Modifica la imagen del header al pasar el ratón
     modificarImagenHeader(await app.obtenerMaxPokemons());
 
-    const main = document.querySelector('body');
-    main.classList.add('fondo');
+    const main = document.querySelector('body'); // Selecciona el body
+    main.classList.add('fondo'); // Añade una clase para establecer el fondo
 
-    // Obtener el ID del Pokémon desde la URL
+    // Obtiene el ID del Pokémon desde la URL
     const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get('id'), 10);
+    const id = parseInt(params.get('id'), 10); // Convierte el parámetro 'id' en número
 
-    // Buscar el Pokémon
+    // Busca el Pokémon en la base de datos
     const pokemon = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', id));
 
     if (!pokemon) {
-        alert('Pokémon no encontrado');
+        alert('Pokémon no encontrado'); // Muestra un mensaje si no se encuentra el Pokémon
         return;
     }
 
-    // Actualizar información básica
+    // Actualiza la información básica del Pokémon
     document.getElementById('nombre-pokemon').textContent = pokemon.name.toUpperCase();
     document.getElementById('id-pokemon').textContent = `N.º ${pokemon.id}`;
     document.getElementById('generacion').textContent = `Generación: ${pokemon.generation}`;
     document.getElementById('peso').textContent = `Peso: ${pokemon.weight} kilogramos`;
     document.getElementById('altura').textContent = `Altura: ${pokemon.height} metros`;
 
-    // Mostrar la foto normal o shiny al pasar el ratón
+    // Muestra la foto normal o shiny al pasar el ratón
     const imagenPokemon = document.getElementById('imagen-pokemon');
-    const defaultSrc = pokemon.sprites.other['official-artwork'].front_default;
-    const hoverSrc = pokemon.sprites.other['official-artwork'].front_shiny;
+    const defaultSrc = pokemon.sprites.other['official-artwork'].front_default; // Sprite por defecto
+    const hoverSrc = pokemon.sprites.other['official-artwork'].front_shiny; // Sprite shiny
 
     imagenPokemon.src = defaultSrc;
 
     imagenPokemon.addEventListener('mouseover', () => {
-        imagenPokemon.src = hoverSrc;
+        imagenPokemon.src = hoverSrc; // Cambia a la imagen shiny al pasar el ratón
     });
 
     imagenPokemon.addEventListener('mouseout', () => {
-        imagenPokemon.src = defaultSrc;
+        imagenPokemon.src = defaultSrc; // Vuelve a la imagen normal al quitar el ratón
     });
 
-    // Mostrar tipos
+    // Muestra los tipos del Pokémon
     const tiposContenedor = document.getElementById('contenedor-tipos');
     tiposContenedor.classList.add('tipos');
     pokemon.types.forEach(tipo => {
         const imgTipo = document.createElement('img');
 
-        // Extrae el número al final de la URL
+        // Extrae el número del final de la URL
         const id = extraerID(tipo.type.url);
         imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
 
         tiposContenedor.appendChild(imgTipo);
     });
 
-    // Mostrar sprites
+    // Muestra los sprites del Pokémon
     const spritesContenedor = document.getElementById('contenedor-sprites');
     const spritesCampos = ['front_default', 'back_default', 'front_shiny', 'back_shiny'];
 
@@ -66,6 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         spriteImg.src = pokemon.sprites[campoSprite];
 
         if (!pokemon.sprites[campoSprite]) {
+            // Si no existe el sprite, usa un ícono predeterminado
             spriteImg.src = '../img/logoPokeball.png';
             spriteImg.width = 50;
             spriteImg.height = 50;
@@ -73,17 +77,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         spritesContenedor.appendChild(spriteImg);
     });
 
-    // Mostrar evoluciones
+    // Muestra las evoluciones del Pokémon
     const evolucionesContenedor = document.getElementById('contenedor-evoluciones');
     const evoluciones = await app.obtenerEvoluciones(pokemon.id);
     for (const evolucion of evoluciones) {
         const aDetallePokemon = document.createElement('a');
         aDetallePokemon.href = `detalle.html?id=${evolucion.idPokemon}`;
-        //aDetallePokemon.classList.add('ficha');
 
         const divNombre = document.createElement('div');
         divNombre.textContent = capitalizarPrimeraLetra(evolucion.nombrePokemon);
-        //divNombre.classList.add('contenedor-nombre-evolucion');
 
         const evolucionImg = document.createElement('img');
         evolucionImg.alt = evolucion.nombrePokemon;
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         evolucionesContenedor.appendChild(aDetallePokemon);
     }
 
-    // Mostrar estadísticas
+    // Muestra las estadísticas del Pokémon
     const listaEstadisticas = document.getElementById('lista-estadisticas');
     pokemon.stats.forEach(stat => {
         const li = document.createElement('li');
@@ -107,9 +109,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     media.textContent = `Average: ${pokemon.getAverageStats()}`;
     listaEstadisticas.appendChild(media);
 
-    // Mostrar habilidades
+    // Muestra las habilidades del Pokémon
     const listaHabilidades = document.getElementById('lista-habilidades');
-    // Obtener las habilidades del Pokémon
     const habilidadesTexto = await pokemon.getAbilities();
     habilidadesTexto.forEach(habilidad => {
         const li = document.createElement('li');
@@ -117,6 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         listaHabilidades.appendChild(li);
     });
 
+    // Redirige al comparador al hacer clic en el botón "Comparar"
     const btnComparar = document.querySelector('#comparar');
     btnComparar.addEventListener('click', function () {
         window.location.href = `comparador.html?pokemon1=${pokemon.id}`;

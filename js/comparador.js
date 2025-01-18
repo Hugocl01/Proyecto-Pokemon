@@ -91,6 +91,14 @@ async function desencadenadorEventoLimpiar(contenedorFichas, inputNombrePokemon,
  * @function cargarTarjetas
  */
 async function cargarTarjetas() {
+    const validarIDUrl = async (datosPokemon) => {
+        if (Array.isArray(datosPokemon) && !datosPokemon.length) {
+            alert('Pokémon no encontrado'); // Muestra un mensaje si no se encuentra el Pokémon
+            window.location.href = 'comparador.html';
+            return;
+        }
+    }
+
     const params = new URLSearchParams(window.location.search);
     const mensejeSeleccion = '<p>Selecciona un pokémon</p>';
 
@@ -106,13 +114,17 @@ async function cargarTarjetas() {
             const idPokemon2 = parseInt(params.get('pokemon2'));
 
             if (params.has('pokemon1') && idPokemon1) {
-                const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
+                const datosPokemon = await app.obtenerDatosDesdeIndexedDB('id', idPokemon1);
+                validarIDUrl(datosPokemon);
+                const pokemon1 = new Pokemon(datosPokemon);
                 divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = mensejeSeleccion;
             }
 
             if (params.has('pokemon2') && idPokemon2) {
-                const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
+                const datosPokemon = await app.obtenerDatosDesdeIndexedDB('id', idPokemon2);
+                validarIDUrl(datosPokemon);
+                const pokemon2 = new Pokemon(datosPokemon);
                 divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);
                 divPokemon1.innerHTML = mensejeSeleccion;
             }
@@ -124,8 +136,14 @@ async function cargarTarjetas() {
                 const idPokemon1 = parseInt(params.get('pokemon1'));
                 const idPokemon2 = parseInt(params.get('pokemon2'));
 
-                const pokemon1 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon1));
-                const pokemon2 = new Pokemon(await app.obtenerDatosDesdeIndexedDB('id', idPokemon2));
+                const datosPokemon1 = await app.obtenerDatosDesdeIndexedDB('id', idPokemon1);
+                validarIDUrl(datosPokemon1);
+
+                const datosPokemon2 = await app.obtenerDatosDesdeIndexedDB('id', idPokemon2);
+                validarIDUrl(datosPokemon2);
+
+                const pokemon1 = new Pokemon(datosPokemon1);
+                const pokemon2 = new Pokemon(datosPokemon2);
 
                 divPokemon1.innerHTML = devolverDetallePokemon(pokemon1);
                 divPokemon2.innerHTML = devolverDetallePokemon(pokemon2);

@@ -1,6 +1,7 @@
 import { app } from "./main.js"; // Importa la instancia de la aplicación principal
-import Pokemon from './Pokemon.js'; // Importa la clase Pokemon
-import { capitalizarPrimeraLetra, extraerID, modificarImagenHeader } from './utils.js'; // Importa utilidades
+import Pokemon from './models/Pokemon.js'; // Importa la clase Pokemon
+import { modificarImagenHeader } from "./helpers/ui.js"; // Importa utilidades
+import { capitalizarPrimeraLetra, extraerID } from "./helpers/utils.js"; // Importa utilidades
 
 /**
  * Inicializa la página de detalles del Pokémon cuando el DOM está completamente cargado.

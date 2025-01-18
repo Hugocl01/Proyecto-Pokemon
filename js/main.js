@@ -1,7 +1,8 @@
 'use strict';
 
-import { obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, obtenerPokemon, extraerID } from "./utils.js";
-import Pokemon from "./Pokemon.js";
+import { obtenerTodosLosPokemon, obtenerPokemonPorGeneracion, obtenerPokemon } from "./helpers/indexedDB.js";
+import { extraerID } from "./helpers/utils.js";
+import Pokemon from "./models/Pokemon.js";
 
 /**
  * @module app

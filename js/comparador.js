@@ -5,9 +5,11 @@
 
 'use strict';
 
-import { guardarDatosPokemon, existeDatosEnGeneraciones, mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, limpiarDatosPokemon, capitalizarPrimeraLetra, extraerID, modificarImagenHeader } from "./utils.js";
+import { guardarDatosPokemon, existeDatosEnGeneraciones, limpiarDatosPokemon } from "./helpers/indexedDB.js";
+import { mostrarSpinner, ocultarSpinner, mostrarFichaPokemon, modificarImagenHeader } from "./helpers/ui.js";
+import { capitalizarPrimeraLetra, extraerID } from "./helpers/utils.js";
 import { app } from "./main.js";
-import Pokemon from "./Pokemon.js";
+import Pokemon from "./models/Pokemon.js";
 
 let pokemons = [];
 

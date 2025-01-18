@@ -1,7 +1,7 @@
 'use strict';
 
 import { app } from "./main.js";
-import { modificarImagenHeader } from "./utils.js";
+import { modificarImagenHeader } from "./helpers/ui.js";
 
 const carrusel = document.querySelector('.carrusel-imagenes');
 const image = document.querySelector('.carrusel-imagenes img');

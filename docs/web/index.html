@@ -57,7 +57,229 @@
 <li><strong>Explora la Pokédex</strong>: Navega por la Pokédex y descubre nuevos Pokémon.</li>
 <li><strong>Detalles del Pokémon</strong>: Visualiza información detallada de cada Pokémon, incluyendo sus evoluciones, estadísticas y habilidades.</li>
 <li><strong>Comparador de Pokémon</strong>: Compara las estadísticas de dos Pokémon.</li>
-</ul></article>
+<li><strong>Generador y gestor de equipos</strong>: Crea tu propio equipo de Pokémon (en proceso de implementación).</li>
+<li><strong>Batalla entre Pokémon</strong>: Simula batallas entre tus Pokémon (en proceso de implementación).</li>
+</ul>
+<h2>Tecnologías Usadas</h2>
+<ul>
+<li><strong>HTML5</strong>, <strong>CSS3</strong> y <strong>JavaScript</strong>: para la construcción del frontend.</li>
+<li><strong>IndexedDB</strong>: para almacenamiento local de los datos.</li>
+<li><strong>PokeAPI</strong>: para obtener la información de los Pokémon.</li>
+</ul>
+<h2>Estrucutra del Proyecto</h2>
+<p>Esqueleto de la estructura de archivos y carpetas del proyecto.</p>
+<pre class="prettyprint source"><code>├── css/                        # Carpeta para archivos CSS
+│   └── style.css               # Hoja de estilos principal
+├── docs/                       # Carpeta para documentación
+│   ├── Arquitectura.drawio     # Diagrama de arquitectura del proyecto
+│   └── UD3E10 proyecto.pdf     # Documento del proyecto
+│   └── web                     # Web estática con el JSDoc del proyecto
+├── html/                       # Carpeta para los archivos HTML
+│   ├── index.html              # Página de inicio de la aplicación
+│   ├── pokedex.html            # Página principal de la Pokédex
+│   ├── comparador.html         # Página para comparar características entre dos Pokémon
+│   ├── detalle.html            # Página con información detallada de un Pokémon
+│   ├── equipos.html            # Página para gestionar equipos de Pokémon
+│   ├── jugar.html              # Página para hacer combates Pokémon
+├── img/                        # Carpeta para imágenes
+├── js/                         # Carpeta para archivos JavaScript
+│   ├── helpers/                # Carpeta para funciones auxiliares (utilidades, manejo de datos, etc.)
+│   │   ├── indexedDB.js        # Manejo de la base de datos IndexedDB
+│   │   ├── localStorage.js     # Manejo del almacenamiento local
+│   │   └── ui.js               # Manejo de la interfaz de usuario
+│   │   └── utils.js            # Funciones utilitarias generales
+│   ├── models/                 # Carpeta para clases y modelos de datos
+│   │   ├── Equipo.js           # Clase para representar un equipo de Pokémon
+│   │   └── Pokemon.js          # Clase para representar un Pokémon
+│   ├── carrusel.js             # Lógica para un carrusel de elementos
+│   ├── comparador.js           # Lógica para la comparación entre dos Pokémon
+│   ├── detalle.js              # Lógica para mostrar detalles de un Pokémon
+│   ├── main.js                 # Archivo principal de JavaScript (punto de entrada)
+│   └── pokedex.js              # Lógica específica de la Pokédex
+├── .editorconfig               # Configuración del editor de código
+├── .gitignore                  # Archivo para ignorar archivos al hacer commit
+├── jsdoc.json                  # Configuración para generar documentación JSDoc
+├── manifest.appcache           # Manifesto para caché en la aplicación web
+├── package-lock.json           # Información sobre las dependencias instaladas
+├── package.json                # Archivo de configuración de npm
+└── README.md                   # Archivo README con información general del proyecto
+</code></pre>
+<h2>Diagrama de Gantt</h2>
+<p>Diagrama de Gantt con las tareas y su programación en el tiempo.</p>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+<th>17</th>
+<th>18</th>
+<th>19</th>
+<th>20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Análisis de requisitos</td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Diseño de la arquitectura</td>
+<td></td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Implementación: Buscador y ficha de Pokémon</td>
+<td></td>
+<td></td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Implementación: Comparador de Pokémon</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Implementación: Generador y gestor de equipos</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+<td></td>
+</tr>
+<tr>
+<td>Implementación: Batalla entre Pokémon o equipos</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+</tr>
+<tr>
+<td>Optimización y caché</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>██</td>
+<td>██</td>
+</tr>
+<tr>
+<td>Pruebas y correcciones</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>██</td>
+<td>██</td>
+</tr>
+<tr>
+<td>Documentación del proyecto</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>██</td>
+<td>██</td>
+<td>██</td>
+</tr>
+<tr>
+<td>Preparación de la presentación</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>██</td>
+<td>██</td>
+</tr>
+<tr>
+<td>Entrega y defensa del proyecto</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>██</td>
+</tr>
+</tbody>
+</table></article>
     </section>
 
 
@@ -70,7 +292,7 @@
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sat Jan 18 2025 19:34:28 GMT+0100 (hora estándar de Europa central) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sat Jan 18 2025 20:33:35 GMT+0100 (hora estándar de Europa central) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

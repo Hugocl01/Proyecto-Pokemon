@@ -30,26 +30,26 @@ Esqueleto de la estructura de archivos y carpetas del proyecto.
 ├── docs/                       # Carpeta para documentación
 │   ├── Arquitectura.drawio     # Diagrama de arquitectura del proyecto
 │   └── UD3E10 proyecto.pdf     # Documento del proyecto
+│   └── web                     # Web estática con el JSDoc del proyecto
 ├── html/                       # Carpeta para los archivos HTML
 │   ├── index.html              # Página de inicio de la aplicación
 │   ├── pokedex.html            # Página principal de la Pokédex
-│   ├── comparador.html         # Página para comparar características de Pokémon
+│   ├── comparador.html         # Página para comparar características entre dos Pokémon
 │   ├── detalle.html            # Página con información detallada de un Pokémon
 │   ├── equipos.html            # Página para gestionar equipos de Pokémon
-│   ├── jugar.html              # Página para algún tipo de juego o desafío
+│   ├── jugar.html              # Página para hacer combates Pokémon
 ├── img/                        # Carpeta para imágenes
-│   ├── helpers/                # Carpeta para imágenes auxiliares (iconos, cargadores, etc.)
-│   └── models/                 # Carpeta para imágenes de modelos (Pokémon, entrenadores, etc.)
 ├── js/                         # Carpeta para archivos JavaScript
 │   ├── helpers/                # Carpeta para funciones auxiliares (utilidades, manejo de datos, etc.)
 │   │   ├── indexedDB.js        # Manejo de la base de datos IndexedDB
 │   │   ├── localStorage.js     # Manejo del almacenamiento local
+│   │   └── ui.js               # Manejo de la interfaz de usuario
 │   │   └── utils.js            # Funciones utilitarias generales
 │   ├── models/                 # Carpeta para clases y modelos de datos
 │   │   ├── Equipo.js           # Clase para representar un equipo de Pokémon
 │   │   └── Pokemon.js          # Clase para representar un Pokémon
-│   ├── carrusel.js             # Lógica para un carrusel de elementos (e.g., Pokémon)
-│   ├── comparador.js           # Lógica para la comparación de Pokémon
+│   ├── carrusel.js             # Lógica para un carrusel de elementos
+│   ├── comparador.js           # Lógica para la comparación entre dos Pokémon
 │   ├── detalle.js              # Lógica para mostrar detalles de un Pokémon
 │   ├── main.js                 # Archivo principal de JavaScript (punto de entrada)
 │   └── pokedex.js              # Lógica específica de la Pokédex

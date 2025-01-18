@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>helpers/ui.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Equipo.html">Equipo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#agregarPokemon">agregarPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#eliminarPokemon">eliminarPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#equipoCompleto">equipoCompleto</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#limpiarEquipo">limpiarEquipo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Equipo.html#obtenerDetalles">obtenerDetalles</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Pokemon.html">Pokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Pokemon.html#getAbilities">getAbilities</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Pokemon.html#getAverageStats">getAverageStats</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Pokemon.html#getFormattedStats">getFormattedStats</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Pokemon.html#getFormattedTypes">getFormattedTypes</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-comparador.html">comparador</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~cargaInicial">cargaInicial</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~cargarTarjetas">cargarTarjetas</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~comparar">comparar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~desencadenadorEventoBuscarPokemon">desencadenadorEventoBuscarPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~desencadenadorEventoLimpiar">desencadenadorEventoLimpiar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-comparador.html#~devolverDetallePokemon">devolverDetallePokemon</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="app.html">app</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerDatos">obtenerDatos</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerDatosDesdeIndexedDB">obtenerDatosDesdeIndexedDB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerDatosEspecies">obtenerDatosEspecies</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerDatosPokemon">obtenerDatosPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerEvoluciones">obtenerEvoluciones</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="app.html#.obtenerMaxPokemons">obtenerMaxPokemons</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#abrirBaseDeDatos">abrirBaseDeDatos</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#actualizarCarrusel">actualizarCarrusel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#almacenarDatosEnLocalStorage">almacenarDatosEnLocalStorage</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cambiarSlide">cambiarSlide</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#cantidad">cantidad</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#capitalizarPrimeraLetra">capitalizarPrimeraLetra</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cargaInicial">cargaInicial</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#desencadenadorEventoBuscarPokemon">desencadenadorEventoBuscarPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#desencadenadorEventoLimpiar">desencadenadorEventoLimpiar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#existeDatosEnGeneraciones">existeDatosEnGeneraciones</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#extraerID">extraerID</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#guardarDatosPokemon">guardarDatosPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#inicio">inicio</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#limpiarDatosPokemon">limpiarDatosPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modificarImagenHeader">modificarImagenHeader</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#mostrarFichaPokemon">mostrarFichaPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#mostrarSpinner">mostrarSpinner</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#obtenerDatosDeLocalStorage">obtenerDatosDeLocalStorage</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#obtenerPokemon">obtenerPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#obtenerPokemonPorGeneracion">obtenerPokemonPorGeneracion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#obtenerTodosLosPokemon">obtenerTodosLosPokemon</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ocultarSpinner">ocultarSpinner</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#pokemons">pokemons</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#reiniciarAutoSlide">reiniciarAutoSlide</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/ui.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { capitalizarPrimeraLetra, extraerID } from "./utils.js";
+
+/**
+ * Muestra un spinner de carga en el contenedor de fichas.
+ */
+export function mostrarSpinner() {
+    const contenedorFichas = document.querySelector('.contenedor-fichas');
+    const spinner = document.createElement('div');
+    spinner.classList.add('spinner');
+    contenedorFichas.appendChild(spinner);
+}
+
+/**
+ * Oculta el spinner de carga en el contenedor de fichas.
+ */
+export function ocultarSpinner() {
+    const spinner = document.querySelector('.spinner');
+    if (spinner) {
+        spinner.remove();
+    }
+}
+
+/**
+ * Muestra las fichas de los Pokémon en el contenedor de fichas.
+ * @param {Array&lt;Object>|Object} pokemons - Los datos de los Pokémon a mostrar.
+ * @param {number} [inicio=0] - El índice inicial desde el cual mostrar los Pokémon.
+ * @param {number} [cantidad=12] - La cantidad de Pokémon a mostrar por carga.
+ */
+export function mostrarFichaPokemon(pokemons, inicio = 0, cantidad = 12) {
+    const contenedorFichas = document.querySelector('.contenedor-fichas');
+
+    if (inicio === 0) {
+        contenedorFichas.innerHTML = '';
+    }
+
+    pokemons = Array.isArray(pokemons) ? pokemons : [pokemons];
+    const pokemonsAMostrar = pokemons.slice(inicio, inicio + cantidad);
+
+    for (const pokemon of pokemonsAMostrar) {
+        const divFicha = document.createElement('div');
+        divFicha.classList.add('ficha');
+        divFicha.dataset.id = pokemon.id;
+
+        const img = document.createElement('img');
+        img.src = pokemon.sprites.other['official-artwork'].front_default;
+        img.title = capitalizarPrimeraLetra(pokemon.name);
+        img.width = 205;
+        divFicha.appendChild(img);
+
+        const divDatos = document.createElement('div');
+        const pID = document.createElement('p');
+        pID.textContent = `N.º ${pokemon.id}`;
+        divDatos.appendChild(pID);
+
+        const tituloNombre = document.createElement('h3');
+        tituloNombre.textContent = capitalizarPrimeraLetra(pokemon.name);
+        divDatos.appendChild(tituloNombre);
+        divDatos.classList.add('datos');
+        divFicha.appendChild(divDatos);
+
+        const contenedorTipos = document.createElement('div');
+        contenedorTipos.classList.add('tipos');
+        pokemon.types.forEach(tipo => {
+            const imgTipo = document.createElement('img');
+
+            // Extrae el número al final de la URL
+            const id = extraerID(tipo.type.url);
+            imgTipo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${id}.png`;
+
+            contenedorTipos.appendChild(imgTipo);
+        });
+        divDatos.appendChild(contenedorTipos);
+
+        contenedorFichas.appendChild(divFicha);
+    }
+
+    // EVENTO - Click en las fichas para mostrar sus detalles o comparar
+    contenedorFichas.addEventListener('click', function (event) {
+        const ficha = event.target.closest('.ficha');
+        if (ficha) {
+            const ficha = event.target.closest('.ficha');
+            if (ficha) {
+                const id = ficha.dataset.id;
+                const params = new URLSearchParams(window.location.search)
+
+                if (window.location.pathname.endsWith('pokedex.html')) {
+                    window.location.href = `detalle.html?id=${id}`;
+                }
+
+                if (window.location.pathname.endsWith('comparador.html')) {
+                    const validarPokemon1 = params.get('pokemon1');
+                    const validarPokemon2 = params.get('pokemon2');
+
+                    switch (params.size) {
+                        case 0:
+                            window.location.href += `?&amp;pokemon1=${id}`;
+                            break;
+
+                        case 1:
+                            if (validarPokemon1) {
+                                window.location.href += `&amp;pokemon2=${id}`;
+                            }
+                            if (validarPokemon2) {
+                                window.location.href += `&amp;pokemon1=${id}`;
+                            }
+                            break;
+
+                        default:
+                            alert('No puedes comparar más Pokémons, elimina uno para realizar otra comparación')
+                            break;
+                    }
+                }
+            }
+        }
+    });
+}
+
+/**
+ * Modifica la imagen del header al pasar el ratón sobre ella.
+ * Cambia la imagen de la Pokéball a una imagen aleatoria de un Pokémon.
+ * Restaura la imagen original al quitar el ratón.
+ * @param {number} maxPokemons - El número máximo de Pokémon disponibles.
+ */
+export function modificarImagenHeader(maxPokemons) {
+    const imgPokeball = document.querySelector('.animar-pokeball');
+    const defaultImgPokeballSrc = imgPokeball.src;
+    imgPokeball.addEventListener('mouseover', () => {
+        imgPokeball.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Math.floor(Math.random() * maxPokemons) + 1}.png`;
+    });
+
+    imgPokeball.addEventListener('mouseout', () => {
+        imgPokeball.src = defaultImgPokeballSrc;
+        //imgPokeball.width = 100;
+    });
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Sat Jan 18 2025 19:34:28 GMT+0100 (hora estándar de Europa central) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

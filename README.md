@@ -1,5 +1,7 @@
 # Proyecto-Pokémon
 
+Este proyecto es una [Aplicación web](https://dwec-pokemon.netlify.app/) que permite a los usuarios explorar, comparar y gestionar información sobre Pokémon. Los usuarios pueden ver detalles de cada Pokémon y comparar estadísticas entre dos Pokémon.
+
 ## Integrantes
  - Hugo
  - Víctor.
@@ -70,16 +72,16 @@ Esqueleto de la estructura de archivos y carpetas del proyecto.
 
 Diagrama de Gantt con las tareas y su programación en el tiempo.
 
-| Tarea                                          | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 |
-|------------------------------------------------|----|----|----|----|----|----|----|----|----|----|----|
-| Análisis de requisitos                         | ██ | ██ | ██ | ██ |    |    |    |    |    |    |    |
-| Diseño de la arquitectura                      |    | ██ | ██ | ██ |    |    |    |    |    |    |    |
-| Implementación: Buscador y ficha de Pokémon    |    |    | ██ | ██ | ██ | ██ |   |    |    |    |    |
-| Implementación: Comparador de Pokémon          |    |    |    |    |    | ██ | ██ | ██ | ██ |    |    |
-| Implementación: Generador y gestor de equipos  |    |    |    |    |    |    |    | ██ | ██ | ██ |    |
-| Implementación: Batalla entre Pokémon o equipos|    |    |    |    |    |    |    |    | ██ | ██ | ██ |
-| Optimización y caché                           |    |    |    |    |    |    |    |    |    | ██ | ██ |
-| Pruebas y correcciones                         |    |    |    |    |    |    |    |    |    | ██ | ██ |
-| Documentación del proyecto                     |    |    |    |    |    |    |    |    | ██ | ██ | ██ |
-| Preparación de la presentación                 |    |    |    |    |    |    |    |    |    | ██ | ██ |
-| Entrega y defensa del proyecto                 |    |    |    |    |    |    |    |    |    |    | ██ |
+| Tarea                                           | 10  | 11  | 12  | 13  | 14  | 15  | 16  | 17  | 18  | 19  | 20  |
+| ----------------------------------------------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Análisis de requisitos                          | ██  | ██  | ██  | ██  |     |     |     |     |     |     |     |
+| Diseño de la arquitectura                       |     | ██  | ██  | ██  |     |     |     |     |     |     |     |
+| Implementación: Buscador y ficha de Pokémon     |     |     | ██  | ██  | ██  | ██  |     |     |     |     |     |
+| Implementación: Comparador de Pokémon           |     |     |     |     |     | ██  | ██  | ██  | ██  |     |     |
+| Implementación: Generador y gestor de equipos   |     |     |     |     |     |     |     | ██  | ██  | ██  |     |
+| Implementación: Batalla entre Pokémon o equipos |     |     |     |     |     |     |     |     | ██  | ██  | ██  |
+| Optimización y caché                            |     |     |     |     |     |     |     |     |     | ██  | ██  |
+| Pruebas y correcciones                          |     |     |     |     |     |     |     |     |     | ██  | ██  |
+| Documentación del proyecto                      |     |     |     |     |     |     |     |     | ██  | ██  | ██  |
+| Preparación de la presentación                  |     |     |     |     |     |     |     |     |     | ██  | ██  |
+| Entrega y defensa del proyecto                  |     |     |     |     |     |     |     |     |     |     | ██  |

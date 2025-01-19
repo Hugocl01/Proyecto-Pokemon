@@ -1,6 +1,10 @@
 # Proyecto-Pokémon
 
-Proyecto Pokémon de Hugo, Ruben, Nestor y Víctor.
+## Integrantes
+ - Hugo
+ - Víctor.
+ - Ruben
+ - Nestor
 
 ## Descripción
 
@@ -32,12 +36,11 @@ Esqueleto de la estructura de archivos y carpetas del proyecto.
 │   └── UD3E10 proyecto.pdf     # Documento del proyecto
 │   └── web                     # Web estática con el JSDoc del proyecto
 ├── html/                       # Carpeta para los archivos HTML
-│   ├── index.html              # Página de inicio de la aplicación
-│   ├── pokedex.html            # Página principal de la Pokédex
 │   ├── comparador.html         # Página para comparar características entre dos Pokémon
 │   ├── detalle.html            # Página con información detallada de un Pokémon
 │   ├── equipos.html            # Página para gestionar equipos de Pokémon
 │   ├── jugar.html              # Página para hacer combates Pokémon
+│   ├── pokedex.html            # Página principal de la Pokédex
 ├── img/                        # Carpeta para imágenes
 ├── js/                         # Carpeta para archivos JavaScript
 │   ├── helpers/                # Carpeta para funciones auxiliares (utilidades, manejo de datos, etc.)
@@ -55,6 +58,7 @@ Esqueleto de la estructura de archivos y carpetas del proyecto.
 │   └── pokedex.js              # Lógica específica de la Pokédex
 ├── .editorconfig               # Configuración del editor de código
 ├── .gitignore                  # Archivo para ignorar archivos al hacer commit
+├── index.html                  # Página de inicio de la aplicación
 ├── jsdoc.json                  # Configuración para generar documentación JSDoc
 ├── manifest.appcache           # Manifesto para caché en la aplicación web
 ├── package-lock.json           # Información sobre las dependencias instaladas

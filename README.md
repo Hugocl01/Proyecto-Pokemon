@@ -27,7 +27,7 @@ Este proyecto es una aplicación web que permite a los usuarios explorar, compar
 - **PokeAPI**: para obtener la información de los Pokémon.
 
 ## Estrucutra del Proyecto
-
+[Documentación del Proyecto Pokemon](DocumentaciónPokemon.md)
 Esqueleto de la estructura de archivos y carpetas del proyecto.
 
 ```
@@ -60,6 +60,7 @@ Esqueleto de la estructura de archivos y carpetas del proyecto.
 │   └── pokedex.js              # Lógica específica de la Pokédex
 ├── .editorconfig               # Configuración del editor de código
 ├── .gitignore                  # Archivo para ignorar archivos al hacer commit
+├── .DocumentaciónPokemon       # Archivo de la documentación del proyecto
 ├── index.html                  # Página de inicio de la aplicación
 ├── jsdoc.json                  # Configuración para generar documentación JSDoc
 ├── manifest.appcache           # Manifesto para caché en la aplicación web

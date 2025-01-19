@@ -10,6 +10,9 @@ Link de Github: [Proyecto Pokemon](https://github.com/Hugocl01/Proyecto-Pokemon)
 
 Link de la web: [Web Pokemon](https://dwec-pokemon.netlify.app/)
 
+## Arquitectura
+![Imagen de la arquitectura del proyecto](docs/Arquitectura.png)
+
 ## Funcionalidades
 
 ### Header y Footer
